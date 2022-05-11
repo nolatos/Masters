@@ -1,0 +1,396 @@
+ Geometric invariant theory, or GIT developed by Mumford provides us a way of taking \enquote{nice} quotients of group actions in algebraic geometry. To see why this is may be desired, consider the following example:
+\begin{example}\label{naive-quotient}
+	Let $k$ be an algebraically closed field and let $k^*$, the multiplicative group of $k$ act on $k^2$ by $\lambda \cdot (p,q):= (\lambda^{-1}p, \lambda q)$. The orbits consist of the axes without the origin, the origin and for every $t \in k^*$ the curve $xy = t$. If we consider the orbit space, it resembles $k$, indeed each nonzero $t$ will represent the curve $xy = t$; however where the origin should be, we find three orbits, one of which is closed and two of which has closure equal to the union of the three orbits. 
+\end{example}
+Intuition thus tells us that the quotient space \enquote{should} be $k$ itself, but clearly something has gone wrong near the origin. GIT allows us to formalise this, and as we will see below, equipped with the formalism the GIT quotient is indeed $k$.
+
+Being a vast and difficult subject, however, we do not have the time to develop the subject in detail. Our focus will be on linear actions (to be defined) on quasi-projective schemes of finite type over $k$. For a full account, see \autocite{GIT}. Our exposition follows the one found in \autocite{ModuliNotes} very closely.
+\section{Algebraic Groups and Actions}
+In this section, we will introduce the basics of algebraic groups. This essentially amounts to writing elementary group theory in the language of algebraic geometry!
+\begin{definition}\index{algebraic group}
+	An \textit{algebraic group} over $k$, also known as a \textit{group scheme} over $k$ is a scheme $G$ over $k$ equipped with a $k$-point $e: \Spec k \rightarrow G$, known as the \textit{identity element} and morphisms $\mu: G \times_k G \rightarrow G$ and $\iota: G \rightarrow G$ known as \textit{multiplication} and \textit{inversion} respectively such that the following three diagrams commute:
+	\begin{enumerate}
+		\item (Asssociativity) 
+		\begin{equation*}
+			\begin{tikzcd}[row sep = huge]
+				G \times G \times G \arrow[r, "\id \times \mu"] \arrow[d, "\mu \times \id"]& G \times G \arrow[d, "\mu"]\\
+				G \times G \arrow[r, "\mu"] &G
+			\end{tikzcd}
+		\end{equation*}
+		\item (Identity) 
+		\begin{equation*}
+			\begin{tikzcd}[row sep = huge]
+				\Spec k \times G \arrow[r, "e \times \id"] \arrow[rd, "\cong"]& G \times G \arrow[d, "\mu"] &\arrow[l, "\id \times e"] G\times \Spec k \arrow[ld, "\cong"] \\
+				&G
+			\end{tikzcd}
+		\end{equation*} 
+		\item (Inverse) 
+		\begin{equation*}
+			\begin{tikzcd}[row sep = huge]
+				G \arrow[r, "\iota\times \id"] \arrow[d] & G \times G \arrow[d, "\mu"]& \arrow[l, "\id \times \iota"] G\arrow[d] \\
+				\Spec k \arrow[r, "e"] & G & \Spec k \arrow[l, "e"]
+			\end{tikzcd}
+		\end{equation*}
+	\end{enumerate}
+	An algebraic group $G$ is \textit{affine} if $G$ is an affine scheme. 
+\end{definition}
+\begin{remark}
+	There are subtle variations in the definition of algebraic group and group scheme from one source to another (indeed, they are usually different!). For example, algebraic groups are sometimes required to be of finite type over $k$, the definition of a group scheme may not require a base scheme, and sometimes algebraic groups are required to be varieties. However, since we will only ever deal with algebraic groups which are affine varieties, these subleties do not matter in this thesis; in fact the definition is given only for completeness!
+\end{remark}
+Of course, these resemble the usual group axioms written using commutative diagrams. To see more concretely the connection with group theory, we may think of an algebraic group as a functor from $\Sch/k$ to $\Gps$; indeed for any scheme $S$, the set $\Hom(S, G)$ has a group structure, with group operation \[(f: S \rightarrow G) \cdot (g: S \rightarrow G) := (\mu\circ(f,g)\circ\Delta: S\rightarrow G)\] where $\Delta$ is the diagonal map. The identity morphism is the composition  $S \rightarrow \Spec k \xrightarrow{e} G$ where the first map is the unique morphism $S \rightarrow \Spec k$, and the inverse of $f: S \rightarrow G$ is simply $\iota \circ f$. In particular, $G(k)$ itself is a group, and when we think of $G$ as a group, we usually think of $G(k)$.
+
+Being a scheme, $G$ has more structure, for example the group operations induce co-operations of $k$-algebras. In fact, if $G$ is affine, we may completely work with $k$-algebras, since there is an equivalence of categories. In this case, we will call $H^0(G, \O_G)$ the \textit{associated co-group}.
+\begin{example}
+	Let $G = \Spec k[t, t^{-1}]$, whose $k$-points are of course is canonically identified with $k^*$. Now $k^*$ obviously has a canonical multiplication which makes it a group; we will now extend this to an algebraic group structure on $G$. Note that since a morphism of varieties is detemined by its $k$-points (\autocite[II Proposition 2.6]{Hart}), this extension is unique, if it exists. Define the co-multiplication 
+	\begin{align*}
+		\mu^\sharp: k[t, t^{-1}] &\rightarrow k[t, t^{-1}]\otimes k[t, t^{-1}]  \\
+		t &\mapsto t\otimes t
+	\end{align*}
+Using the identification $ k[t, t^{-1}]\otimes k[t, t^{-1}] \cong k[t_1^{\pm1}, t_2^{\pm1}]$, we may write this in the more familiar way as $t\mapsto t_1t_2$. Taking $\Spec$, we get a morphism $G \times G \rightarrow G$, and we observe the induced map of $k$-points is simply $(p,q) \mapsto pq$ as expected. Then the co-identity is the $k$-algebra map $k[t, t^{-1}] \rightarrow k$ given by $t \mapsto 1$, and co-inversion is the endomorphism $t \mapsto t^{-1}$. We check the group axioms by checking the co-axioms on the co-group: note that \[(\id \otimes \mu^\sharp)\circ \mu^\sharp(t) = t\otimes t \otimes t = (\mu^\sharp \otimes \id)\circ \mu^\sharp(t) \] and extending algebraically this proves associativity. To check identity, we observe  \[ (e^\sharp\otimes \id)\circ\mu^\sharp(t) = 1 \otimes t \cong t\cong t \otimes 1 =  (\id \otimes e^\sharp)\circ \mu^*(t)\] as desired, where, by abuse of notation, $\cong$ denotes the image of $1\otimes t$ under the isomorphisms $k \otimes k[t^{\pm1}] \cong k[t^{\pm1}]\cong k[t^{\pm1}] \otimes k$. Finally, we check inversion: \[(\iota^\sharp \otimes \id)\circ\mu^\sharp(t) = 1 = e^\sharp(t)\] and similarly in the other direction. Thus we have our expected group axioms.
+\end{example}
+Henceforth, we will denote $\Spec k[t, t^{-1}]$ by $\mathbb{G}_m$ (note that $m$ stands for multiplication, not for any specific number).
+
+Before stating our next example, a few comments about notation are in order. We will use $\GL_n(R)$ to denote the (abstract) group of $n$-by-$n$ matrices over $R$, and we will use $V$ to describe the vector space $k^n$. In particular, these are \textbf{not} schemes. We will use $\A^n$ to describe the variety/scheme $\Spec k[x_1,...,x_n]$, and we will use $\GL_n$ or $\GL_V$ to describe the variety/scheme, which is defined below.
+\begin{example}
+	We endow $\GL_n(k)$ with an algebraic group structure. Now $\GL_n(k)$ may be identified as the $k$-points of the affine scheme $\Spec k[x_{ij}, 1 \leq i,j \leq n, \det(x_{ij})^{-1}]$, which we will denote $\GL_n$. Co-multiplication is given by \[\mu^\sharp(x_{ij}) := \sum_{k = 1}^n x_{ik}\otimes x_{kj}\] or, once again, making the identification \[k[x_{ij}, 1 \leq i,j \leq n, \det(x_{ij})^{-1}] \otimes k[x_{ij}, 1 \leq i,j \leq n, \det(x_{ij})^{-1}] \cong k[x_{ij}, y_{ij}, \det(x_{ij})^{-1}, \det(y_{ij})^{-1}]\] this is just the familiar \[\mu^\sharp(x_{ij}) = \sum_{k = 1}^n x_{ik} y_{kj} \] Similarly, the co-identity is given by $e^\sharp(x_{ij}) := \delta_{ij}$. The co-inversion is a little difficult to write explicitly, but $\iota^\sharp(x_{ij})$ is the $i,j$-th entry of the $n$-by-$n$ matrix $(x_{k\ell})_{1 \leq k,\ell \leq n}$, which may be shown to be algebraic. Once again, we can check the group axioms for this by checking the co-group co-axioms:
+	\begin{align*}
+		(\mu^\sharp \otimes \id)(\mu^\sharp(x_{ij})) &= (\mu^\sharp \otimes \id)(\sum_k x_{ik} \otimes x_{kj}) \\
+		&= \sum_k \sum_{\ell} x_{i\ell} \otimes x_{\ell k} \otimes x_{kj} \\
+		&= \sum_k \sum_{\ell} x_{ik} \otimes x_{k \ell} \otimes x_{\ell j} \\
+		&= (\id \otimes \mu^\sharp)(\sum_k x_{ik} \otimes x_{kj}) \\
+		&= (\id \otimes \mu^\sharp)(\mu^\sharp(x_{ij}))
+	\end{align*}
+	proves associativity and \[(e^\sharp\otimes \id) (\mu^\sharp(x_{ij})) = (e^\sharp\otimes \id)(\sum_k x_{ik} \otimes x_{kj}) = \sum_k \delta_{ik}\otimes x_{kj} = \sum_i 1\otimes x_{ij} \cong x_{ij}\] and similarly proves identity. We will not prove inversion, but it follows from the properties of multiplying matrices. 
+\end{example}
+\begin{example}
+	Let $G$ be a finite group. We will endow $G$ with a natural algebraic group structure. Write $n:= |G|$. By Corollary \ref{cayleys-theorem}, we may embed $G$ into $S_n$, the symmetric group on $n$ letters, and $S_n$, in turn, embeds into $\GL_n(k)$ via permutation matrices. We therefore may interpret $G$ as a closed subscheme of $\GL_n$, and the group axioms inherit from the group axioms in $\GL_n$.
+\end{example}
+Next we will discuss algebraic group actions. 
+\begin{definition} \index{algebraic group! algebraic actions}
+	Let $G$ be an algebraic group and $X$ a scheme over $k$. An \textit{action} of $G$ on $X$ is a morphism $\sigma: G \times X \rightarrow X$ such that the following diagrams commute: 
+	\begin{enumerate}
+		\item (Associativity)
+		\begin{equation*}
+			\begin{tikzcd}[row sep = huge]
+				G \times G \times X \arrow[r, "\id_G \times \sigma"]\arrow[d, "\mu \times \id_X"] & G \times X \arrow[d, "\sigma"]\\
+				G \times X \arrow[r, "\sigma"] & X
+			\end{tikzcd}
+		\end{equation*}
+		\item (Identity)
+		\begin{equation*}
+			\begin{tikzcd}[row sep = huge]
+				\Spec k \times X \arrow[r, "e \times \id_X"]  \arrow[d, "\cong"]&G \times X \arrow[ld, "\sigma"]\\
+				X
+			\end{tikzcd}
+		\end{equation*}
+	\end{enumerate}
+\end{definition}
+\begin{example}
+	The most straightforward example is $G$ acting on itself via $\mu$. Associativity and identity follow directly from the corresponding group axioms.
+\end{example}
+Let $G$ act on $X$. We observe a few things: passing to $k$-points, the group $G(k)$ acts (as an abstract group, in the usual sense) on $X(k)$. Any $k$-point $g: \Spec k \rightarrow G$ induces an automorphism of $X$ given by $\sigma(g\times \id)$, which we will denote $\sigma_g$ (on the level of $X(k)$, this is simply multiplication by $g$). Similarly, any $k$-point $p: \Spec k \rightarrow X$ induces a morphism $G \rightarrow X$. 
+
+Now assuming $G$ and $X$ are both affine, equal to $\Spec R$ and $\Spec A$ respectively the action induces a co-action homomorphism of $k$-algebras $A \rightarrow R \otimes A$. However, the group $G(k)$ also has an induced action (in the usual sense) on $A$: as previously mentioned, every $g\in G(k)$ induces an automorphism of $X$. However, by the equivalence of categories, this also induces a $k$-linear automorphism of $A$. We define it so that for any $g\in G(k)$ and $p\in X(k)$ we have $(g\cdot f)(p) = f(g^{-1}\cdot p)$, so that we end up with a group action.
+
+\begin{example} \label{naive-quotient-scheme}
+	Consider the action described in Example \ref{naive-quotient}. We will extend this to an algebraic group action of $\bb{G}_m$ on $\A^2$. The associated coordinate rings are $k[t^{\pm1}]$ and $k[x,y]$. We now define the co-action $\sigma^\sharp: k[x,y]\rightarrow k[t^{\pm1}]\otimes k[x,y]$ by $x \mapsto t^{-1}\otimes x$ and $y \mapsto t\otimes y$; it is not hard to check the axioms and to show that this induces the action in the aforementioned example. Now we compute the action of $\bb{G}_m(k)$ on $k[x,y]$: let $\lambda\in k^* \cong \bb{G}_m(k)$ be given. This induces the map $k[t^{\pm1}] \rightarrow k$ defined by $t\mapsto \lambda$, hence we have \[ \sigma_{\lambda}^\sharp(x) = \lambda^{-1}\otimes x = 1 \otimes (\lambda^{-1}x) \cong \lambda^{-1} x \] and \[ \sigma_{\lambda}^\sharp(y)= \lambda \otimes y = 1 \otimes \lambda y \cong \lambda y \] which is easily seen to be a group action.
+\end{example}
+\begin{example}\label{gl-action}
+	We consider the natural action of $\GL_n(k)$ (the group of $n$-by-$n$ matrices) on $V = k^n$. We will lift this to an algebraic group action of $\GL_n$ on $\A^n$. The coordinate rings are $k[x_{ij}, \det(x_{ij})^{-1}]$ and $k[v_1,...,v_n]$. We define the co-action \[\sigma^\sharp: k[v_1,...,v_n] \rightarrow k[x_{ij}, \det(x_{ij})^{-1}]\otimes k[v_1,...,v_n] \] by \[\sigma^\sharp(v_i):= \sum_{j = 1}^n x_{ij} \otimes v_j\] and for a $k$-point $g = (g_{ij})\in \GL_n(k)$ (which is induced by $x_{ij}\mapsto g_{ij}$), we have the following automorphism $\sigma^\sharp_{g}$ of $k[v_1,...,v_n]$: \[\sigma^\sharp_g(v_i) = \sum_j g_{ij}\otimes v_j = \sum_j 1 \otimes g_{ij}v_j \cong \sum_j g_{ij}v_j  \] and in order for it to be a group action, we have to take the inverse of this map.
+\end{example}
+\begin{definition}
+	Let $G$ and $H$ be algebraic groups. A \textit{homomorphism} of algebraic groups is a morphism of schemes $f:G \rightarrow H$ such that the following diagram commutes:
+	\begin{equation*}
+		\begin{tikzcd}[row sep = large]
+			G \times G \arrow[r, "\mu_G"] \arrow[d, "f \times f"]&G \arrow[d, "f"] \\
+			H \times H \arrow[r, "\mu_H"] & H
+		\end{tikzcd}
+	\end{equation*}
+	A homomorphism $\rho: G \rightarrow \GL_n$ will be called a \textit{representation}. Composing this with the action on $\A^n$, we see that $\rho$ induces an action of $G$ on $\A^n$ and hence of $G(k)$ on $V = k^n$.
+\end{definition}
+\begin{example}
+	Consider the representation $\rho: \bb{G}_m \rightarrow \GL_2$ induced by \[\rho^*(x_{ij}) = \delta_{ij}t^{2i-3} \] composing this with the natural action of $\GL_2$ on $\A^2$ described in Example \ref{gl-action} we obtain the action in Example \ref{naive-quotient-scheme}.
+\end{example}
+Note that the image of the induced morphism $k^* \rightarrow \GL_2(k)$ in the above representation is contained in the subgroup of diagonal matrices. This is no coincidence, as we will show below. This result is hugely important, and as we will soon see, representations of $\bb{G}_m$ play a huge role in our further discussions (for example, in our analysis of stability). For now, we end with the following theorem:
+\begin{theorem}\label{torus-reductive}
+	Let $\rho: \bb{G}_m \rightarrow \GL_n$ be a representation. Then there is a decomposition \[k^n =: V = \bigoplus_{i\in \Z} V_i \] where \[V_i:= \{v\in V \mid \lambda \cdot v = \lambda^i v \space, \forall \lambda \in k^*\} \]
+\end{theorem}
+\begin{proof}
+	We follow the proof given in \autocite[p.17]{ModuliNotes}. Firstly, observe that $\rho$ induces a group homomorphism $\Hom(\Spec R, \bb{G}_m)\rightarrow \Hom(\Spec R, \GL_n)$ for every $k$-algebra $R$. In particular, letting $R = k[t^{\pm1}]$, we have a group homomorphism $\rho: \bb{G}_m(R)\rightarrow \GL_n(R)$, and hence $\rho(t)\in \GL_n(R)$. We interpret $\rho^* =\rho(t)$ as a linear map $\rho^*:V \rightarrow V \otimes k[t^{\pm1}]$. It can be shown (\autocite[22,23]{Waterhouse}) that the following diagrams commutes:
+	\begin{equation}\label{comodule diagram}
+		\begin{tikzcd}[row sep = huge]
+			V \arrow[r, "\rho^*"] \arrow[d, "\rho^*"]&V \otimes k[t^{\pm1}] \arrow[d, "\id \times \mu^\sharp"]\\
+			V \otimes k[t^{\pm1}] \arrow[r, "\rho^*\otimes \id"] & V \otimes k[t^{\pm1}]\otimes k[t^{\pm1}]
+		\end{tikzcd}
+	\end{equation}
+	and
+	\begin{equation}\label{comodule identity diagram}
+		\begin{tikzcd}[row sep = huge]
+			V \arrow[r, "\rho^*"] \arrow[d, "\cong"]& V \otimes k[t^{\pm1}] \arrow[ld, "\id \otimes e^\sharp"]\\
+			V\otimes k
+		\end{tikzcd}
+	\end{equation}
+	and it is clear that for any $\lambda\in \bb{G}_m(k) = k^*$ we have the following commutative diagram:
+	\begin{equation*}
+		\begin{tikzcd}[row sep = huge]
+			V \arrow[r, "\rho^*"] \arrow[d, "\sigma_\lambda"] &V \otimes k[t^{\pm1}] \arrow[ld, "t\mapsto \lambda"] \\
+			V
+		\end{tikzcd}
+	\end{equation*} 
+	Now observe that there exist $f_i\in \End(V)$ for each $i\in \Z$ such that \[\rho^*(v) = \sum_{i\in \Z} f_i(v) \otimes t^i \] for every $v\in V$. We claim $f_i(v)\in V_i$. Indeed, by the commutativity of (\ref{comodule diagram}), we have \[\sum_{i\in \Z} f_i(v) \otimes t^i \otimes t^i = (\id \otimes \mu^\sharp)(\sum_{i\in \Z} f_i(v) \otimes t^i) = (\rho \times \id)(\sum_{i\in \Z} f_i(v) \otimes t^i) = \sum_{i\in \Z} \rho^*(f_i(v)) \otimes t^i\] and the claim follows since the $t^i$ are linearly independent. Next observe that  the commutativity of (\ref{comodule identity diagram}) implies \[v = \sum f_i(v) \] and hence we have the decomposition as desired. Finally, the observation that the $V_i$ intersect trivially pairwise implies the result.
+\end{proof}
+\section{Reductive Groups}
+In this section, we will conduct a brief study into the theory of reductive groups, and in the sequel we will be exclusively looking at the action of reductive algebraic groups. The reason for this is that the reductive hypothesis provides us with a finitely-generated ring of invariants, and this will allow us to define the GIT quotient. So we begin with a definition:
+%However, we will first define what a quotient is:
+%\begin{definition}
+%	Let $G$ be a reductive algebraic group acting on a variety $X$. A \textit{quotient} of this action is a morphism $\varphi: X \rightarrow Y$ such that $\varphi \circ \sigma = \varphi \circ \pi_X$ as morphisms $G\times X \rightarrow Y$. A quotient is \textit{categorical} if it satisfies the following universal property: given any other quotient $\psi: X \rightarrow Z$, there is a unique morphism $f: Y \rightarrow Z$ such that $\psi = f\circ \varphi$.
+%\end{definition}
+
+\begin{definition}
+	Let $G$ be a group acting on a ring $A$ by ring automorphisms. The \textit{ring of invariants} of this action, denoted $A^G$ is the subring of elements fixed by $G$.
+\end{definition}
+\begin{definition}
+	An algebraic group $G$ is \textit{reductive} over $k$ if, for every representation $\rho: G \rightarrow \GL_n$, we can decompose $V = k^n$ into irreducible $G(k)$-invariant subspaces.
+\end{definition} 
+\begin{example}
+	If $G$ is a finite group, then it is reductive if $\operatorname{char} k$ does not divide $|G|$, by Maschke's Theorem.
+\end{example}
+\begin{example}
+	As we saw in Theorem \ref{torus-reductive}, $\bb{G}_m$ is reductive.
+\end{example}
+\begin{example}
+	In characteristic zero, many \enquote{familiar} groups (such as $\GL_n, \SL_n, \PGL_n$) {\color{red}are reductive}. 
+\end{example}
+\begin{remark}
+	Our definition of reductive is more commonly known as \textit{linearly reductive}, the current definition of reductive is that radical of $G$ is a torus (isomorphic to $(\bb{G}_m)^r)$. However, {\color{red} in characteristic zero, they are equivalent}.
+\end{remark}
+Henceforth, we will assume $\operatorname{char} k = 0$. The key that makes this work is the following theorem:
+\begin{theorem}\index{ring of invariants}
+	Let $G$ be a reductive algebraic group acting on an affine scheme $X = \Spec A$ of finite type over $k$. Then the ring of invariants $A^G$ is a finitely generated $k$-algebra. 
+\end{theorem}
+\begin{proof}
+	{\color{red}TODO }
+\end{proof}
+We are now in a position to construct the quotient. 
+\section{The GIT Quotient}
+
+In this section, we will construct the GIT quotient for the action of a reductive group $G$ on an affine or projective variety $X$. We begin with a general study of quotients, so we make the following definition:
+\begin{definition}
+	Let $G$ be a reductive group acting on $X$, and let $p\in X(k)$. The \textit{orbit} of $p$, denoted $G\cdot p$, is the set $\{g\cdot p \mid g\in G(k)\}\subseteq X(k)$. The \textit{stabiliser} of $p$, denoted $G_p$ is the fibred product $G \times_X \Spec k$, given by the following diagram:
+	\begin{equation*}
+		\begin{tikzcd}[row sep = huge]
+			G \times_X \Spec k \arrow[d]\arrow[r] & \Spec k\arrow[d,"p"]  \\
+			G \arrow[r, "\sigma(\id \times p)"]& X
+		\end{tikzcd}
+	\end{equation*}
+	A \textit{quotient} of this action is a morphism $\varphi: X \rightarrow Y$ such that $\varphi \circ \sigma = \varphi \circ \pi_X$ as morphisms $G\times X \rightarrow Y$. A quotient is \textit{categorical} if it satisfies the following universal property: given any other quotient $\psi: X \rightarrow Z$, there is a unique morphism $f: Y \rightarrow Z$ such that $\psi = f\circ \varphi$.
+\end{definition}
+
+In fact, since $X$ is a variety, we can say more about $G\cdot p$. Firstly, observe that $X(k)$ has a natural topology. Now $G\cdot p$ is just the set-theoretic image of the morphism $\sigma(-, p): G \rightarrow X$ in $X(k)$, and by Chevalley's theorem is a constructible subset (i.e. a finite disjoint union of locally closed subsets) of $X(k)$. So we can write \[G \cdot p = \bigcup_{i = 1}^n (U_i \cap V_i), \] where $U_i$ is open and $V_i$ is closed, and we may assume without loss of generality $V_i = \overline{U_i \cap V_i}$, the closure of $U_i \cap V_i$. Since closure commutes with unions, it follows \[\overline{G\cdot p} = \bigcup V_i. \] Now observe that $U =( \bigcup U_i) \cap G \cdot p$ is a dense open subset of $\overline{G \cdot p}$ (because $\overline{U}\cap \overline{G \cdot p}$ necessarily contains each $\overline{U_i \cap V_i} = V_i$ and $\bigcup V_i = \overline{G \cdot p}$ itself is closed), and since \[G\cdot p = \bigcup_{g\in G(k)} g\cdot U \] it follows that $G \cdot p$ is open in its closure; that is it is itself locally closed. Since $k$ is algebraically closed, this means we may identify $G\cdot p$ as the set of $k$-points of a closed subset of an open subscheme, and equipping it with the reduced closed subscheme structure, we give $G\cdot p$ the natural structure of a scheme. By abuse of language, we will use the word \enquote{orbit} to denote both the set $G(k) \cdot p\subseteq X(k)$, and the scheme described above. It will either be clear from context, or unimportant which is meant.
+
+\begin{proposition}
+	For any $k$-point $p\in X(k)$, the morphism $\sigma(-, p): G \rightarrow G \cdot p$ is flat. In particular, we have \[\dim G = \dim G_p + \dim G\cdot p. \]
+\end{proposition}
+\begin{proof}
+	\autocite[p. 19]{ModuliNotes}
+\end{proof}
+Now we are equipped to construct and study the affine GIT quotient. 
+\subsection{Affine GIT Quotients}
+Let $X$ be an affine variety and $G$ a reductive algebraic group acting on $X$. We make the following definition:
+\begin{definition}
+	A point $p\in X(k)$ is \textit{polystable} if $G\cdot p$ is closed. Furthermore $p$ is \textit{stable} if it is polystable, and $\dim G_p = 0$. An orbit is \textit{(poly)stable} if one (equivalently all) of its points is.
+\end{definition}
+As the name suggests, the stable points are the ones that are \enquote{nicest}, and we will shortly why that is the case. However, let us first look at this example:
+\begin{example}\label{naive-quotient-orbits}
+	Recall Example \ref{naive-quotient}. As remarked, the orbits consist of the axes without the origin, the origin and for every $\lambda\in \bb{G}_m(k)$ the hyperbola $xy = \lambda$. Clearly the \enquote{typical} orbits are the hyperbolas, which are closed, and clearly the stabiliser for each such point is trivial, and hence they are stable. The origin itself is polystable, but not stable, and the axes are neither stable nor polystable. We note a few things: firstly the stable points form an open subset. Next, observe that closure of the union of the two non-closed orbits are $G$-invariant, and their intersection contains a polystable orbit (the origin). 
+\end{example}
+In fact, the the situation described above is typical, and we will see how these properties of orbits correspond to points in the GIT quotient, which we will now define:
+\begin{definition}\index{GIT quotient ! affine}
+	Let $X$ be an affine variety, and $G$ a reductive algebraic group acting on $X$. The \textit{affine GIT quotient} is the map $\varphi^G:X\rightarrow \Spec A^G$ induced by the inclusion $A^G \rightarrow A$. We denote $\Spec A^G$ by $X\git G$.
+\end{definition}
+We will state without proof the key properties of the affine GIT quotient.
+\begin{theorem}
+	The affine GIT quotient is a quotient, and satisfies the following properties:
+	\begin{enumerate}
+		\item $\varphi^G$ is surjective.
+		\item For any open subset $U\subseteq X \git G$, the map $\O_{X \git G}(U)\rightarrow \O_X((\varphi^G)^{-1}(U))$ is an isomorphism onto $\O_X((\varphi^G)^{-1}(U))^G$.
+		\item The image of every $G$-invariant closed subset is closed.
+		\item If $W_1$ and $W_2$ are disjoint, $G$-invariant and closed, then their images are disjoint. 
+		\item $\varphi^G$ is affine.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	\autocite[p. 31]{ModuliNotes}
+\end{proof}
+Let us investigate some consequences. Firstly, observe that any orbit closure is $G$-invariant; indeed let $G\cdot p$ be an orbit, and let $I$ denote the ideal of functions vanishing on this orbit. Now by definition, $I$ is the set of $f\in A$ such that $f\in \mathfrak{m}_{g\cdot p}$, or equivalently $g^{-1}\cdot f\in \mf{m}_p$ for all $g\in G(k)$, so in particular it is $G$-invariant, and hence $\overline{G\cdot p}$, which is the closed subset cut out by $I$, is $G$-invariant too. Since $\varphi^G$ is a quotient, property (iii) implies that orbit closures are contracted to a point. By property (iv), the converse is also true: two points are mapped to the same point if and only if their orbit closures intersect. By the same property, it follows that the set-theoretic fibre of every $p\in Y(k)$ contains a unique polystable orbit. In particular, every equivalence class of orbits (the relation being intersection of closure) contains a unique polystable orbit. In particular, this means that the set $Y(k)$ is in canonical 1-1 correspondence with the polystable orbits of $X$.  
+\begin{definition}
+	Let $G$ be a reductive algebraic group acting on a scheme $X$. A quotient $\varphi^G: X \rightarrow Y$ is a \textit{good quotient} if the five conditions in the above theorem hold. The quotient $\varphi^G$ is said to be a \textit{geometric quotient} if it is a good quotient and additionally the mapping $G \cdot p \rightarrow \varphi^G(p)$ is a bijection between the orbit space and $Y(k)$.
+\end{definition}
+So in particular, the affine GIT quotient is a good quotient, and since it can also be shown that a good quotient is a categorical quotient (\autocite[Proposition 3.30]{ModuliNotes}), it follows that the GIT quotient is a categorical quotient. However, it is not always a geometric quotient:  
+\begin{example}
+	Let us consider Example \ref{naive-quotient} once more. We saw how the action is formalised as an algebraic action in Example \ref{naive-quotient-scheme}, and we studied its orbits in Example \ref{naive-quotient-orbits}. Now retaining the notation in Example \ref{naive-quotient-scheme}, observe that clearly the invariant ring is $A^G = k[xy]$, and hence the GIT quotient is \[\A^2 = \Spec k[x,y] \rightarrow \Spec k[xy] = \A^1, \] where the map sends each stable orbit $\{xy = \lambda\}$ to $\lambda$ and the three orbits that are not stable, which intersect each other, to the origin. Now it is not hard to check that this is a good quotient, however it is not geometric, because the set-theoretic fibre of the origin in $\A^1$ is the union of three orbits. However, if we restrict to the open subset of stable points $(\A^2)^s :=\A^2\setminus\{xy=0\}$, the quotient is in fact a geometric quotient. Indeed, the restricted quotient is just \[(\A^2)^s = \Spec k[x,y,(xy)^{-1}] \rightarrow k[(xy)^{\pm 1}] = \A^1 \setminus \{0\} \] and the set-theoretic fibre of each $\lambda\in k^*$ is just the hyperbola $\{xy = \lambda\} $.
+\end{example}
+In fact, this is typical:
+\begin{theorem}
+	Let $G$ be a reductive algebraic group acting on an affine variety $X$. Then the set of stable $k$-points are the $k$-points of a (possibly empty) open subscheme $X^s$, and the restricted map \[ X^s \rightarrow X^s \git G\] is a geometric quotient.
+\end{theorem}
+\begin{proof}
+	This follows the proof in \autocite[p. 19, 32]{ModuliNotes}. Firstly, we claim that the set of points $p$ such that $\dim G_p >0$ is closed. Indeed, consider the following diagram:
+	\begin{equation*}
+		\begin{tikzcd}[row sep = huge]
+			S = (G\times X)\times_{X\times X} X \arrow[r, "\varphi"] \arrow[d] & X\arrow[d,"\Delta"] \\
+			G \times X \arrow[r, "(\sigma\times\pi_X)"] & X\times X
+		\end{tikzcd}
+	\end{equation*}
+	where $\Delta: X \rightarrow X\times X$ is the diagonal map and $S$ is the fibred product of the diagram. Now observe that the $k$-points of $S$ are exactly the pairs $(g,p)$ such that $g\cdot p = p$. By Chevalley's semicontinuity theorem (\autocite[Th\'eor\`eme 13.1.3]{EGAIV}), the subset \[V:=\{(g,p)\in S(k) \mid \dim G_p = \dim S_{p} > 0 \} \] is closed. Now define $T$ to be the fibred product $S \times_{G\times X} X$ given by the following diagram:
+	\begin{equation*}
+		\begin{tikzcd}[row sep = huge]
+			T \arrow[r] \arrow[d]&S \arrow[d]\\
+			\Spec k \times X \cong X \arrow[r, "e \times \id"] &G \times X
+		\end{tikzcd}
+	\end{equation*}
+	and observe that $V$ pulls back to the set $\{(e, p) \mid \dim G_p > 0\}$. Since $X$ is separated over $k$, the diagonal is a closed immersion, and in particular it is proper. It thus follows that $T \rightarrow X$ is a closed map, which proves the claim.
+	
+	Now let $p$ be a stable point. We will find an open neighbourhood of stable points containing $p$. Observe that $V$, which we saw was closed, and is clearly $G$-invariant, is disjoint from $p$, and hence by property (iv), $p$ and $V$ to disjoint sets in the GIT quotient. In particular, there is some invariant $f\in A^G$, such that $f(V) = 0$, and $f(p)\neq 0$ (for example, suppose take $1 - F$ where $F\in A^G$ vanishes exactly on $\varphi^G(p)$). We claim that the $k$-points of $X_f$ are stable. Indeed, since $X_f(k) \cap V = \emptyset$, it suffices to show that the orbits of $X_f$ are closed. So fix some $q\in X_f(k)$, suppose for contradiction its orbit is not closed. Since $G\cdot q$ is open and dense in $\overline{G\cdot q}$, its boundary must be of smaller dimension, and moreover contains a polystable orbit, say $G\cdot r$. It must therefore be that $\dim G_r > 0$ by, so $r\in V$, and hence $f(r) = 0$. But since $f$ is $G$-invariant and does not vanish on $q$, it does not vanish anywhere on $\overline{G\cdot q}$, which is a contradiction. It thus follows that the $k$-points of $X_f$ are all stable, and hence we conclude that $X^s$ is open. 
+	
+	Finally, we prove that this is a geometric quotient. To this end, we simply need to show that the set-theoretic fibre of each $k$-point in $ X^s \git G$ is a single stable orbit. But this is obvious; indeed for each $p\in X^s$, the set-theoretic fibre $(\varphi^G)^{-1}(\varphi^G(p))$ contains a unique polystable orbit, which must be $G\cdot p$. If it contains any other orbit, say $G\cdot q$, then $G\cdot p \cap \overline{G\cdot q}$ is nonempty, and since $\overline{G\cdot q}$ is $G$-invariant, it follows $G\cdot p$ is in the boundary of $G\cdot q$, and hence has dimension strictly less, which contradicts the fact that $p$ is stable.
+\end{proof}
+However, the affine GIT quotient is slightly oversimplified, since every $p\in X(k)$ has an image. In particular, no orbits are thrown away; simply merged. As we will see shortly, things are more complicated in the projective case.
+\subsection{Projective GIT Quotients}
+
+Our next task is to extend the notion of a GIT quotient to a projective variety. There are, however, more issues, the first and perhaps most obvious is that a projective scheme does not have a canonical homogeneous coordinate ring; such a coordinate ring is induced by a projective embedding. Indeed, even in the case of $X = \P^1$, we may embed $X$ in $\P^2$ in the obvious way, with resulting coordinate ring $k[x_0, x_1]$, or via the 2-uple embedding, with resulting coordinate ring $k[y_0, y_1, y_2]/y_0y_2 - y_1^2$, but these rings are not isomorphic, since the former is a UFD but the latter is not. 
+
+But even if we we have an embedding $X \subseteq \P^n$, such that $X = \Proj S$, this is not enough, because the action does not lift canonically to $S$; indeed:
+\begin{example}\label{linearisation-motivation}
+	Let $X = \bb{P}^n$. Let $\bb{G}_m$ act on $X$ as follows: for any $\lambda\in \bb{G}_m(k), p = [p_0:...:p_n]\in X(k)$, we define \[\lambda\cdot p:= [\lambda^{-1}p_0:\lambda p_1:...:\lambda p_n] \] which extends uniquely to an algebraic action, since $k$ is algebraically closed. We embed $X$ in itself via the identity, with resulting coordinate ring $S = k[x_0,...,x_n]$. However, the action of $G$ may be lifted to one on $S$ in many ways; for example
+	\begin{align*}
+		\lambda\cdot x_0 &:= \lambda^{-1}x_0,\\ \lambda \cdot x_i &:= \lambda x_i
+	\end{align*}
+	and 
+	\begin{align*}
+		\lambda \cdot x_0 &:= x_0, \\\lambda \cdot x_i& := \lambda^2 x_i.
+	\end{align*}
+	just to name two.
+\end{example}
+We must therefore \textbf{choose} a lift of the action, which is accomplished as follows: recall that a projective embedding is equivalent to picking a very ample line bundle $\L$, and the resulting coordinate ring is \[S = \bigoplus_{r \geq 0} H^0(X, \L^{\otimes r}). \] We will therefore choose a lift of our action on $X$ to one on $\L$, so that the action is linear in some sense. This is encapsulated in the following definition:
+\begin{definition}\index{linearisation}
+	Let $\sigma: G\times X \rightarrow X$ be an algebraic group action on a projective scheme $X$. A \textit{linearisation} of this action is a line bundle $\L$ and an isomorphism $\Phi:\sigma^*(\L)\cong \pi_X^*(\L)$, where $\pi_X: G \times X \rightarrow X$ is the projection onto the second factor, such that the following diagram commutes:
+	\begin{equation}\label{linearisation cocycle condition}
+		\begin{tikzcd}[column sep = huge, row sep = huge]
+			(\sigma\circ(\id_G \times \sigma))^*\L  \arrow[r, "(\id_G \times \sigma)^*\Phi"] \arrow[d, "="]& (\pi_X \circ(\id_G \times \sigma))^*\L \arrow[r, "="]& (\sigma \circ \pi_{23})^*\L\arrow[d, "\pi_{23}^*\Phi"] \\
+		(\sigma\circ(\mu\times \id_X))^*\L\arrow[r, "(\mu\times \id_X)^*\Phi"]&(\pi_X \circ(\mu\times \id_X))^*\L	\arrow[r, "="]& (\pi_X \circ \pi_{23})^*\L		
+		\end{tikzcd}
+	\end{equation}
+	where $\pi_{23}: G \times G \times X\rightarrow G \times X$ is the projection onto the last two factors. A linearisation is \textit{very ample} if $\L$ is. By abuse of language, we will often refer to $\L$ itself as the linearisation.
+\end{definition}
+We unwrap this definition. Of course, for any $g\in G(k)$, we may pull back $\L$ along the isomorphism $\sigma_g: X \rightarrow X$. The linearisation $\Phi$ allows us to identify $\L$ before and after the pullback. More precisely: for any open subset $U\subseteq X$ where $\L$ is trivial, we identify $\L|_U \cong \O_{U}$. Now fix a $k$-point $g$ of $G$. Then $\sigma_g^*\L(U) \cong \Ox(gU)$ and $\pi_X^*\L(U) \cong \O_{X}(U)$. In particular, we have the following isomorphism: 
+\begin{equation}\label{composition-clusterfuck}
+	\begin{tikzcd}
+		\sigma_g^*\L(U) \cong \Ox(gU) \arrow[r, "\Phi"] & \pi_X^*\L(U) \cong \Ox(U)
+	\end{tikzcd}	
+\end{equation} 
+So in particular, $\Phi$ may be thought of as defining a way to \enquote{shift} $\L$ by $g$.
+
+We now make sense of (\ref{linearisation cocycle condition}) a little. Firstly, observe that these are morphisms of sheaves on $G \times G \times X$, all of which are pullbacks of $\L$ by various maps. The equalities follow from the axioms, for example \(\sigma\circ (\id_G \times \sigma) = \sigma\circ(\mu\times \id_X)\) is just the associativity axiom of group actions. Without explicitly stating the equalities, the commutativity says
+\begin{equation}\label{linearisation-cocycle-equation}
+	(\mu\times \id_X)^*\Phi = \pi_{23}^*\Phi \circ (\id_G \times \sigma)^*\Phi 
+\end{equation} 
+which we make sense of as follows: Let $(g,h)$ be a $k$-point in $G\times G$. Then as in (\ref{composition-clusterfuck}), the map $(\mu\times \id_X)^*\Phi$ induces a map \[\sigma_{gh}^*\L(U) \cong \Ox(ghU) \rightarrow \pi_X^*\L(U)\cong \Ox(U). \] Now $(\sigma \circ \pi_{23})(g,h,-) = \sigma_h $, and so $\pi_{23}^*\Phi$ induces a map 
+\begin{equation*}
+	\begin{tikzcd}
+		\sigma_{h}^*\L(U) \cong \Ox(hU) \arrow[r] &  \pi_X^*\L(U)\cong\Ox(U)
+	\end{tikzcd}
+\end{equation*}
+and finally since $(\sigma\circ (\id_G \times \sigma))(g,h,-) = \sigma_g \circ \sigma_h$, the pullback $(\id_G \times \sigma)^*\Phi $ induces a map
+ \begin{equation*}
+ 	\begin{tikzcd}
+ 		\sigma_g^*(\sigma_h^*\L)(U) \cong \Ox(ghU) \arrow[r]& \sigma_h^*\L(U) \cong \Ox(hU)
+ 	\end{tikzcd}
+ \end{equation*}
+Put together, this means the following diagram commutes:
+\begin{equation*}
+	\begin{tikzcd}
+		\sigma_{gh}^*\L\arrow[d] \arrow[r] &\L\\
+		\sigma_h^*\L \arrow[ru]
+	\end{tikzcd}
+\end{equation*}
+so in particular $G(k)$ acts on $\L$ via automorphisms.
+
+Of course, this means that $G(k)$ also acts on all tensor powers of $\L$, and in the case $\L$ is very ample, taking global sections shows that $G(k)$ acts on the graded homogeneous coordinate ring $S = \bigoplus_{r\geq 0}H^0(X, \L^{\otimes r})$, and moreover it is not hard to see that this action preserves the grading. Furthermore, there is a natural action induced on the dual bundle, which we may interpret as the affine cone of this embedding, and it is not hard to see that this action is linear.
+\begin{example}\label{projective-git-example}
+	There is a natural linearisation of the action described in Example \ref{linearisation-motivation} on $\Ox(1)$. To see this, we first note that both $\sigma^*(\Ox(1))$ and $\pi_X^*(\Ox(1))$ are abstractly isomorphic to $\O_{\bb{G}_m \times X}(1)$. We define the isomorphism $\sigma^*(\Ox(1))\rightarrow \pi_X^*(\Ox(1))$ to be $x_0 \mapsto t^{-1}x_0$ and $t_i \mapsto t x_i$ for $i\neq 0$. 
+	
+	Once again, we check that this is in fact a linearisation. Clearly it is an isomorphism, so it suffices to show that (\ref{linearisation-cocycle-equation}) holds. To this end,  we first observe that the various pullbacks of $\Ox(1)$ to $\bb{G}_m\times \bb{G}_m\times X$ are abstractly isomorphic to the $\O_{\bb{G}_m\times\bb{G}_m\times X}$-module $\O_{\bb{G}_m\times\bb{G}_m\times X}(1)$, and since \[f^*(\O_{\bb{G}_m \times X}(1)) =  \O_{\bb{G}_m\times\bb{G}_m\times X}\otimes_{f^{-1}\O_{\bb{G}_m \times X}}f^{-1}(\O_{\bb{G}_m \times X}(1))\] where $f: \bb{G}_m\times \bb{G}_m\times X \rightarrow \bb{G}_m\times X$ is any map, we may write its elements as sums of $f\otimes g \otimes hx_i $, where $f,g\in \O_{\bb{G}_m}$ and $h\in \O_{\bb{G}_m \times X}$ (the $X$ component of $\O_{\bb{G}_m\times \bb{G}_m\times X}$ is absorbed by $h$). With this in mind, we compute:\[(\mu\times \id_X)^*\Phi(1\otimes 1 \otimes x_0) =  1 \otimes 1 \otimes t^{-1}x_0 = t^{-1}\otimes t^{-1}\otimes x_0\] and similarly for any other $x_i$. We also have \[(\id_G\times \sigma)^*\Phi(1\otimes 1 \otimes x_0) = 1\otimes 1 \otimes t^{-1}x_0 = t^{-1}\otimes 1 \otimes x_0 \] and finally \[\pi^{*}_{23}\Phi(t^{-1} \otimes1 \otimes x_0)  = t^{-1}\otimes t^{-1}\otimes x_0 \] as desired.
+		
+	Now the homogeneous coordinate ring of this embedding is just \[S = \bigoplus_{r \geq 0} H^0(X, \Ox(1)^{\otimes r}) = k[x_0,...,x_n]\] as expected, and there is an induced action of $\bb{G}_m(k)$ on $S$ given by $\lambda\cdot x_0 = \lambda^{-1}x_0$ and $\lambda\cdot x_i = \lambda x_i$ for $i\neq 0$, and in particular observe that this action preserves the grading on $S$.
+\end{example}
+Now we may define our quotient. We fix the following data: let $X$ be a projective scheme, $G$ a reductive algebraic group, $G\times X \rightarrow X$ an action, $\L$ a very ample linearisation and $S = \bigoplus_{r \geq 0} H^0(X, \L^{\otimes r})$ the homogeneous coordinate ring. We denote $S^G$ the subring of invariant elements of $S$, and we write $S_+$ for the irrelevant ideal $\bigoplus_{r>0}S_{\deg r}$, and similarly write $S_+^G$ for the $S^G$-ideal $S_+\cap S^G$. 
+\begin{definition}\index{stability}\index{GIT quotient ! projective}
+	A $k$-point $p$ is \textit{semistable} (with respect to $\L$) if there is a homogeneous invariant $\sigma\in S^G$ of positive degree such that $\sigma(p) \neq 0$, or equivalently $p\in X_\sigma(k)$ where $X_\sigma = \Spec S[\sigma^{-1}]_{\deg 0}$. If $p$ is not semistable, then it is \textit{unstable}. The \textit{semistable locus}, denoted $X^{ss}$ is the open subscheme $X \setminus V(S_+^G)$, where $V(S_+^G)$ is the closed subset associated to the honogeneous ideal $\langle S_+^G \rangle$ in $S$. Note that the homogeneous elements of $S_+^G$ generate this ideal, so it is in fact homogenous. We say $p$ is \textit{polystable} if it is semistable, and its orbit is closed in the semistable locus. Furthermore, $p$ is \textit{stable} if it is polystable, and additionally its stabiliser has dimension zero. The \textit{projective GIT quotient} is the map \[ X^{ss} \rightarrow X \git_\L G:=\Proj S^G\] induced by the inclusion $S^G \subseteq S$.
+\end{definition}
+Let us compare the affine and projective GIT quotients. The main difference is that in the affine case, every $k$-point has an image in the quotient; in other words every point is \enquote{semistable}; this is obviously not so in the projective case. Their similarities are, however, much more abundant: if $\sigma\in S^G_+$ is homogeneous, it is not hard to check that $X_\sigma = \Spec S[\sigma^{-1}]_{\deg 0}$ is invariant, and that the restriction of the projective GIT quotient to $X_\sigma$ is just the affine GIT quotient $X_\sigma \rightarrow \Spec S[\sigma^{-1}]_{\deg 0}^G$, and since $X^{ss}$ is covered by these affine open subsets, it follows that the projective GIT quotient is just a collection of affine GIT quotients glued together. Now observe that being a good quotient is local,and hence it follows that the projective GIT quotient is also a good quotient. By a similar argument to the affine case, it can also be shown that the stable locus is open and that the restriction is a geometric quotient.
+\begin{example}
+	Retain the notation and hypotheses in Example \ref{projective-git-example}. It can be shown (\autocite[p. 37]{GIT}) that the ring of invariants $S^G$ is just $k[x_0x_1,...,x_0x_n]$. It follows that $p = [p_0:...:p_n]$ is semistable if and only if $p_0$ is nonzero, and some other $p_i$ for $i > 0$ is nonzero. In particular, the semistable locus can be identified with $\A^n \setminus\{0\}$. Now on the semistable locus, the action is just multiplication by $\lambda^2$, so every point is polystable, the orbit just being the line passing through our point and the origin in $\A^n$, minus the origin itself. In fact, every point is stable, since the action is free. Of course, this makes sense because our projective GIT quotient is just \[\P^{n-1} = \Proj k[x_0x_1,...,x_0x_n]\] and this is a geometric quotient.
+\end{example}
+\begin{example}
+	Of course, there is another linearisation on $\Ox(1)$ given by $x_0 \mapsto x_0$ and $x_i \mapsto t^2x_i$ for $i > 0$. Clearly $k[x_0]$ is the ring of invariants, so the projective GIT quotient with respect to this linearisation is simply $\Spec k$. Indeed, the semistable locus is the open set given by $x_0 \neq 0$, which is isomorphic to $\A^n$. With this interpretation, the action of $\bb{G}_m$ is just scaling, and the closure of every orbit contains the origin in $\A^n$ (or equivalent the point $[p_0:0:...:0]\in \P^n$), which is the unique polystable orbit of this linearisation. In particular, the stable locus is empty. This shows that projective GIT is heavily dependent on our choice of linearisation. However, we will often fix a single linearisation to work with, and the problem of choosing different linearisations will not be discussed in this thesis. 
+\end{example}
+
+\section{The Hilbert-Mumford Criterion}
+As we have just seen, stability is very important. However, with our definition, it is rather difficult to calculate. In this section, we will develop the \textit{Hilbert-Mumford criterion}, which gives a numerical criterion for stability in terms of 1-parameter subgroups. We begin with a closer examination of our current definition for stability, which requires the following definition:
+\begin{definition}\index{affine cone}
+	Let $X$ be a projective scheme and let $\L$ be a very ample line bundle. Write $S$ for the homogeneous coordinate ring \[S:= \bigoplus_{r \geq 0} H^0(X, \L^{\otimes r}).\] We define the \textit{affine cone} of $X$ to be the affine scheme $\widetilde{X} := \Spec S$.
+\end{definition}
+To make sense of the affine cone, firstly recall that $\L$ embeds $X$ as a closed subscheme of $\P^n$, where $n = h^0(X, \L)-1 = \dim H^0(X, \L) - 1$. The $k$-points of $\P^n$ are just the 1-dimensional subspaces of $k^{n+1}$, and thus the $k$-points of $X$ may be interpreted as a collection of lines through the origin in $k^{n+1}$. The $k$-points of $\widetilde{X}$ may, in turn, be thought of as the union of these lines. For example, the affine cone of $\P^n$ is just $\A^{n+1}$.
+
+There is a well-defined notion of an origin, which corresponds to the irrelevant ideal $S_+$, which is clearly maximal, and there is a natural map $\Spec S \setminus \{0\} \rightarrow \Proj S$, which we define as follows: let $f\in S_{\deg 1}$. Then there is an inclusion $S[f^{-1}]_{\deg 0}\subseteq  S[f^{-1}]$, which induces a morphism $\Spec S[f^{-1}]\rightarrow \Spec S[f^{-1}]_{\deg 0}$. Since $\L$ is very ample, it follows $S$ is generated by a finite set of these $f\in S_{\deg 1}$ as a $k$-algebra, and so $X_f = \Spec S[f^{-1}]_{\deg 0}$ cover $\Spec S \setminus\{0\}$. On the level of $k$-points, this is just $(p_0,...,p_n)\mapsto [p_0:...:p_n]$.
+
+Now suppose $X$ is a projective variety, and let $G$ be a reductive affine algebraic group acting on $X$. Further, let $\L$ be a very ample linearisation, and let $S$ be the homogeneous coordinate ring. We claim the the linearisation naturally induces an action on the affine cone. Indeed, by the adjunction property of pullbacks and pushforwards, there is a natural map (the unit map of the adjunction) $\L \rightarrow \sigma_*\sigma^*(\L)$. Taking global sections, we have \[H^0(X, \L)\rightarrow H^0(G\times X, \sigma^*(\L))\cong H^0(G\times X, \pi_X^*(\L)) \cong H^0(G, \O_G)\otimes H^0(X, \L) \] where the final isomorphism comes from the K\"unneth formula (\autocite[Lemma 33.29.1]{stacks-project}). We can check that this induces a map $\tilde{\sigma}^*:S \rightarrow \O_G(G)\otimes S$ {\color{red} which satisfies the co-action axioms; and in particular this induces a group action $G \times \widetilde{X} \rightarrow \widetilde{X}$. Moreover, since the co-action homomorphism is linear on $H^0(X, \L)$, this means that $G$ acts linearly (i.e. via a representation $G \rightarrow \GL_{n+1}$) on $\widetilde{X}$.}
+\begin{example}
+	Recall Example \ref{projective-git-example}. The induced action on $\widetilde{X} = \A^{n+1}$ is just \[\lambda \cdot (p_0,...,p_n) = (\lambda^{-1}p_0,\lambda p_1,...,\lambda p_n) \] on the level of $k$-points. More rigorously, the co-ordinate rings are $k[t^{\pm 1}]$ and $k[x_0,...,x_n]$, and co-action homomorphism is given by $x_0 \mapsto t^{-1}\otimes x_0$ and $x_i \mapsto t\otimes x_i$ for $i > 0$.
+\end{example}
+We now present our first criterion for stability:
+\begin{theorem}[Topological criterion for stability] \index{stability ! topological criterion}
+	Let $X$ be a projective variety, let $G$ be a reductive affine algebraic group with a linearisation on the very ample line bundle $\L$, and let $S$ denote the resulting coordinate ring. 
+	\begin{enumerate}
+		\item A $k$-point $p$ is semistable if and only if for any lift $\tilde{p}\in \widetilde{X}(k)$, the closure of the $\tilde{p}$ orbit in $\widetilde{X}$,  $\overline{G\cdot \tilde{p}}$, does not contain the origin.
+		\item A $k$-point $p$ is polystable if and only if the orbit of any of its lifts is closed in $\widetilde{X}$.
+		\item A $k$-point $p$ is stable if and only if for any lift $\tilde{p}$, the map $\sigma(-, p): G \rightarrow X$ is proper.  %its orbit is closed in $\widetilde{X}$ and $\dim G_{\tilde{p}} = 0$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Fix a $k$-point $p$ and a lift $\tilde{p}$. If $p$ is semistable, then there is some $r>0$ and $\sigma\in S_{\deg r}^G$ such that $\sigma(p) \neq 0$. Let $f = \sigma - \sigma(\tilde{p})$. Then $f$ is invariant, and hence constant on $G\cdot \tilde{p}$. Observe that $f(0) = \sigma(0) - \sigma(\tilde{p}) = - \sigma(\tilde{p})$ (since $\sigma$ is homogeneous of positive degree, it follows $\sigma(0) = 0$), which means that there is some function which vanishes on $G\cdot \tilde{p}$ but not 0, and hence $0$ is not in the orbit closure of $\tilde{p}$. Conversely, suppose $0$ is not in the orbit closure of $\tilde{p}$. Then $\overline{G\cdot \tilde{p}}$ and the origin are both $G$-invariant closed subsets of $\widetilde{X}$, and it can be shown (\autocite[Corollary 1.2]{GIT}) there is some invariant $f\in S$ such that $f(0)= 0$ for all $g\in G(k)$ but $f(g\cdot p)\neq 0$. Clearly then $f$ has no degree zero component. Now let $f = \sum_{i > 0} f_i$ be the homogeneous decomposition of $f$, with $f_i$ of degree $i$. In particular, some $f_r$ must not vanish on $\tilde{p}$, and since $G$ preserves each homogeneous component of $S$, it follows that $f_r$ is invariant, and hence $f_r(p)\neq 0$, so $p$ is semistable. This proves (i).
+	
+	To prove (ii), firstly suppose $p$ is semistable (if it is not, then it cannot be polystable, and the boundary of its orbit contains the origin). Then $p\in X_\sigma(k)$ for some invariant homogeneous $\sigma$ of positive degree. Observe then that $X_\sigma$ is $G$-invariant, and so $G\cdot p\subseteq X_\sigma(k)$. Now pick a lift $\tilde{p}$ of $p$, and consider the closed subscheme $V = \Spec S/ \langle \sigma - \sigma(\tilde{p}) \rangle$ of $\widetilde{X}$, which clearly contains the orbit $G\cdot \tilde{p}$. Now the map $\widetilde{X} \setminus \{0\} \rightarrow X$ restricts to a map $\varphi: V\mapsto X_\sigma$, which is a morphism of affine schemes, induced by the canonical ring homomorphism \[S[\sigma^{-1}]_{\deg 0} \rightarrow S/\langle \sigma - \sigma(\tilde{p}) \rangle,  \] \[ \frac{f}{\sigma} \mapsto \frac{f}{\sigma(\tilde{p})}, \] and since the homomorphism is surjective, the morphism $\varphi$ is finite, and hence closed. In particular, if $G \cdot \tilde{p}$ is closed, then it is closed in $V$, and $G \cdot X$ is closed in $X_\sigma$. {\color{red} TO FINISH}.
+\end{proof}
+
+The main issue with the above is that it is oftentimes very difficult to compute the closure of an orbit, and in fact it may even be unknown what the homogeneous coordinate ring of our linearisation is in the first place! And thus we will require a slightly different notion, which is more computation-friendly. This is the \textit{Hilbert-Mumford criterion}, which relates stability to 1-parameter subgroups, which we will now define:
+\begin{definition}\index{1-parameter subgroup}
+	Let $G$ be an algebraic group acting on a scheme $X$, separated over $k$. A \textit{1-parameter subgroup}, or just \textit{1-PS}, is a group homomorphism $\lambda: \bb{G}_m \rightarrow G$. 
+	
+	Now let $f: \bb{G}_m \rightarrow X$ be any morphism. Then by the valuative criterion for separation, $f$ has at most one extension to a morphism $f^\sharp: \A^1 \rightarrow X$. If this extension does exist, we define the \textit{limit} of $f$ at 0, denoted $\lim_{t\to 0} f(t)$, to be \[\lim_{t\to 0} f(t):= f^\sharp(0). \] If this extension does not exist, we say the \textit{limit does not exist}.
+\end{definition}
+%\begin{lemma}
+%	Let $\lambda: \bb{G}_m \rightarrow G$ be a 1-PS. Then $\lim_{t \to 0} \lambda(t)$ exists if and only if $\lambda$ is trivial.
+%\end{lemma}
+%\begin{proof}
+%	content...
+%\end{proof}
+
+Now suppose $X$ is projective. Then given an embedding $X\subseteq \P^n$ and $p\in X(k)$, the morphism $\lambda_p$ may be considerd a morphism into $\P^n$, and if we define the lift $\lambda_p^\sharp$ as a morphism into $\P^n$, it is clear that the limit will be contained in the closed subscheme $X$, and thus we reduce to the case $X = \P^n$. 
+
+Now suppose we have a linearisation $\L$, and hence a linear action of $G$ on the affine cone $\widetilde{\P^n} = \A^{n+1}$. Then given a $p\in \A^n(k)$ and a 1-PS $\lambda: \bb{G}_m \rightarrow G$, we have an induced morphism $\lambda_p: \bb{G}_m \rightarrow \A^{n+1}$, and if the limit does exist, then the limit is contained in the closure of $G\cdot p$. This is clear. What is not clear is that the converse is also true:
+\begin{theorem}\label{fundamental-theorem-git}
+	Let $G$ be a reductive affine algebraic group acting on $\A^n$, with the action induced by a representation $G \rightarrow \GL_n$. Then for any $p\in \A^n(k)$, a $k$-point $q$ is in the closure of $G\cdot p$ if and only if there exists a nontrivial 1-PS $\lambda: \bb{G}_m \rightarrow G$ such that \[\lim_{t\to 0} \lambda_p(t) = q.\]
+\end{theorem}
+The {\color{red}proof relies on the Cartan-Iwahori decomposition theorem}, which is beyond the scope of this thesis, but it can be found in \autocite[p. 48]{ModuliNotes} or \autocite[p. 53]{GIT}. This result is highly analogous to the theorem in analysis, which states that a point is in the closure of a set in a metric space if and only if there is some sequence which converges to it. 
+
+The significance of this theorem is that we can study the closure of an orbit by studying linear actions of $\bb{G}_m$, which we know has a weight space decomposition, by Theorem \ref{torus-reductive}. More precisely, we have the following definition:
+\begin{definition}
+	Let $G$ be a reductive affine algebraic group acting on $\P^n$, with a linearisation on $\O_{\P^n}(1)$. Then we have a linear action of $G$ on $\A^{n+1}$. Now given a 1-PS $\lambda: \bb{G}_m \rightarrow G$, we have a weight space decomposition \[ k^{n+1}=: V = \bigoplus_{r\in \Z} V_r. \] Choose a basis $\{e_i\}$ for $V$ such that $\lambda \cdot e_i = \lambda^{r_i} e_i$ for all $\lambda\in \bb{G}_m(k)$. Now let $p\in \P^n(k)$, and let $\tilde{p}\in \A^{n+1}(k)$ be a lift. We may write $\tilde{p} = \sum p_i e_i$. The \textit{Hilbert-Mumford weight of $\lambda$ at $p$}, denoted $\mu(p, \lambda)$, is the integer \[\mu(p, \lambda) := \max\{-r_i \mid p_i \neq 0\}.\] Note that this does not depend on the choice of $\tilde{p}$.
+\end{definition}
+
+We unwrap this definition a little. If $\mu(p, \lambda) < 0$, this means that all the $r_i$ are postive. In particular, \[\lim_{t\to 0} \lambda_p(t) = 0, \] and so $p$ is unstable. If $\mu(p, \lambda) = 0$, then all the $r_i$ are nonnegative, with at least one strictly zero, and so the limit does exist, and it easy to see \[\lim_{t\to 0} \lambda_p(t) = \sum_{r_i = 0}  p_i e_i. \] In particular, if $\lambda$ is not trivial, then $p$ is {\color{red} not polystable}.
+
+
+

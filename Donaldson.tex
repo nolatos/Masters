@@ -1,0 +1,83 @@
+
+\section{Donaldson's Proof}
+\par Finally, we will conclude the thesis with an exposition of Donaldson's paper \autocite{Donaldson}. This builds on earlier work by Atiyah and Bott in \autocite{AtiBot}, and provides {\color{red} a short proof of the theorem of Narasimhan and Seshadri}. We fix the following data: let $\E$ be an indecomposable holomorphic vector bundle of signature $(n,d)$ with underlying smooth bundle $E$ and fix a hermitian metric $h$. Let $\nabla$ denote the Chern connection. Furthermore, since $X$ is a compact Riemann surface, it is K\"ahler, and we make the further assumption that the volume of $X$ is 1. The result is the following:
+\begin{theorem}[Donaldson-Narasimhan-Seshadri]
+	The bundle $\E$ is stable if and only if there is some unitary connection $\nabla'$ on $E$ with curvature $\Theta\in H^0(\Omega^2_X)\otimes \End E$ satisfying 
+	\begin{equation}\label{NS-equality}
+		\Theta = -2\pi i \mu \vol \otimes \id_E 
+	\end{equation}
+	and a gauge transformation $g$ such that $\nabla = g \cdot \nabla'$. Moreover, $\nabla'$ is unique up to the action of the unitary gauge group.
+\end{theorem}
+\begin{example}
+	Of course, over $\P^1$ the only stable bundles are line bundles. So let $\Ox(n)$ be a line bundle. In Example \ref{chern-class-line-bundle-on-p1}, we defined a hermitian metric and computed the Chern class, Chern connection and curvature. Now we will need to compute the volume form. Of course, $X$ is obviously K\"ahler with its Fubini-Study metric (which can be realised as the metric of $\mathcal{T}_X = \Ox(2)$ or its dual $\Ox(-2) = \Omega_X^1$ described in Example \ref{chern-class-line-bundle-on-p1}), and so by taking the real part of this complex inner product, we have a natural Riemannian structure. Locally, if we pick an affine patch with holomorphic coordinate $z = x + iy$, and frame $(\partial x, \partial y)$ of $T_X$ (the smooth tangent space) the metric is given by \[g = \begin{pmatrix*}
+		\frac{1}{\sqrt{\pi}(1 + x^2+y^2)^2} & 0 \\
+		0 & \frac{1}{\sqrt{\pi}(1 + x^2+y^2)^2} 
+	\end{pmatrix*} \] The $\sqrt{\pi}$ is there so that the resulting volume is 1. An orthonormal frame is given by $(\sqrt{\pi}(1 + x^2+y^2)\partial x , \sqrt{\pi}(1 + x^2+y^2)\partial y)$, and hence the volume form is \[\vol = \frac{dx \wedge dy}{\pi(1 + x^2 + y^2)^2} = \frac{idz \wedge d\bar{z}}{2\pi(1 + |z|^2)^2}. \] Now we computed the curvature of the Chern connection on $\Ox(n)$ to be \[ \Theta =\frac{n}{(1+|z|^2)^2} dz \wedge d\bar{z} = -2\pi i \deg(\Ox(n)) \vol \] as expected. Hence the theorem is true for $\P^1$.
+\end{example}
+In fact, we will first prove the theorem for line bundles in general:
+\begin{theorem}
+	The Donaldson-Narasimhan-Seshadri theorem is true for line bundles.
+\end{theorem}
+\begin{proof}
+	Of course, if $\L$ is a line bundle with hermitian metric $h$, underlying smooth bundle $L$ and Chern connection $\nabla$, then it is already stable. Thus we reduce to showing that a connection $\nabla'$ in the orbit of $\nabla$ with curvature in the form (\ref{NS-equality}) exists. 
+	
+	To this end, we observe that the curvature $\Theta$ of $\nabla$ is just an imaginary global (1,1)-form (since $\fancyEnd \L$ is trivial; the identity endomorphism is a global frame), so $i\Theta$ differs from its harmonic representative $i\Theta'$ by a real exact  1-form, say $i\Theta - d\eta= i\Theta'$. Now observe that since $\Theta'$ is harmonic, $d\star \Theta' = 0$, and so $\star\Theta'$ is a constant; necessarily equal to $-2\pi i\mu$. So we reduce once again to showing that there is a gauge transformation $g$ such that $\Theta'$ is the curvature of $g \cdot \nabla$. 
+	
+	Observe that $d\eta$ is real and closed and therefore the following Poisson equation has a solution (\autocite[Theorem 4.7]{Aubin}): \[2\delbar\partial f = \Delta f = id\eta. \] Now write $g:= \exp f$, let $\nabla' = g\cdot \nabla$, and write $\Theta'$ for the curvature of $\nabla'$. Firstly, observe that since $\fancyEnd \L$ is trivial, the operators induced by the connection, $\partial_{\fancyEnd \L}$ and $\delbar_{\fancyEnd \L}$, are just the usual $\partial$ and $\delbar$ operators. Hence \[\Theta' = \theta - d(\delbar g)g^{-1} + d\overline{(\delbar g)g^{-1}} = \Theta - \partial \delbar f +  \]
+\end{proof}
+
+Observe that the condition (\ref{NS-equality}) is a little awkward to work with, so we introduce the \textit{Donaldson $J$-functional} on the {\color{red} Sobolev }space of unitary connections, which satisfies the property that $J(\nabla) = 0$ if and only if $\nabla$ satisfies (\ref{NS-equality}). It is defined as follows: Firstly recall that the \textit{trace norm} of a square matrix $M\in \C^{r\times r}$ is defined to be \[\nu(M) := \tr((MM^*)^{\frac{1}{2}}), \] where $(MM^*)^{\frac{1}{2}}$ is the unique positive semidefinite matrix $B$ such that $B^2 = MM^*$, which exists since $MM^*$ is hermitian (and hence diagonalisable) and positive semidefinite. In fact, if $M$ is diagonalisable, it is easy to see that \[\nu(M) = \sum |\lambda_i|, \] where the sum is taken across all eigenvalues of $M$, counting multiplicity. We define the \textit{$N$-norm} on $\End E$, the space of smooth endomorphisms of $E$, as \[N(s):= \left(\int_X \nu^2(s) \vol\right)^{\frac{1}{2}}. \]
+
+Now let $\nabla$ be a $W^{1,2}$-connection with curvature $\Theta\in H^0(\Omega_{\fancyEnd E}^{2})$. Then we define the \textit{Donaldson $J$-functional} as \[J(\nabla):= N(\frac{\star \Theta}{2\pi i} + \mu)= \left(\int_X \nu^2\left(\frac{\star \Theta}{2\pi i} + \mu\right)\vol\right)^{\frac{1}{2}}, \] where $\nu^2(s) := (\nu(s))^2$ and $\star$ is the Hodge star operator. Observe that $J=0$ if and only if $\nabla$ is a connection of the type we want (known as, \textit{projectively flat}, or \textit{Yang-Mills connections}). Thus we have turned our problem into one of finding zeroes of $J$.
+
+The rough idea of the proof is as follows: let $\nabla$ denote the Chern connection of $\E$, and let $O_\nabla$ denote the $W^{2,2}$-gauge orbit of $\nabla$. We will show that if $\E$ is stable, then the infimum of $J(O_\nabla)$ is attained; that is there is some $\nabla'\in O_\nabla$ such that $J(\nabla') = \inf J(O_\nabla)$. One then deduces that the infimum must be zero, by looking at infinitesimal deformations of $\nabla'$. In order to deduce that the infimum is attained, we take a minimising sequence (that is, a sequence $\nabla_i$ such that $J(\nabla_i)\to \inf J(O_\nabla)$) in $O_\nabla$ and extract, using Uhlenbeck's weak compactness theorem (to be stated), a weakly convergent subsequence that converges to $\nabla'$. Now $\nabla'$ defines a holomorphic bundle, say $\F$, and the key property is that $\Hom(\E, \F)\neq 0$. So we take a nonzero $\varphi: \E \rightarrow \F$, and apply Proposition \ref{canonical-extension-proposition} to get a factorisation of $\varphi$ through two exact rows, and apply estimates to these rows to deduce that $\E$ is stable if and only if $\E \cong\F$. The converse (that if there is some connection annihilating $J$ then $\E$ is stable) also follows from these estimates.
+\\\\
+\par Now we begin with a {\color{red} statement of Uhlenbeck's compactness theorem}:
+\begin{theorem}[Uhlenbeck's weak compactness]
+	Let $(\nabla_i)$ be a sequence of $W^{1,2}$-connections with curvatures $(\Theta_i)$, and suppose the sequence $(||\Theta_i||_{L^2}:=\int_X \tr(\Theta_i) \wedge \tr(\star \overline{\Theta_i}))$ is bounded. Then there is a sequence of $W^{2,2}$-gauge transformations $(g_i)$ and a subsequence $(\nabla_{i_k})$ such that $(g_{i_k}\cdot \nabla_{i_k})$ weakly converges to some $\nabla_\infty$ (that is, $\int_X \tr(g_{i_k}\cdot \Theta_{i_k}) \wedge \tr(\star A) \to\int_X \tr(\Theta_\infty) \wedge \tr(\star A) $ for all $W^{1,2}$-connections $A$).
+\end{theorem}
+\begin{proof}
+	\autocite[p. 41]{Uhlenbeck}.
+\end{proof}
+So let $(\nabla_i)$ be a sequence in $O_{\nabla}$ with curvatures $(\Theta_i)$, such that $J(\nabla_i)\to \inf J(\O_\nabla)$. In order to use the theorem, we need to check that $||\Theta_i||_{L^2}$ is bounded. To this end, we first observe that $N(\star \Theta_i)$ is bounded, since $J(\nabla_i)$ is and $N$ is a norm. Now note that \[\nu^2(\star \Theta_i) \vol =\tr(\sqrt{(\star \Theta_i)(\star \Theta_i)^*})^2\vol,\] and similarly, \[\tr(\Theta_i) \wedge \star\tr(\overline{\Theta_i}) = \tr(\star\Theta )(\star\Theta)^*\vol. \] Since all norms are equivalent in finite dimensions, it follows that there is some $m,M>0$ such that for any matrix $A$ we have \[m\tr(AA^*)\leq \tr\sqrt{AA^*}^2 \leq M \tr(AA^*),   \] thus since $\{N(\star\theta_i)\}$ is bounded, it follows that $\{||\Theta_i||_{L^2}\}$ is also bounded. Thus there is some $\nabla_\infty$ which is the weak limit, and hence defines a holomorphic bundle, say $\F$ with signature $(n,d)$.
+\begin{proposition}
+	Let $\E, \F$ be as above.
+	\begin{enumerate}
+		\item Then $\inf J(O_\nabla) \geq \inf J(O_{\nabla_\infty})$.
+		\item The group $\Hom(\E, \F)$ is nonzero.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\color{red} TODO
+\end{proof}
+
+With this result in hand, we fix a nonzero homomorphism $\varphi: \E \rightarrow \F$ and apply Proposition \ref{canonical-extension-proposition}, so that we have the following commutative diagram:
+	\begin{equation}\label{proper-factorisation-equation-donaldson}
+	\begin{tikzcd}
+		0 \arrow[r] & \cal{E'}\arrow[r] & \E \arrow[r] \arrow[d, "\varphi"]& \E'' \arrow[d]\arrow[r]& 0\\
+		0  & \F''\arrow[l]& \F \arrow[l] & \F'\arrow[l] &\arrow[l] 0
+	\end{tikzcd}
+\end{equation}
+with exact rows, $\E' \cong \ker \varphi$, $\E''\cong \im \varphi$ and $\rk \E'' = \rk \F'$, $\deg \E'' \leq \deg \F'$. The key now is to apply estimates to these rows. 
+\begin{proposition}[First Estimate]
+	Consider the following short exact sequence of vector bundles: \[ 0 \rightarrow \F' \rightarrow \F \rightarrow \F'' \rightarrow 0,\] and suppose $\mu(\F') \geq \mu(\F)$. Then for any unitary connection $\nabla_\F$ on $\F$, we have \[J(\nabla_\F) \geq \rk \F'(\mu(\F') - \mu(\F)) + \rk \F''(\mu(\F) - \mu(\F')). \] Equality holds only if the sequence splits.
+\end{proposition}
+\begin{proof}
+	Firstly, we fix a local unitary frame $s_\alpha$ and consider the matrix of one-forms of $\nabla_\F$. It is then not hard to see that.
+\end{proof}
+
+Our next estimate applies to the top row. However, it is more technical and requires the stronger hypothesis that the Donaldson-Narasimhan-Seshadri theorem has been proven for bundles of smaller rank:
+\begin{proposition}[Second Estimate]
+	Consider the following short exact sequence of vector bundles: \[ 0 \rightarrow \E' \rightarrow \E \rightarrow \E'' \rightarrow 0,\] suppose this exension is proper, that $\E$ is stable and the Donaldson-Narasimhan-Seshadri theorem has been proven for bundles of smaller rank. Then there exists a {\color{red} connection} $\nabla_{\E}$ on $\E$ such that \[J(\nabla_{\E}) < \rk \E'(\mu(\E) - \mu(\E')) + \rk \E''(\mu(\E'') - \mu(\E)). \]
+\end{proposition}
+\begin{proof}	
+	We consider the Harder-Narasimhan filtration of $\E$:
+\end{proof}
+\begin{corollary}
+	Suppose the Donaldson-Narasimhan-Seshadri theorem has been proven for lower-rank bundles. If $\E$ is stable, we have $\E \cong \F$. In particular, $J(\nabla_\infty) = \inf J(O_\nabla)$.
+\end{corollary}
+\begin{proof}
+	content...
+\end{proof}
+
+

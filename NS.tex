@@ -1,0 +1,230 @@
+\par {\color{red} We have constructed the spaces $V^s_{n,d}$ of stable vector bundles on a curve. In this chapter, we turn our attention to the case $k = \C$ (in particular, our vector bundles are \textbf{complex} vector bundles). This choice is necessary, as it gives us access to methods from analysis and differential geometry. In this setting, it turns out $V^s_{n,d}$ has a nice characterisation, known as the \textit{Narasimhan-Seshadri Correspondence}, or the \textit{Narasimhan-Seshadri Theorem}. }So let us fix once and for all a compact Riemann surface $X$ of genus $g$ (which may be identified as the $\C$-valued points of a projective curve over $\C$, given the complex topology). The basic result is the following:
+\begin{theorem}[Narasimhan-Seshadri, 1965]
+	Suppose $g\geq 2$. Then there is a bijection between $V^s(n,0)$ with irreducible representations $\pi_1(X) \rightarrow U(n)$ up to conjugation.
+\end{theorem}
+This is first given as Corollary 1 of \autocite{NS}. Since then, Donaldson gave a different proof in \autocite{Donaldson} by studying unitary connections, and using a correspondence theorem known as the \textit{Riemann-Hilbert Correspondence}. His result is stated as follows:
+\begin{theorem}[Donaldson, 1983]
+	An indecomposable holomorphic bundle $\E$ over $X$ with a hermitian metric $h$ is stable if and only if there is a unitary connection on $\E$ with curvature equal to a constant multiple of the volume form. Such a connection is unique up to isomorphism.
+\end{theorem}
+We will survey these results in this chapter.
+\\\\
+\indent Of course, since we are moving into analytic territory, some comments are in order. \textit{Open} and \textit{closed} will always mean with respect to the usual topology. \textit{Point} will always refer to a usual point. We will make use of the correpondence between vector bundles and locally free sheaves without comment, and we will also use without comment the correspondence between holomorphic vector bundles on $X$ and algebraic vector bundles on $X$. 
+\section{Parameterising Holomorphic Structures}
+\indent Within the problem of classifying holomorphic bundles, a subproblem is to classify all holomorphic bundles that restrict to a given smooth bundle $E$. As we will see in the next section, the degree of a holomorphic bundle is actually a smooth invariant, and in fact, along with the rank, completely classifies $E$! Thus $V_{n,d}$, the isomorphism classes of all holomorphic bundles with signature $(n,d)$, is equal to the set of holomorphic structures on $E$, up to isomorphism. It turns out that this space is, in turn, parameterised by so-called unitary connections (to be defined) on $E$, and this correspondence, known as the \textit{Chern Correspondence}, is a key ingredient in the Narasimhan-Seshadri theorem. We will study the Chern corespondence in this section.
+
+Recall some notation. Let $\Omega^{p,q}_X$ denote the sheaf of smooth $(p,q)$-forms on $X$, and let \[\Omega^{p,q}_E:= \Omega^{p,q}_X \otimes E.\] Note that $\Omega^0_E \cong E$.
+\begin{definition}\index{Dolbeault operator}
+	A \textit{Dolbeault operator} on $E$ is a homomorphism of abelian sheaves (in particular, \textbf{NOT} as $\Ox$-modules) \[\delbar_E: \Omega^0_E \rightarrow \Omega^{0,1}_E\] such that for any smooth $f\in C^\infty(U)$ and local section $s\in \Omega^0_U$, we have \[\delbar_E(fs) =  \delbar(f)\otimes s + f\delbar_E(s).\]
+\end{definition}
+\begin{example}
+	Let $E$ be the trivial bundle $E = X \times \C^n$. Then the usual $\delbar$ operator is a Dolbeault oeprator
+\end{example}
+\begin{example}
+	Let $\nabla$ be any connection on $E$. Composing $\nabla$ with the projection to its $(0,1)$-component we obtain a Dolbeault operator. This is often known as the \textit{$(0,1)$-component of} $\nabla$.
+\end{example}
+\begin{example}
+	Let $\E$ be a holomorphic bundle whose underlying smooth bundle is $E$. Then there is a natural Dolbeault operator, known as the \textit{canonical Dolbeault operator}, characterised by $\delbar_E(s) = 0$ for any homomorphic section $s$. To see that this is well-defined, let $u: U \rightarrow E$ be a smooth section. Covering $U$ with sufficiently small open subsets $\{U_\alpha\}$ we may assume there are local holomorphic frames $\{(s_i)_\alpha\}$. Now we can write $u_\alpha:=u|_{U_\alpha} = \sum a_i s_i$ where $s_\alpha = (s_i)_\alpha$ is a holomorphic frame on $U_\alpha$ and $a = (a_i)$ is smooth. Then we see \[\delbar_E(u_{\alpha}) = \delbar_E(\sum a_i s_i) = \sum \delbar(a_i)\otimes s_i \] Repeating on $U_\beta$ with local holomorphic frame $t_\beta = (t_i)_\beta$ such that $u_\beta = \sum b_i t_i$ we have $\delbar_E(u_\beta) = \sum \delbar(b_i)\otimes t_i$. Now if $g = g_{\alpha\beta}$ is the transition map, letting $g_{ij}$ denote the $i,j$-th entry of $g$, we observe \[\sum_j \delbar(b_j) \otimes t_j = \sum_j\sum_i \delbar(b_j)\otimes (g_{ij}s_i)=  \sum_i \sum_j\delbar(g_{ij}b_j)\otimes s_i = \sum_i \delbar(a_i)\otimes s_i \] as desired (note that since $g$ is holomorphic we have $\delbar(g) = 0$) and hence by the sheaf axioms this defines $\delbar_E(u)$ uniquely. 
+\end{example} 
+In fact, the converse of the above example is true for Riemann surfaces: if $\delbar_E$ is a Dolbeault operator and there exists an open cover $U_\alpha$ with frames $s_\alpha$ such that $\delbar_E(s_\alpha) = 0$, then it is not hard to show that the transition maps are holomorphic and hence the $\{s_\alpha\}$ define a holomorphic structure on $E$. Such a Dolbeault operator is said to be \textit{integrable}. It can be shown (\autocite[p.555]{AtiBot}) that every Dolbeault operator on a Riemann surface is integrable. Hence Dolbeault operators parameterise holomorphic structures on $E$ (however, we will soon see that they actually over-parameterise holomorphic structures).
+\\\\
+Next we recall the following definition:
+\begin{definition}
+	A \textit{Hermitian metric} on $E$, denoted $h$ is the assignment of a complex inner product $h_p(\cdot, \cdot): E_p^2 \rightarrow E_p$ to every $p\in X$ such that for any smooth sections $s,t$ we have that $p \mapsto h_p(s,t)$ is smooth. A \textit{hermitian bundle} is a vector bundle $E$ equipped with a hermitian metric. A \textit{morphism} of hermitian bundles is a smooth morphism of bundles $\varphi: E \rightarrow F$ such that $h_F(\varphi(s),\varphi(t)) = h_E(s,t)$ for any sections $s,t$ if $E$. A hermitian automorphism is known as a \textit{unitary gauge transformation}, and the group of all such automorphisms is known as the \textit{unitary gauge group}.
+	
+	A frame $(s_i)_\alpha$ is \textit{unitary} if $h(s_i, s_j) = \delta_{ij}$. A \textit{unitary connection} is a connection $\nabla$ such that \[dh(s,t) = h(\nabla s, t )+ h(s, \nabla t)\] for any smooth sections $s,t$. Given a local frame $(s_i)_\alpha$ on $U_\alpha$, we define the \textit{local matrix of} $h$, denoted $h_\alpha$ such that $(h_\alpha)_{ij}:= h(s_i, s_j)$. 
+\end{definition}
+\begin{lemma}\label{unitary-iff-skew-hermitian}
+	Let $\nabla$ be a connection. Then $\nabla$ is a unitary connection if and only if for any unitary frame $(s_i)_\alpha$, the local 1-form $\omega_\alpha$ is skew-Hermitian.
+\end{lemma}
+\begin{proof}
+	Suppose $\nabla$ is unitary. Note that for any $i,j$, we have $$0 = dh(s_i, s_j) = h(\sum_k(\omega_\alpha)_{ki} s_k, s_j) + h(s_i, \sum_k\omega_\alpha)_{kj} s_k) = (\omega_\alpha)_{ij} + (\overline{\omega}_\alpha)_{ji}$$ and thus $(\omega_\alpha)_{ij} =- (\overline{\omega}_\alpha)_{ji}$ as required.
+	
+	Conversely, suppose $\omega_\alpha$ is skew-Hermitian and let $s = \sum a_i s_i$ and $t = \sum b_i s_i$ be local sections. Then we can check
+	\begin{align*}
+		h(\nabla(s), t) + h(s, \nabla(t)) &= h(\nabla(\sum a_i s_i), \sum b_i s_i) + h(\sum a_i s_i, \nabla(\sum b_i s_i))\\
+		&=h(\sum_i da_i s_i + a_i\sum_j (\omega_\alpha)_{ij} s_j, \sum_i b_i s_i) \\
+		&+ h(\sum_i a_i s_i, \sum_i db_i + b_i \sum_j((\omega_\alpha)_{ij}, s_j))\\
+		&= (\sum_i b_ida_i + a_idb_i) + (\sum_j\sum_i a_i (\omega_\alpha)_{ij} b_j) + (\sum_j\sum_i a_j (\overline{\omega}_\alpha)_{ij}b_i)\\
+		&= (\sum_i b_ida_i + a_idb_i) + (\sum_j\sum_i a_i (\omega_\alpha)_{ij} b_j) - (\sum_j\sum_i a_j (\omega_\alpha)_{ji}b_i)\\
+		&= \sum_i b_ida_i + a_idb_i\\
+		&= dh(s,t)
+	\end{align*}
+	as desired.
+\end{proof}
+It can be shown by a partition of unity argument (\autocite[III Theorem 1.2]{Wells}) that hermitian metrics exist on any bundle. Similarly, a standard Gram-Schmidt argument will show that smooth unitary frames always exist locally, and finally, we will show that unitary connections always exist:
+\begin{theorem}[Chern Correspondence]\index{Chern correspondence}
+	Let $\E$ be a holomorphic vector bundle, $\delbar_E$ its canonical Dolbeault operator, and $h$ a hermitian metric. Then there is a unique unitary connection $\nabla$ on $\E$ with $(0,1)$ component $\delbar_E$. Moreover, if $(s_i)_\alpha$ is a local holomorphic frame, then this connection is described by $\omega_\alpha =(\partial h_\alpha) h_\alpha^{-1}$
+\end{theorem}
+\begin{proof}
+	We first prove uniqueness. Suppose $\nabla$ is such a connection, and let $(s_i)_\alpha$ be a holomorphic frame defined on $U_\alpha$. Then the corresponding matrix of 1-forms $\omega_\alpha$ satisfies \[\nabla(s_i) = \sum_j (\omega_\alpha)_{ij}s_j.\] Observe that since all the $s_i$ are holomorphic, all the entries of $\omega_\alpha$ must be of type $(1,0)$. Now we compute: 
+	\begin{align*}
+		dh(s_i, s_j) &= h(\nabla s_i, s_j) + h(s_i, \nabla s_j) \\
+		&= h(\sum_k (\omega_\alpha)_{ik}s_k, s_j) + h(s_i, \sum_k(\omega_\alpha)_{jk}s_k) \\
+		&= \sum_k(\omega_\alpha)_{ik} h(s_k, s_j) + \overline{(\omega_\alpha)_{jk}} h(s_i,s_k)
+	\end{align*}
+	But $dh(s_i, s_j)  = \partial (h_\alpha)_{ij} + \delbar (h_\alpha)_{ij}$, and thus comparing types we must have $(\partial h_\alpha)_{ij} = \sum_k(\omega_\alpha)_{ik} (h_{\alpha})_{kj}$ and letting $i,j$ vary, we observe \[ \omega_\alpha h_\alpha = \partial h_\alpha \] as required. This proves uniqueness.
+	
+	To prove existence, we define the connection to be $\omega_\alpha:=  (\partial h_\alpha)h_\alpha^{-1}$ for any holomorphic frame $(s_i)_\alpha$, and extend by the Leibniz rule. By the proof of uniqueness, this satisfies the properties in the theorem, thus we just need to check that this is well-defined. So let $(t_i)_\beta$ be another holomorphic frame, and suppose $g$ satisfies $t_i = \sum g_{ij}s_j$. Then it is not hard to see \[h_\beta = gh_\alpha g^*\] where $g^*$ is the conjugate transpose of $g$. By Proposition \ref{connection-transformatino-rule}, it suffices to show that $\omega_\beta = (dg)g^{-1}+ g\omega_\alpha g^{-1}$. We compute:
+	\[\partial h_\beta = \partial (gh_\alpha g^*) = (\partial g) h_\alpha g^* + g(\partial h_\alpha)g^* + gh_\alpha (\partial g^*) = (\partial g) h_\alpha g^* + g(\partial h_\alpha)g^* \]  since $g$ is holomorphic. Thus \[\omega_\beta = (\partial h_\beta )h_\beta^{-1} = ((\partial g) h_\alpha g^* + g(\partial h_\alpha)g^* )(g^*)^{-1}h_\alpha g^{-1} = (\partial g)g^{-1}+ g(\partial h_\alpha)h_{\alpha} ^{-1}g^{-1} = (dg)g^{-1}+ g\omega_\alpha g^{-1} \] as desired. 
+\end{proof}
+\begin{definition}\index{Chern connection}
+	The unitary connection in the above theorem is the \textit{Chern connection}.
+\end{definition}
+We sum up the above results as follows: as established, there is a 1-1 correspondence between holomorphic structures and Dolbeault operators. Now the natural follow-up question to that is given a Dolbeault operator $\delbar_E$, is there a canonical connection we can put on $E$ with (0,1)-component $\delbar_E$? The Chern correspondence answers this in the affirmative, with the choice of a hermitian metric placed on $E$. Thus, in order to study holomorphic structures, we can study unitary connections instead. 
+
+Finally, we describe the gauge group action on the space of connections. To begin, we consider the gauge group action on the space of Dolbeault operators. So let $u$ be a gauge transformation, and $\delbar_E$ a Dolbeault operator. We define \[(u \cdot \delbar_E)(s):= u\delbar_E(u^{-1}(s))\] it is easy to check that this is a group action that results in a Dolbeault operator. 
+\begin{proposition}
+	Let $\delbar_1, \delbar_2$ be two Dolbeault operators on $E$, and $\E_1, \E_2$ their associated holomorphic bundles. Then $\E_1 \cong \E_2$ if and only if there is a gauge transformation $u$ such that $\delbar_2 = u \cdot \delbar_1$. Moreover, $u: \E_1 \rightarrow \E_2$ is one such isomorphism.
+\end{proposition}
+\begin{proof}
+	Suppose firstly that $\delbar_2 = u\cdot\delbar_1 = u\delbar_1u^{-1}$. Now let $s$ be a holomorphic section of $\E_1$. Observe \[0 = \delbar_1(s) = \delbar_1(u^{-1} u(s)) = u\delbar_1(u^{-1}u(s)) = \delbar_2(u(s))\] and hence $u(s)$ is a holomorphic section of $\E_2$. By the same argument, if $t$ is a holomorphic section of $\E_2$, then $u^{-1}(t)$ is holomorphic in $\E_1$ as desired.
+	
+	Conversely, suppose $\E_1 \cong \E_2$ and let $u: \E_1 \rightarrow \E_2$ be an isomorphism. Now let $s_\alpha = (s_i)_\alpha$ be a holomorphic frame of $\E_1$; whence by the above calculation we have $u\delbar_1(u^{-1}u(s_i)) = 0$. But also $\delbar_2(u(s_i))= 0$ (since $u(s_i))$ is holomorphic). Since $u\delbar_1u^{-1}$ and $\delbar_2$ agree on a collection of frames on an open cover of $X$, they must be equal.
+\end{proof}
+We now want to extend this to the space of all unitary connections, so let $\nabla$ be a unitary connection with Dolbeault operator $\delbar_E$. By the Chern correspondence, the Dolbeault operator $u\cdot \delbar_E$ corresponds to a unique unitary connection; thus we simply need to find a unitary connection with $(0,1)$-component $u\cdot \delbar_E$. To this end, observe that as in the space of all connections, the space of unitary connections is an affine space. The underlying vector space is the subspace of $H^0(X, \Omega^1_{\fancyEnd(E)})$ consisting of 1-forms with values in a skew-hermitian endomorphism; that is, an endomorphism $F$ such that \[h(F(s), t) + h(s, F(t)) = 0\] Observe then, that \[-(\delbar_{\fancyEnd E}u)u^{-1} +  ((\delbar_{\fancyEnd E}u)u^{-1} )^*\] is clearly skew-hermitian, (where $(\delbar_{\fancyEnd E}u)(s):= \delbar_E(u(s))- u\delbar_E(s)$ is the \textit{induced Dolbeault operator}) and $u^*$ satisfies $h(us, t) = h(s, u^*t)$) and has $(0,1)$-component equal to \[(-(\delbar_{\fancyEnd E}u)u^{-1} +  (\delbar_{\fancyEnd E}u)u^{-1} )^*)^{0,1} = -(\delbar_{\fancyEnd E}u)u^{-1} \] since $((\delbar_{\fancyEnd E}u)u^{-1} )^*$ is of type (1,0). Hence $u\cdot \nabla$ defined by
+\begin{equation}\label{gauge-group-unitary-connection}
+	(u\cdot \nabla)(s) := \nabla(s) -(\delbar_{\fancyEnd E}u)u^{-1}(s) +  ((\delbar_{\fancyEnd E}u)u^{-1} )^*(s)
+\end{equation}
+is a unitary connection, and its associated Dolbeault operator is equal to  \[\delbar_E(s) -(\delbar_{\fancyEnd E}u)u^{-1}(s) = \delbar_E(s) - \delbar_E(uu^{-1}(s)) + u\delbar_E(u^{-1}(s)) = u\delbar_E(u^{-1}(s)) \] as desired. Hence defining the action of the gauge group by the formula in (\ref{gauge-group-unitary-connection}) (and it is easy to check that this is indeed a group action) extends the gauge group action on Dolbeault operators, and in particular two unitary connections induce isomorphic holomorphic structures if and only if they lie in the same gauge orbit. In summary, we have the following bijection:\[\{\text{Holomorphic structures on }E\}/\text{isomorphism} \leftrightarrow \{\text{unitary connections on }E \}/ \text{gauge equivalence}. \]
+We conclude this section with a discussion about the Sobolev completions of various spaces we have been working with, and how the above bijection extends. To begin, we first recall that since $X$ is a Riemann surface, it is K\"ahler with its Fubini-Study form. This fixes a volume form $\vol$ and hence a Hodge star product $\star$. The \textit{Hodge inner product} is defined on $\Omega^p_X$ as \[\langle\alpha, \beta\rangle := \int_X \alpha \wedge \star \beta. \] Completing this with 
+\section{Chern Classes}
+In this section, we will study Chern classes (or more precisely, the first Chern class), which are smooth invariants which are intimately connected with the notion of degree, and uniquely define the bundle up to smooth isomorphism. Once again, we fix a smooth bundle $E$. We begin with a result:
+\begin{lemma}
+	Let $\nabla_1, \nabla_2$ be connections on $E$ with curvature forms $\Theta_1, \Theta_2$ respectively. Then $\tr \Theta_1$ and $\tr \Theta_2$ are cohomologous.
+\end{lemma}
+\begin{proof}
+	Since $X$ is a Riemann surface, clearly $\tr \Theta_i$, being a two-form, is closed, thus the statement makes sense. Now $\nabla_1-\nabla_2$ is a global $\fancyEnd(E)$-valued 1-form; call it $A$. Let $\omega_1, \omega_2$ be respective local 1-forms of $\nabla_1$ and $\nabla_2$ on a local frame. Then locally, we have \[\Theta_2 = d\omega_2 + \omega_2\wedge \omega_2 = d(\omega_1+A) + (\omega_1 + A)\wedge (\omega_1 + A) = \Theta_1 + dA + A\wedge A + \omega_1 \wedge A + A \wedge \omega_1 \] hence \[\tr(\Theta_2) = \tr(\Theta_1) + \tr(dA) + \tr(A\wedge A) + \tr(\omega_1 \wedge A + A \wedge \omega_1). \] It is not hard to show that $\tr(A\wedge A)$ and $\tr(\omega_1 \wedge A + A \wedge \omega_1)$ are both zero, from the antisymmetry of the wedge product. Since $A$ is a global form, the $dA$ glue to a global exact 2-form and hence the result follows.
+\end{proof}
+\begin{definition}\index{Chern class! first}
+	The \textit{first Chern class} of $E$ is defined to be the cohomology class \[ c_1(E):=\left[\tr(\frac{i}{2\pi} \Theta)\right]\in H^2_{\text{DR}}(X) \] where $\Theta$ is the curvature form for any connection. By the above lemma, this does not depend on the connection.
+\end{definition}
+The key theorem we will be proving in this section is the following:
+\begin{theorem}\label{chern-weil-degree}
+	For any holomorphic bundle $\E$ with underlying smooth bundle $E$, we have \[\int_X c_1(E) = \deg(\E)\] up to sign. A choice of orientation fixes the sign.
+\end{theorem}
+Let us take a moment to appreciate this result. We defined the degree of a line bundle $\L$ on a curve $X$ over an algebraically closed field $k$ to be the degree of its corresponding divisor class, and we defined the degree of a vector bundle $\E$ to be the degree of $\det(\E)$. Note that this is purely algebraic. The theorem states that in the case $k = \C$, where we have access to analytic tools, when we equip $\E$ with a connection (any connection, in fact), take its curvature, take the trace of the curvature, multiply by $i/2\pi$ and integrate it, we get, not only an integer, but the same integer representing the degree of the divisor associated to its determinant bundle!
+\\\\
+\par Before we proceed, we would like to review the Snake Lemma; in particular how the \enquote{snake} is constructed. We recall the statement:
+\begin{proposition}[Snake Lemma]\index{Snake Lemma}
+	Suppose we have the following diagram of $A$-modules with exact rows:
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \arrow[r] &A^0  \arrow[r]\arrow[d, "d^A"] &B^0\arrow[d, "d^B"] \arrow[r]& C^0 \arrow[d, "d^C"]\arrow[r] & 0 \\
+			0 \arrow[r] &A^1  \arrow[r] &B^1 \arrow[r, "f"]& C^1 \arrow[r] & 0
+		\end{tikzcd}
+	\end{equation*}
+	Then there is a map $\delta: \ker d^C \rightarrow \coker d^A$ such that the following sequence is exact:
+	\begin{equation*}
+		\begin{tikzcd}[column sep = small]
+`				0 \arrow[r] & \ker d^A \arrow[r] & \ker d^B  \arrow[r] & \ker d^C \arrow[dll, 
+			rounded corners,
+			to path={ -- ([xshift=2ex]\tikztostart.east)
+				|- (Z) [near end]\tikztonodes
+				-| ([xshift=-2ex]\tikztotarget.west)
+				-- (\tikztotarget)}] \\ 
+			& \coker d^A \arrow[r] & \coker d^B \arrow[r] & \coker d^C \arrow[r] & 0
+		\end{tikzcd}
+	\end{equation*}
+\end{proposition}
+The $\delta$ above is constructed as follows: Take $c\in \ker d^C$. Since the top row is exact, there exists some $b\in B^0$ that maps to $c$. Now observe that since $d^C(c)
+= 0$, it must follow that the image of $d^B(b)\in \ker f$, by the commutativity of the diagram. Since the bottom row is exact, this pulls back to some unique $a\in A^1$, and moreover it can be shown that the image of $a$ in $\coker d^A$ does not depend on our choice of $b$, and in particular it is well-defined. Hence we define $\delta(c):= b$, and one can show that the resulting sequence is exact.
+\\\\
+\par Now we begin our investigation. We clearly have the short exact sequence of abelian groups:
+\begin{equation*}
+	\begin{tikzcd}
+		0 \arrow[r] & \Z \arrow[r] & \C \arrow[r, "\exp"] & \C^* \arrow[r] &0
+	\end{tikzcd}
+\end{equation*}
+where $\exp$ above is the map $x \mapsto \exp(2\pi i x)$. Taking the sheaf of $\scr{P}$-functions with values in the above groups, we have the following short exact sequence of sheaves, known as the \textit{exponential sheaf sequence}: 
+\begin{equation}\label{exponential-sequence}
+	\begin{tikzcd}
+		0 \arrow[r] & \underline{\Z} \arrow[r] & \Ox \arrow[r, "\exp"] & \Ox^* \arrow[r] &0
+	\end{tikzcd}
+\end{equation}
+where $\Ox$ is the sheaf of $\scr{P}$-functions on $X$, and $\underline{\Z}$ is the constant sheaf $\Z$. Recall that $H^i(X, \underline{\Z}) \cong H^i_{\text{sing}}(X, \Z)$ (\autocite[pp. 42-43]{GriHa}). Now taking cohomology of (\ref{exponential-sequence}), we have:
+\begin{equation}\label{exponential-sequence-cohomology}
+	\begin{tikzcd}[column sep = small]
+		0 \arrow[r] & H^{0}(X, \Z) \arrow[r] & H^{0}\left(X, \Ox\right)  \arrow[r] & H^{0}\left(X, \Ox^*\right) \arrow[dll, 
+		rounded corners,
+		to path={ -- ([xshift=2ex]\tikztostart.east)
+			|- (Z) [near end]\tikztonodes
+			-| ([xshift=-2ex]\tikztotarget.west)
+			-- (\tikztotarget)}] \\ 
+		& H^{1}\left(X, \Z\right) \arrow[r] & H^{1}\left(X, \Ox\right) \arrow[r] & H^{1}\left(X, \Ox^*\right) ...
+	\end{tikzcd}
+\end{equation}
+and in particular, we have a map $\delta: H^1(X, \Ox^*)\rightarrow H^2(X, \Z)$. Now recall that $H^1(X, \Ox^*)$ is the Picard group of $X$; in particular it parameterises the isomorphism classes of $\scr{P}$-line bundles on $X$. 
+\begin{proposition}\label{exp-sequence-chern-class}
+	Under the inclusion $H^2(X, \Z) \subseteq H^2(X, \R) \cong H^2_{\operatorname{DR}}(X)$, we have \[\delta(L) = -c_1(L) \] for any $\scr{P}$-line bundle $L$
+\end{proposition}
+\begin{proof}
+	This follows the proof given in \autocite[pp. 141-142]{GriHa}. Let $\{U_\alpha\}$ be a sufficiently fine open cover (in particular, one where we can take local logarithms on overlaps) and let $\{g_{\alpha\beta}\}$ be a \v{C}ech cocycle $L$. We define local inverses \[h_{\alpha\beta}:= \frac{1}{2\pi i}\log g_{\alpha\beta} \] and by the construction of the snake map of the Snake Lemma, it follows that $\{h_{\alpha\beta} - h_{\alpha\gamma} + h_{\beta\gamma}\}$ is a 2-cocycle of $\underline{\Z}$ representing $\delta(L)$. 
+	
+	Next we look at $c_1(L)$. Fix a connection and let $\{\omega_\alpha\}$ be the associated 1-forms. By Proposition \ref{connection-transformatino-rule}, we have \[\omega_\beta = (dg_{\alpha\beta})  g_{\alpha\beta}^{-1} + g_{\alpha\beta}\omega_\alpha g_{\alpha\beta}^{-1} = g_{\alpha\beta} dg_{\alpha\beta} + \omega_\alpha \] hence \[\omega_\beta - \omega_\alpha = g_{\alpha\beta}^{-1}dg_{\alpha\beta} = d \log g_{\alpha\beta} \] and in particular $d\omega_\alpha = d\omega_\beta$. Now we compute the curvature. Since we are working with a line bundle, $\omega$ is just a usual 1-form; it follows $\omega \wedge \omega = 0$, hence \[\Theta = d\omega_\alpha = d \omega_\beta. \] Finally, we reconcile de Rham and \v{C}ech cohomology. Note that by the Poincare Lemma we have the following short exact sequences of sheaves (recall exactness of sheaves is measured locally):
+	\begin{equation}\label{poincare-zero-forms}
+		0 \rightarrow \underline{\R} \rightarrow \Omega^0_X \rightarrow \mathcal{Z}^1 \rightarrow 0
+	\end{equation}
+	and
+	\begin{equation}\label{poincare-1-forms}
+		0 \rightarrow \mathcal{Z}^1 \rightarrow \Omega^1_X \rightarrow \mathcal{Z}^2 \rightarrow 0
+	\end{equation}
+	where $\mathcal{Z}^p$ denotes the sheaf of closed $p$-forms on $X$. Now it can be shown \autocite[p. 42]{GriHa} that $\Omega^p_X$ is acyclic, hence we have 
+	\begin{equation}\label{0-cohomology-2-forms}
+		H^0(X, \mathcal{Z}^2)/ H^0(X, \Omega^1_X) \cong H^1(X, \mathcal{Z}^1)
+	\end{equation}
+	by the long exact sequence of (\ref{poincare-1-forms}) and 
+	\begin{equation}\label{2-cohomology-1-forms}
+		H^1(X, \mathcal{Z}^1) \cong H^2(X, \R) 
+	\end{equation}
+	by the long exact sequence of (\ref{poincare-zero-forms})
+	Now we compute. Using (\ref{0-cohomology-2-forms}), and the construction of the snake map, the image of $\Theta$ in $H^1(X, \cal{Z}^1)$ is represented by the \v{C}ech 1-cocycle $\{i(\omega_\beta - \omega_\alpha)/ 2\pi\}$, and using (\ref{2-cohomology-1-forms}), the image of $\Theta$ in $H^2(X, \R)$ is \[\{\frac{i}{2\pi} (\log g_{\alpha\beta} - \log g_{\alpha\gamma} + \log g_{\beta\gamma})\}= -\{h_{\alpha\beta} - h_{\alpha\gamma} + h_{\beta\gamma}\} = - \delta(L) \] as desired.
+\end{proof}
+\begin{corollary}
+	In the smooth category, or in the holomorphic category with $g = 0$, every line bundle is uniquely determined by its first Chern class.
+\end{corollary}
+\begin{proof}
+	In both cases $\Ox$ is acyclic.
+\end{proof}
+
+Next we prove Theorem \ref{chern-weil-degree} for line bundles:
+\begin{theorem}\label{chern-weil-degree-line}
+	If $\L$ is a holomorphic line bundle with underlying smooth bundle $L$, then up to sign we have:
+	\begin{equation}\label{chern-degree-equation-line}
+		\int_X c_1(L) = \deg \L
+	\end{equation}
+	A choice of orientation fixes our sign.
+\end{theorem}
+\begin{proof}
+	We first prove the case where $\L$ is the line bundle of a prime divisor. Let $D$ be a prime divisor, supported on $P\in X$, suppose $\L = \L(D)$. Since $D$ is effective, by Proposition \ref{divisor-of-zeroes-effective}, it is the divisor of zeroes of some global section $s\in H^0(X, \L)$ that vanishes exactly once, at $P$. In particular, $s$ is a frame on $X \setminus \{P\}$. Now fix a hermitian metric $h$. By the Chern correspondence, the Chern connection of $(\E, h)$ is given locally by $h^{-1}_\alpha\partial h_\alpha$ and the curvature by $dh^{-1}_\alpha \partial h_\alpha= d\partial \log h_\alpha$ (here we may take logarithms because $h_\alpha > 0$). Now for an $\varepsilon> 0$, write $U_\varepsilon$ for the open set $X \setminus \overline{B}_{\varepsilon}(P)$, define $s_\varepsilon$ to be the frame $s|_{U_\varepsilon}$ and finally write $h_\varepsilon:= h(s_\varepsilon, s_\varepsilon) > 0$. We compute: \[\int_X c_1(L) = \lim_{\varepsilon \to 0} \int_{U_\varepsilon}c_1(L) = \lim_{\varepsilon \to 0} \int_{U_\varepsilon}\frac{i}{2\pi} d\partial \log h_\varepsilon = \lim_{\varepsilon \to 0}\int_{\partial U_\varepsilon} \frac{i}{2\pi}\partial \log h_\varepsilon \] where the final equality follows from Stoke's theorem. Now since $s|_{B_\varepsilon(P)}$ vanishes exactly at $P$, we may pick a holomorphic coordinate chart centred at $P$ such that $s = z$. Hence \[\int_{\partial U_\varepsilon} \partial \log h_\varepsilon= \pm \int_{|z| = \varepsilon} \partial (\log z + \log \bar{z} + \log h_z(1,1)) \] with the sign depending on our choice of orientation. Now observe that since $\log h_z(1,1)$ is smooth, it follows $\partial \log (h_z(1,1))/\partial z$ is continuous, and since $\{|z| \leq \delta \}$ is compact, for some sufficiently small $\delta$, it follows $\partial \log (h_z(1,1))/\partial z$ is bounded on $\{|z| \leq \delta \}$. Thus \[\lim_{\varepsilon \to 0}\left| \int_{|z| = \varepsilon} \partial \log h(1,1)\right| = \lim_{\varepsilon \to 0} \left|\int_{|z| = \varepsilon} \frac{\partial \log h_z(1,1)}{\partial z} dz\right| \leq \lim_{\varepsilon\to 0} 2\pi \varepsilon \sup\{ \left|\frac{\partial \log h_z(1,1)}{\partial z}\right| \mid |z|\leq \delta \} = 0. \] Finally, we have, by Cauchy's integration formula, \[\int_{|z| = \varepsilon} \partial (\log z + \log \bar{z}) =  \int_{|z| = \varepsilon} \frac{dz}{z} = 2\pi i  \] as desired. 
+	
+	Finally, we observe that $H^2(X, \Z)\cong \Z$, and by Proposition \ref{exp-sequence-chern-class}, it follows \[c_1(L_1 \otimes L_2) = c_1(L_1)+ c_2(L_2)\] Hence if $D = \sum n_i P_i$ is any divisor and $\L = \L(D)$, it follows $\L = \otimes \L(P_i)^{\otimes n_i}$ hence \[\int_X c_1(L) = \int_X c_1(\otimes \L(P_i)^{\otimes n_i}) = \int_X \sum n_i c_1(\L(P_i)) = \sum n_i  = \deg \L \] as desired.
+\end{proof}
+To make further arguments easier, we will henceforth choose the orientation such that equality holds as in (\ref{chern-degree-equation-line}).
+\begin{example}\label{chern-class-line-bundle-on-p1}
+	Suppose $X = \P^1$. We will compute the Chern class of $\Ox(n)$. Suppose the homogeneous coordinates on $X$ are $[x_0:x_1]$, and let $U_0 = \{x_0\neq 0\}$ and similarly with $U_1$. We define $z_0:= x_1/x_0$ to be the affine coordinate on $U_0 \cong \A^1$ and similarly for $z_1$. Now by definition of $\Ox(n)$, we may find frames $s_0, s_1$ on the corresponding affine patches such that \[g_{0,1}:= \frac{s_1}{s_0} = z_0^n = z^{-n}_1\] We define the hermitian metric on $\Ox(n)$ to be \[h_0 := h(s_0, s_0) = (1+|z_0|^2)^{-n} \]  on $U_0$, and \[h_1:= h(s_1, s_1) = (1+|z_1|^2)^{-n}. \] Of course, we need to check this is well-defined, that is \[h_0 = h(s_0, s_0) = h(z_1^n s_1, z_1^ns_1) = |z_1|^{2n}h_1. \] To this end observe \[h_0 = (1+|z_0|^2)^{-n} = (1+\frac{1}{|z_1|^2})^{-n} = (\frac{|z_1|^2+1}{|z_1|^2})^{-n} = |z_1|^{2n}(|z_1|^2+1)^{-n} = |z_1|^{2n}h_1\] as claimed. Hence for brevity, we will simply write \[h = (1+|z|^2)^{-n}\] understanding that this works for any affine patch, and finally observe that both affine patches have complement measure zero, and thus we may ultimately just work on one affine patch. 
+	
+	We continue. By the Chern correspondence, the unitary connection $\omega$ is given by \[\omega = h^{-1}\partial h = -\frac{n\bar{z}}{1+ |z|^2}dz \] and now computing the curvature $\Theta$: \[\Theta = d\omega = \frac{-n}{(1+|z|^2)^2} d\bar{z} \wedge dz =\frac{n}{(1+|z|^2)^2} dz\wedge d\bar{z} \]	and hence \[c_1(\Ox(n)) = \frac{ni}{2\pi(1+|z|^2)^2} dz\wedge d\bar{z} \] Finally, we integrate. Write $z = x+iy$ and we interpret the real coordinates $x,y$ as the standard coordinates of $\R^2$. Then $idz\wedge d\bar{z} = 2dx\wedge dy$, and letting $r,\theta$ denote the polar coordinates, we deduce \[\int_X c_1(\Ox(n)) = \int_U \frac{n}{\pi(1+|z|^2)^2}dx\wedge dy = \int_0^ \infty \int_0^{2\pi} \frac{nr}{\pi(1+r^2)^2}d\theta dr =n \] as desired.
+\end{example}
+
+\begin{proof}[Proof of Theorem \ref{chern-weil-degree}]
+	By Theorem \ref{chern-weil-degree-line}, it suffices to show that there is some connection $\{\omega_\alpha\}$ on $E$, such that $\{\tr \omega_\alpha\}$ is a connection on $\det E$. To this end, we first observe that $E$ can be decomposed into a direct sum of line bundles (for example, letting $L$ be a subbundle, fixing a hermitian metric on $E$ and taking the unitary complement of $L$ induces a splitting $E = L \oplus L^\perp$; and repeating with $L^\perp$ we deduce the result). So let \[E = \bigoplus_{1 \leq i \leq n} L_i \] be such a decomposition, and for each $L_i$ we fix a connection $\{\omega_\alpha^i\}$ on each $L_i$, relative to the frames $\{s_{i, \alpha}\}$. Now observe that $s_\alpha:=(s_{1, \alpha},...,s_{n, \alpha})$ is a frame on $E$, and clearly we have an induced connection described by $\omega_\alpha:= \diag(\omega_\alpha^1,...,\omega_\alpha^n)$ with respect to the frame $s_\alpha$. Now the transition functions are also diagonal matrices described by $\diag(g_{\alpha\beta, 1},...,g_{\alpha\beta, n})$ where $g_{\alpha\beta, i}$ is the relevant transition function on $L_i$. Now we compute. By Proposition \ref{connection-transformatino-rule},  it suffices to show \[\tr(\omega_\beta) = \det g^{-1}d(\det g) + \tr(\omega_\alpha)  \] for any two $\omega_\alpha, \omega_\beta$. To this end, simply note \[\det g^{-1}d(\det g) + \tr(\omega_\alpha) =( \prod_{1\leq i \leq n} g_i^{-1})(\sum_{1 \leq i \leq n} dg_i\prod_{j\neq i} g_j) + \sum_i \omega_{\alpha}^i = \sum_i g_i^{-1}dg_i + \omega_\alpha^i = \sum \omega_\beta^i = \tr \omega_\beta \] as desired.
+\end{proof}
+Finally, we need to prove Theorem \ref{chern-weil-degree} and the fact that the Chern class (and hence degree) classifies all smooth bundles up to diffeomorphism. Both follow immediately from the following result:
+\begin{theorem}[Structure Theorem of Smooth Vector Bundles]
+	There is a diffeomorphism \[E \cong \det E \oplus \Ox^{\rk E - 1}. \]
+\end{theorem}
+\begin{proof}
+	It suffices to prove that every bundle of rank greater than one has a nonvanishing global section. {\color{red} This follows form the fact that there always a section transverse to the zero section, and by dimensionr reasons, these sections must not intersect}.
+\end{proof}
+\begin{corollary}
+	For any holomorphic bundle $\E$ with underlying smooth bundle $E$, we have \[\int_X c_1(E) = \deg(\E).\] 
+\end{corollary}
+\begin{proof}
+	If $\nabla$ is a connection on $\det E$ with local 1-forms $\{\omega_\alpha\}$, then $\diag(\omega_\alpha,0,...,0)$ is the matrix of 1-forms for a connection on $\det E \oplus \Ox^{\rk E - 1}$. Thus \[\int_X c_1(E) = \int_X c_1(\det E) = \deg(E) \] as desired.
+\end{proof}
+\begin{corollary}
+	For each $(n,d)\in \N \times \Z\cong \N \times H^2(X, \Z)$, there exists a unique smooth bundle $E$ over $X$ with signature $(n,d)$.
+\end{corollary}
+
+
+\input{Donaldson}

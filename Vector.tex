@@ -1,0 +1,123 @@
+Since notations and conventions vary between sources, the purpose of this section is to collect together the basic definitions and results which will be used throughout the thesis. 
+
+\section{Smooth and Holomorphic Vector Bundles}
+In this section, we will recall basic definitions and results. Let $X$ be a complex manifold, which may also be regarded as a smooth manifold.
+\begin{definition}\index{vector bundle!}
+	Let $\bb{K}\in \{\R, \C\}$. If $\bb{K} = \R$, let $\scr{P} = \text{smooth}$, and if $\bb{K} = \C$, let $\scr{P} \in \{\text{smooth, holomorphic}\}$. A $\scr{P}$-\textit{vector bundle}, or just $\scr{P}$-bundle of rank $n$ over $X$ is a $\scr{P}$-manifold $E$ equipped with a surjective $\scr{P}$-map $\pi: E \rightarrow X$ such that at each $p\in X$, the fibre $E_p:=\pi^{-1}(p)$ has the structure of an $n$-dimensional $\bb{K}$-vector space, and there is an open (in the usual topology) cover $\{U_\alpha\}$ and $\scr{P}$-isomorphisms $\{\Phi_\alpha: \pi^{-1}(U_\alpha) \rightarrow U_\alpha \times \bb{K}^n\}$ such that at every $p\in U_\alpha$ the induced map $\Phi_\alpha|_p: E_p \rightarrow \bb{K}^n$ is a linear isomorphism and the following diagram commutes:
+	\begin{equation*}
+		\begin{tikzcd}
+			\pi^{-1}(U_\alpha) \arrow[r, "\Phi_\alpha"] \arrow[d, "\pi"]& U_\alpha\times \bb{K}^n \arrow[ld] \\
+			U_\alpha
+		\end{tikzcd}
+	\end{equation*}
+	where the arrow from $U_\alpha\times \bb{K}^n $ to $U_\alpha$ denotes projection onto the first factor. 
+	\\\\
+	A $\scr{P}$-\textit{(local) section} over an open subset $U$ is a $\scr{P}$-map $s: U \rightarrow E$ such that $\pi \circ s = \id_U$. A $\scr{P}$-\textit{global section} is a section over $X$. A $\scr{P}$-\textit{frame} is a tuple of sections $(s_1,...,s_n)$ over $U$ such that for all $p\in U$ the set $\{s_1(p),...,s_n(p)\}$ is linearly independent.
+	\\\\
+	A $\scr{P}$-\textit{morphism} of $\scr{P}$-vector bundles $\pi_E: E \rightarrow X$ and $\pi_F: F \rightarrow X$ is a $\scr{P}$-map $f: E \rightarrow F$ such that the following diagram commutes:
+	\begin{equation*}
+		\begin{tikzcd}
+			E \arrow[r, "f"]\arrow[d, "\pi_E"] & F \arrow[ld, "\pi_F"] \\
+			X
+		\end{tikzcd}
+	\end{equation*}
+	and for all $p\in X$ we have that $f|_{E_p}$ is a linear map. A $\scr{P}$-\textit{isomorphism} of $\scr{P}$-bundles is a morphism with a two-sided inverse. $E$ and $F$ are \textit{isomorphic} if there is an isomorphism between them. If $E$ is smooth, then an automorphism of $E$ is known as a \textit{gauge transformation}. The group of smooth automorphisms is known as the \textit{gauge group}.
+\end{definition}
+For now we give only the most basic example: 
+\begin{example}
+	The most basic example is $E = X \times \bb{K}^n$ with $\pi$ being projection onto the first factor, known as the \textit{trivial bundle}. A bundle is \textit{trivial} if it is isomorphic to the trivial bundle.
+\end{example}
+\begin{lemma}
+	A bundle is trivial if and only if there is a global frame.
+\end{lemma}
+\begin{proof}
+	Clearly $((x, e_i))_{i = 1}^n$ is a frame for $X \times \bb{K}^n$. Conversely, suppose $(s_i)_{i = 1}^n$ is a frame for $E$. Then every $p\in E$ can be written uniquely as $\sum a_is_i(\pi(p))$ where the $a_i$ are smooth. It is not hard to check that $$\sum a_is_i(\pi(p)) \mapsto (\pi(p),\sum a_ie_i)$$ is a $\scr{P}$-isomorphism. 
+\end{proof}
+In fact, the notions of local frame and local trivialisation are equivalent: given a local trivialisation $\Phi_i: \pi^{-1}(U_\alpha)\rightarrow U_\alpha\times \bb{K}^n$, we can define $s_i(p):= (p, e_i)$, and conversely, given a local frame $(s_i)_\alpha$, we can define $\Phi_i(\sum a_i s_i(p)) := (p, \sum a_i e_i)$. We will be using this equivalence without further comment. 
+\begin{definition}\index{transition map}
+	Let $E$ be a $\scr{P}$-vector bundle and let $s_\alpha = (s_i)_\alpha$ and $t_\beta = (t_i)_\beta$ on $U_\alpha$ and $U_\beta$. We define the \textit{transition function} $g_{\alpha\beta}: U_\alpha \cap U_\beta\rightarrow \GL_n(\bb{K})$ equal to be the $\scr{P}$-map \[g_{\alpha\beta}(x):= \Phi_{\alpha, x} \circ \Phi_{\beta, x}^{-1}\]
+\end{definition}
+Observe that if $t_j = \sum g_{ij} s_i$, then \[g_{\alpha\beta}(e_j) = \Phi_{\alpha} \circ \Phi_{\beta}^{-1}(e_j) = \Phi_{\alpha}(t_j) = \Phi_{\alpha}(\sum g_{ij} s_i) = \sum g_{ij} e_i \] and hence $g_{\alpha\beta} = (g_{ij})$.
+\\\\
+\par If $\{U_\alpha\}$ is an open cover of $X$ with local frames $s_{\alpha}$, then it is not hard to check that the transition functions satisfy the following conditions:
+\begin{enumerate}
+	\item $g_{\alpha\beta} = g_{\beta\alpha}^{-1}$.
+	\item $g_{\alpha\beta} g_{\beta\gamma}= g_{\alpha\gamma}$ 
+\end{enumerate}
+These are known as the \textit{cocycle conditions}. Conversely:
+\begin{lemma}[Clutching Construction]
+	Let $\{U_\alpha\}$ be an open cover of $X$ and suppose for any $\alpha, \beta$ we have a $\scr{P}$-map $$g_{\alpha\beta}: U_\alpha \cap U_\beta \rightarrow \GL_n(\bb{K})$$satisfying the cocycle conditions. Then there exists a unique bundle $E \rightarrow X$ trivial on each $U_\alpha$ with transition functions $g_{\alpha\beta}$.
+\end{lemma}
+\begin{proof}
+	We define $$E^\sharp:= \coprod_\alpha U_\alpha \times \bb{K}^n$$with the induced $\scr{P}$-structure. Now we put an equivalence relation $\sim$ on $E^\sharp$ by declaring $(x,u)_\alpha \sim (y,v)_\beta$ if and only if $x=y$ and $u = g_{\alpha\beta}(x)v$. The cocycle conditions guarantee that this is an equivalence relation. We then define $E:= E^\sharp / \sim$. Since $\scr{P}$-ness is local, we obtain a $\scr{P}$-vector bundle. Now for each $\alpha$ define the local frame $(s_i)_\alpha$ on $U_\alpha$ by \[s_i(p):= (p, e_i)_\alpha \mod \sim\] and observe that with respect to the frame $(s_i)_\alpha$, we have $(t_i)_\beta = g_{\alpha\beta}$ as desired. To check uniqueness, suppose $F$ is another vector bundle with local frames $\{(s_i)_\alpha\}$ that satisfy the same transition functions. We then define an isomorphism $E \rightarrow F$ given by $(x, e_i) \mapsto s_i(x)$ and extend by linearity. It is not hard to check that this is well defined and an isomorphism. 
+\end{proof}
+\begin{example}\label{tangent-bundle}
+	We define the $\scr{P}$-\textit{tangent bundle} $\pi: T_X \rightarrow X$ of $X$ as follows: let $\{(U_\alpha, \phi_\alpha: U_\alpha \rightarrow \bb{K}^n)\}$ be a $\scr{P}$-chart for $X$. Then the tangent bundle at $X$ is the unique bundle that is trivial on each $U_\alpha$ and has transition function $g_{\alpha\beta}$ equal to the Jacobian of $\phi_\alpha\circ\phi_{\beta}$. This may be interpreted as follows: on $\bb{K}^n$, the tangent space is spanned by $\partial_i = \partial/\partial x_i$, where $x_i$ are the $\scr{P}$-coordinates of $\bb{K}^n$. Thus on $U_\alpha$, we define the local frame $(s_i)_\alpha$ by $s_i:= \phi_\alpha^{-1}(\partial_i)$, and hence we obtain a local trivialisation $\Phi_\alpha(s_i):= e_i$. Identifying $e_i$ with $\partial_i$, we obtain \[\Phi_\alpha \circ \Phi_\beta = \phi_\alpha \circ \phi_\beta \] as desired.
+	
+	Similarly, we may define the \textit{cotangent bundle} $T^*_X$ to be the unique bundle with transition function $\varphi_\beta \circ \varphi_\alpha$; we may interpret the fibre at each point to be the set of linear functionals from $T_pX$. Locally, we may find a basis $dx_i$ dual to $\partial_i$, and on overlaps these satisfy the required transition map. 
+ 
+ 	In future, we will often denote the smooth tangent bundle by $T_X$ and the holomorphic tangent bundle by $\mathcal{T}_X$.
+\end{example}
+
+
+
+Our next theorem connects us back to algebraic geometry:
+\begin{theorem}\label{locally-free-sheaves-vector-bundles}
+	Let $\Ox$ denote the sheaf of complex $\scr{P}$-functions on $X$, and let $E$ be a vector bundle of rank $n$. Then:
+	\begin{enumerate}
+		\item The presheaf $\cal{E}$ given by $$\mathcal{E}(U):= \{\text{sections of } E \text{ over } U\}$$ is a locally free $\Ox$-module of rank $n$. Call this the \textbf{sheaf of sections} of $E$.
+		\item Any locally free $\Ox$-module of rank $n$ is isomorphic to the sheaf of sections of some unique vector bundle of rank $n$.
+		\item The association $E\mapsto \cal{E}$ is an equivalence of categories between the category of vector bundles and locally free sheaves.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	It is not hard to check that $\cal{E}$ is indeed a sheaf (indeed, a section over $U$ is a function satisfying a local property), and since each fibre $E_p$ is a vector space, this defines the $\Ox$-module structure. To see that it is locally free, suppose $E$ is trivial on $U$. We define an isomorphism $$\varphi: \bigoplus_{i = 1}^n\Ox|_U \rightarrow  \E|_{U}$$ as follows: let $V$ be an open subset of $U$. Then given $(f_i)\in\bigoplus_{i = 1}^n\Ox(V)$, we interpret this as a map $V \rightarrow \bb{K}^n$. This naturally defines a section $s:V \rightarrow E$ given by $$p \mapsto \Phi^{-1}(p, f_1(p),...,f_n(p))$$ where $\Phi: \pi^{-1}(V) \rightarrow V\times \bb{K}^n$ is a local trivialisation. We then define $\varphi_V(f_i):= s$. It is easy to check that this is a homomorphism of $\Ox(V)$-modules and that it commutes with restriction, hence we have a morphism of sheaves. Conversely, given a section $s: V \rightarrow E$, composing with $\Phi: \pi^{-1}(V) \rightarrow V\times \bb{K}^n$ and projecting onto $\bb{K}^n$ we have a map $V \rightarrow \bb{K}^n$, which is exactly an element of $\bigoplus \O_X(V)$. It is clear that this is the inverse to $\varphi$, hence this proves (i).
+	\\\\
+	Now let $\E$ be a locally free $\Ox$-module. Cover $X$ with open subsets $\{U_\alpha\}$ on which $\E$ is free. For any $\alpha$, fix an isomorphism of $\Ox(U_\alpha)$-modules $\Phi_\alpha: \Gamma(U_\alpha, \E)\rightarrow \Ox(U_\alpha)^n$. Now we define $$g_{\alpha\beta}:= \Phi_\alpha\circ  \Phi^{-1}_\beta|_{U_\alpha \cap U_\beta} \in \GL_n(\Ox(U_\alpha\cap U_\beta))$$In other words, $g_{\alpha\beta}$ is a matrix of $\bb{K}$-valued $\scr{P}$-functions, which may also be interpreted as a $\scr{P}$-map $$g_{\alpha\beta}:U_\alpha\cap U_\beta \rightarrow\GL_n(\bb{K})$$It is clear they satisfy the cocycle condition, so by the Clutching Construction this gives us a unique vector bundle $F$. Now let $\F$ denote the sheaf of sections of $F$, so that $\F$ is trivial on each $U_\alpha$, and fix a frame $(s_i)_\alpha$ for $F$ on each $U_\alpha$. We define a morphism $\varphi:\F \rightarrow \E$ given by $$\varphi_{U_\alpha}(s_i):= \Phi_{\alpha}^{-1}(e_i)$$where $e_i\in \Ox(U_\alpha)^n$ is the obvious constant function, and extend by linearity. It is then not hard to check that these are isomorphisms of $\Ox(U_\alpha)$-modules and that they glue on overlaps, hence we have a morphism of sheaves. Now these are isomorphisms locally, hence $\varphi$ is an isomorphism of sheaves. This proves (ii).
+	\\\\
+	To prove 3, it suffices to show that the embedding is fully faithful. Let $\varphi: E \rightarrow F$ denote a morphism of vector bundles. Now given a section $s$ of $E$ over $U$, this induces a section $\varphi^\sharp(s)$ of $F$ by defining \[\varphi^\sharp(s)(p):= \varphi(s(p))\] and it is not hard to check that this is an $\Ox(U)$-module homomorphism. Since it clearly commutes with restriction, we have a morphism of sheaves $\varphi^\sharp:\E \rightarrow \F$. It is clear that $\varphi \mapsto \varphi^\sharp$ is functorial, and that it is faithful. To show that it is full, suppose $\varphi^\sharp: \E \rightarrow \F$ is a homomorphism of sheaves. Now we define a morphism $\varphi: E \rightarrow F$ as follows: let $p\in E$ be a point, and suppose $s$ is a section such that $s(\pi(p)) = p$. We then define $\varphi(p):= \varphi^\sharp(s)(\pi(p))$. To see this is well-defined, suppose $s'$ also goes through $p$. Then \[0 = \varphi(0)(p) = \varphi^\sharp(s - s')(p) = \varphi^\sharp(s)(p) - \varphi^\sharp(s')(p) \] and hence $\varphi$ is well-defined. It is not hard to check that $\varphi$ is $\scr{P}$ and linear on each fibre, and is hence a morphism of vector bundles as desired. This proves (iii).
+\end{proof}
+\begin{example}
+	Given two bundles $E,F$, we may interpret these as locally free sheaves $\E,\F$. Then the \textit{tensor product} of $E$ and $F$, denoted $E\otimes F$ is the bundle associated to $\E \otimes \F$. Similarly, we may define the \textit{direct sum} of $E$ and $F$ to be the bundle associated to $\E \oplus \F$, and the \textit{exterior powers} of $E$, denoted $\bigwedge^p E$ to be the bundle associated to the sheaf $\bigwedge^p \E$. We may also define $\fancyHom(E,F)$ to be the bundle associated to the sheaf-hom $\fancyHom(\E,\F)$, and similarly define $\fancyEnd(E)$ to be $\fancyHom(E,E)$. Note that these differ from the \textbf{groups} $\Hom(E,F)$ and $\End(E)$.
+\end{example}
+Henceforth, we will make very little distinction between locally free sheaves and vector bundles.
+\begin{example}
+	In this example, we extend the constructions in Example \ref{tangent-bundle}. Let $T_X$ and $T^*_X$ be the \textbf{smooth} tangent and cotangent bundles. We define the \textit{bundle of $p$-forms}, to be the $p$-th exterior power of $T^*_X$. The sections of this bundle will be called \textit{differential $p$-forms}. 
+\end{example}
+We will conclude this section with a study of the interplay between the smooth and holomorphic tangent bundles. Let $X^\flat$ denote the underlying smooth manifold of $X$. Picking a local holomorphic chart for $X$, we have a local diffeomorphism $\C^n \rightarrow \R^{2n}$ given by \[(z_1 = x_1+iy_1,...,z_n = x_n+iy_n) \mapsto (x_1, y_1,...,x_n, y_n). \] The holomorphic and smooth tangent bundles are then related as follows: observe that the symbols $\partial x_i, \partial y_i$ act on real-valued functions. Tensoring $T_{X^\flat}$ with the trivial bundle $X^\flat \times \C$, these symbols may be interpreted as acting on complex-valued smooth functions, given by \[\frac{\partial}{\partial x_i}(f + ig) =\frac{\partial f}{\partial x_i} + i\frac{\partial g }{\partial x_i}:= \frac{\partial f}{\partial x_i}\otimes 1 + \frac{\partial g }{\partial x_i}\otimes i \] where $f,g$ are real-valued. Then by the chain rule we have \[\frac{\partial}{\partial z_i} = \frac{\partial}{\partial x_i} - i \frac{\partial}{\partial y_i}. \] We thus conclude that the holomorphic tangent space is spanned by $\partial x_i - i \partial y_i$. However, we also see that \[\frac{\partial}{\partial \bar{z_i}} = \frac{\partial}{\partial x_i} + i \frac{\partial}{\partial y_i}. \] We call the vector bundle spanned locally by the $\partial \bar{z_i}$ the \textit{antiholomorphic tangent bundle}. Now observe that $T_{X^\flat}\otimes \C$ is the direct sum of the holomorphic and antiholomorphic tangent spaces. We will often write \[T_{X^\flat}\otimes \C = T^{1,0}_X \oplus T^{0,1}_X\] for this decomposition.
+	
+\index{forms of type $p,q$}In fact, this extends to differential forms. A \textit{complex $(p,q)$-form}, or a \textit{complex form of type $(p,q)$}, or simply $(p,q)$-form is a section of $\Omega^{p,q}_X:=(\bigwedge^p T_X^{1,0}) \oplus (\bigwedge^q T_X^{0,1}) $. Locally, a $(p,q)$-form looks like \[f_1 dz_{i_1}+...+f_p dz_{i_p} + g_1 d\bar{z_{j_1}}+...+g_q \bar{z_{j_q}}\] where the $f_i, g_i$ are smooth complex-valued functions. A \textit{complex $r$-form} is a complex $(p,q)$-form such that $p+q=r$. We will denote the bundle of complex $r$-forms by $\Omega^r_X$. Observe that we have a decomposition \[\Omega^r_X = \bigoplus_{p + q = r} \Omega^{p,q}_X. \] Finally, we define the operators $\partial^{p,q}: \Omega^{p,q}_X \rightarrow \Omega^{p+1,q}_X$ and $\delbar^{p,q}:  \Omega^{p,q}_X \rightarrow\Omega^{p, q+1}_X$ to be \[\partial^{p,q}:= \pi_{p+1, q}\circ d \] \[\delbar^{p,q}:= \pi_{p, q+1}\circ d, \] where $d^{p+q}: \Omega^{p+q}_X\rightarrow \Omega^{p+q+1}_X$ is the usual exterior derivative, and the projections are the obvious projections. Note that \[d^0 = \partial^0 + \delbar^0.\] We will often omit the superscripts.
+
+
+\section{Connections}
+In this section, we fix a smooth complex bundle $E$. We define the \textit{bundle of complex $E$-valued $p$-forms}, denoted $\Omega^p_E$, to be $E \otimes \Omega^p_X$, where $\Omega^p_X$ is the sheaf of complex $p$-forms. Note that $\Omega^0_E \cong E$.
+\begin{definition}\index{connection}
+	A \textit{connection} on $E$ is a morphism of abelian sheaves (\textbf{NOT} as sheaves of modules) $\nabla: \Omega^0_E\rightarrow \Omega^1_E$ that satisfies the following \textit{Leibniz rule} for any $f\in C^\infty(U)$ and local seciton $s$: \[\nabla(fs) = df \otimes s + f\nabla(s) \]
+	
+	Now let $\{U_\alpha\}$ be a trivialising open cover, and let $(s_i)_\alpha$ be a collection of local frames on $U_\alpha$. We define the \textit{local connection 1-form}, denoted $\omega_\alpha$ to be the matrix such that \[\nabla(s_i) = \sum (\omega_\alpha)_{ij}s_j \] Observe that if $s = \sum a_i s_i$ is a local section, then \[\nabla(s) = \sum_j da_j \otimes s_j + \sum_i a_i (\omega_\alpha)_{ij} s_j\] and hence the local 1-form carries the data of the entire connection.
+\end{definition}
+Observe that the set of connections is an affine space with underlying vector space $H^0(X, \Omega^1_{\fancyEnd(E)})$. In other words, any two connections differ by an $\End(E)$-valued global 1-form, and conversely, if $\nabla$ is a connection and $L\in H^0(X, \Omega^1_{\fancyEnd(E)})$, then $\nabla + L$ is a connection.
+\begin{proposition}\label{connection-transformatino-rule}
+	Let $\nabla$ be a connection, and $s_\alpha, t_\beta$ two frames and suppose $g: U_\alpha\cap U_\beta \rightarrow \GL_n(\C)$ satisfies $t_i = \sum g_{ij} s_j$. Then if $\omega_\alpha$ and $\omega_\beta$ are the respective local 1-forms, then we have 
+	\begin{equation}\label{connection-transformation-rule-equation}
+		\omega_\beta = (dg)  g^{-1} + g\omega_\alpha g^{-1} 
+	\end{equation}
+	Conversely, if $\{U_\alpha\}$ is a trivialising open cover with local frames $\{s_\alpha\}$, and for each $\alpha$ we have a local 1-form $\omega_\alpha$ that satisfy (\ref{connection-transformation-rule-equation}), then there exists a unique connection with local 1-forms $\omega_\alpha$.
+\end{proposition}
+\begin{proof}
+	\autocite[p. 72]{GriHa}
+\end{proof}
+A connection $\nabla$ induces an operator $\Omega^p_E\rightarrow \Omega^{p+1}_E$, by asserting, for any $\eta\in \Omega^p_E$ and $s\in \Omega^0_E$ that \[\nabla(\eta s) := d\eta \otimes s + \eta \wedge \nabla(s) \] This allows us to make the following definition:
+\begin{definition}\label{curvature}
+	Let $\nabla$ be a connection. We define the \textit{curvature} of $\nabla$ to be \[\nabla^2: \Omega^0_E\rightarrow \Omega^2_E \]
+\end{definition}
+\begin{remark}
+	This is \textbf{not} the Laplacian.
+\end{remark}
+Let us compute the curvature locally. Let $s_\alpha = (s_i)_\alpha$ be a local frame with local 1-form $\omega = \omega_\alpha$. We define the \textit{local curvature matrix} $\Theta_\alpha$ such that \[\nabla^2(s_i) = (\Theta_\alpha)_{ij} s_j \] Let us compute the curvature locally: \[\nabla^2(s_i) = \nabla(\sum_j \omega_{ij} s_j) = \sum_j d \omega_{ij} s_j + \omega_{ij}\nabla(s_j) = \sum_j d \omega_{ij} s_j + \sum_j\sum_k\omega_{ij}\wedge \omega_{jk} s_k  = \sum_j (d \omega_{ij}  + \sum_k\omega_{ik}\wedge \omega_{kj}) s_j  \] and hence \[(\Theta_\alpha)_{ij} = d \omega_{ij}  + \sum_k\omega_{ik}\wedge \omega_{kj} \] we commonly just write \[\Theta_\alpha = d\omega + \omega \wedge \omega \]
+\begin{proposition}
+	The curvature operator is an $\Ox$-module homomorphism, where $\Ox$ is the sheaf of smooth functions on $X$. In particular, the $\Theta_\alpha$ glue together to a global $\fancyEnd(E)$-valued 2-form $\Theta$.
+\end{proposition}
+\begin{proof}
+	One simply checks that $\nabla^2$ is $C^\infty$-linear. 
+\end{proof}

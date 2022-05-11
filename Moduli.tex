@@ -1,0 +1,282 @@
+When studying a classification problem, a very natural thing to ask for is a geometric parameter space. Or in other words, we are asking for a geometric space whose points are in bijection with equivalence classes of the objects we are classifying. We begin with a very informal example, to illustrate the sort of thing we are looking for:
+\begin{example}
+	Consider the set of all circles in $\R^2$, up to equality. A circle is uniquely determined by its centre and its radius, and hence the set of circles is in natural 1-1 correspondence with the set $M=\R^2 \times \R_{>0}$ (we are discounting circles of radius zero), with the $\R^2$-component representing its centre and the $\R_{>0}$-component representing its radius. Note that points that are \enquote{close} in $M$ represent circles that are \enquote{similar} in $\R^2$. In particular, the geometry of $M$ reflects, in some vague sense, the structure of the set of circles.
+\end{example}
+Now that we have a rough idea of what we are looking for, we make our informal definition: \index{moduli problem ! na\"ive} \index{moduli space ! na\"ive}
+\begin{infdef}
+	A \textit{na\"ive moduli problem} is a pair $(\cal{M}, \sim)$ where $\cal{M}$ is a collection of objects and $\sim$ is an equivalence relation on $\cal{M}$. We will often just denote the problem by $\cal{M}$, and we often assume without loss of generality (for example, by replacing $\cal{M}$ by $\cal{M}/\sim$) that the equivalence relation is equality. A \textit{na\"ive moduli space} of $\cal{M}$ is a geometric space $M$ equipped with a bijection $\eta: (\mathcal{M}/\sim) \rightarrow M$.
+\end{infdef}
+
+Firstly, observe that \enquote{geometric space} is undefined in general, which is why this is an informal definition. But even if we insist that a geometric space is a (smooth/Riemannian/K\"ahler) manifold or a scheme or a stack, this is still not a very useful notion to work with, since it is literally just a question of cardinality; indeed, a moduli problem $\cal{M}$ with cardinality $2^{\aleph_0}$ always has a moduli space, and in fact \textbf{any} manifold or variety of positive dimension over $\C$ could be one such moduli space! Hence we have to insist that $\eta$ relates the geometry of $M$ and the \enquote{structure} of $\cal{M}$ in some way. We dedicate this rest of the chapter into formalising and studying this last condition in the context of algebraic geometry. 
+%\begin{remark}
+%	We will also, however, encounter na\"ive moduli spaces which do not fall under this formalism. In these cases, our construction will be very ad-hoc: we will take $\cal{M}$ as a set, and endow it with a \enquote{natural} (topological/smooth/Riemannian etc.) structure, and define our resulting na\"ive moduli space $M$ as \textbf{the} moduli space of $\cal{M}$. 
+%\end{remark}
+
+
+\section{The Functor of Points}
+
+\index{functor of points}Let $X$ be a scheme over a base scheme $T$. We make the following definition:
+\begin{definition}
+	Let $S$ be another $T$-scheme. An \textit{$S$-valued point}, or simply \textit{$S$-point} of $X$ is a $T$-morphism $p:S \rightarrow X$. If $S$ is affine, equal to $\Spec R$ then an $S$-valued point will be called an \textit{$R$-valued point}. The set of $R$-valued points of $X$ will be denoted $X(R)$.
+\end{definition}
+This is perhaps a weird definition to make, since a geometric space is usually just a set of points endowed with some structure. To make some sense of it, we consider the following examples:
+%fix a $k$-valued point, say $p$, and recall the following: the underlying topological space of $\Spec k$ consists of only one point (in the usual sense). The underlying continuous map of the morphism $p$ sends this point to a point (in the usual sense) of $X$. Call this image $P\in X$. The pushforward sheaf $p_*\O_{\Spec k}$ is just the skyscraper sheaf $k$ sitting over $P$, and for any open set $U \subseteq X$ containing $P$ we have the following homomorphism of $k$-algebras: 
+%\begin{equation*}
+%	\begin{tikzcd}
+%		k \arrow[r]& \Ox(U) \arrow[r, "p^\sharp"] &k
+%	\end{tikzcd}
+%\end{equation*}
+%where $p^\sharp$ is the induced map of sheaves of $p$. As $U$ varies over all the open sets containing $P$, we have the following:
+%\begin{equation*}
+%	\begin{tikzcd}
+%		k \arrow[r]& \varinjlim_{U \ni P}\Ox(U) = \O_{X, P} \arrow[r, "p^\sharp"] &k
+%	\end{tikzcd}
+%\end{equation*}
+%where $\O_{X,P}$ is the local ring of $P$, with maximal ideal, say $\mf{m}$ and residue field say $K$. Since the map $\O_{X,P} \rightarrow k$ is required to be a local homomorphism (that is $\mf{m} \mapsto 0$), this means we have a composition $k \rightarrow K \rightarrow k$ hence $K = k$. Conversely, given a (usual) point $P\in X$ with residue field $k$, one can easily show that there is a $k$-valued point sending $\Spec k$ to $P$. To wrap up, a $k$-valued point of $X$ is simply a usual point with residue field $k$.
+\begin{example}
+	Let $T = \Spec A$ for some noetherian ring $A$, let $R$ be an $A$-algebra, let $I = \langle f_1,...,f_r \rangle$ be an ideal of $A[x_1,...,x_n]$ (the noetherian hypothesis is just so that $I$ can be finitely generated), and let $X = \Spec A[x_1,...,x_n]/I$. Then \[X(R) = \{a = (a_1,...,a_n)\in R^n \mid f_i(a) = 0 \text{ for all }1\leq i \leq r\} \] (where, by abuse of notation, the equality above means \enquote{canonical identification}). Indeed, an element of $X(R)$ is just an $A$-algebra homomorphism $A[x_1,...,x_n]/I\rightarrow R$, and this is equivalent to giving a tuple $a = (a_1,...,a_n)$ such that $f_i(a) = 0$ for all $i$, with the homomorphism given by $x_i \mapsto a_i$. 
+\end{example}
+\begin{example}
+	Retain the notation and hypothesis of the above example. In the special case $A = k$ for an algebraically closed field $k$ and $I$ is prime, the set $X(k)$ is just the maximal ideals of $k[x_1,...,x_n]/I$, by Hilbert's Nullstellensatz; so in other words $X(k)$ is the object that is classically known as an \enquote{affine variety}, as defined in \autocite[I, Section 1]{Hart}. In particular, given a variety $Y$, (that is, an integral, separated scheme, equipped with a morphism of finite type to $\Spec k$), the set $Y(k)$ is canonically identified with the closed points of $Y$ (as a locally ringed space). We will be making the use of this canonical identification without further comment.
+\end{example}
+
+The set $S$-valued points is (tautologically) the set $\Hom(S, X)$. As $S$ varies, we get a contravariant functor $\Hom(-, X)$, known as the \textit{functor of points} of $X$. We will study this functor, firstly showing that this determines $X$ up to isomorphism. We work in an arbitrary category $\sf{C}$, since our proofs are no more difficult, but the important case is $\mathsf{C} = \mathsf{Sch}/k$, the category of schemes over a ground field $k$.
+\begin{proposition}\label{yoneda-up-to-iso}
+	Let $X$ and $Y$ be objects in a category $\sf{C}$. Suppose $\alpha:\Hom(-,X) \rightarrow \Hom(-, Y)$ is a natural isomorphism (that is, a natural transformation with an inverse). Then $X \cong Y$ 
+\end{proposition}
+\begin{proof} 
+	Consider the map $\alpha_X: \Hom(X,X) \rightarrow \Hom(X,Y)$. Then $\alpha_X(\id)$ is a morphism from $X$ to $Y$. Denote this morphism by $f$. Now applying $\alpha$ to the map $f: X \rightarrow Y$ we get the following commutative diagram:
+	\begin{equation*}
+		\begin{tikzcd}[row sep = huge]
+			\Hom(Y,X) \arrow[r, "f^*"] \arrow[d, "\alpha_Y"]& \Hom(X,X) \arrow[d, "\alpha_X"]\\
+			\Hom(Y,Y)\arrow[r, "f^*"] & \Hom(Y,X)
+		\end{tikzcd}
+	\end{equation*}
+	where $f^*$ is the map $u \mapsto u \circ f$. Consider $g:= \alpha_Y^{-1}(\id)\in \Hom(Y,X)$. The commutativity of the diagram says that $g \circ f = \id$. Now reversing the roles of $X$ and $Y$ will show that $f \circ g = \id$ too, hence $f$ is an isomorphism.
+\end{proof}
+
+We now consider the functor category $\Fun(\sf{C}^\sf{opp}, \Sets)$, whose objects are contravariant functors $\sf{C} \rightarrow \Sets$ and whose morphisms are natural transformations (this is also known as the \textit{presheaf category} on $\sf{C}$; recall that a \textit{presheaf} is just a contravariant functor $\sf{C}\rightarrow \Sets$). There is a natural functor $\sf{C} \rightarrow \Fun(\sf{C}^\sf{opp}, \Sets)$ which sends $X$ to $\Hom(-, X)$ and $X \rightarrow Y$ to the obvious natural transformation $\Hom(-,X) \rightarrow \Hom(-,Y)$. This functor is known as the \textit{Yoneda embedding}. The name is justified by our first corollary to the following proposition: 
+\begin{proposition}[Yoneda's Lemma]\index{Yoneda's Lemma}
+	Let $\sf{C}$ be a category, let $F\in \Fun(\sf{C}^\sf{opp}, \Sets)$ be a contravariant functor from $\sf{C}$ into $\Sets$ and let $A$ be an object in $\sf{C}$. Then there is a canonical bijection between the set of natural transformations $\Hom(-, A)\rightarrow F$ and $F(A)$ given by $\alpha \mapsto \alpha_A(\id)$.
+\end{proposition} 
+\begin{proof}
+	\autocite[p. 5]{ModuliNotes}.
+\end{proof}
+Before we state our corollaries, recall that a functor $F: \sf{C} \rightarrow \sf{C'}$ is \textit{fully faithful} if for every pair of objects $A,B$ in $\sf{C}$, the induced map $\Hom_{\sf{C}}(A,B) \rightarrow \Hom_{\sf{C'}}(A,B)$ is a bijection.
+\begin{corollary}\label{fully-faithful-yoneda}
+	The Yoneda embedding is fully faithful.
+\end{corollary}
+\begin{proof}
+	For any given objects $A$ and $B$, take $F = \Hom(-, B)$ in the above proposition. Then there is a bijection between the set of natural transformations $\Hom(-, A) \rightarrow \Hom(-, B)$ and $\Hom(A,B)$, given by $\alpha \mapsto \alpha_A(\id)$. Fix some $\alpha$ and write $f:= \alpha_A(\id)$. Applying the Yoneda embedding to $f: A \rightarrow B$ gives the natural transformation $f^*: \Hom(-, A) \rightarrow \Hom(-,B)$, where for an object $X$ and $\varphi\in \Hom(X,A)$, we have $f^*_X(\varphi) = f \circ \varphi$. Taking $X = A$ and $\varphi = \id$, we observe $$f^*_A(\id) = f \circ \id = f = \alpha_A(\id)$$ By Yoneda's Lemma, this means $f^* = \alpha$. Conversely, given some $f: A \rightarrow B$, we see that $f^*_A(\id) = f$ hence the Yoneda embedding induces the bijection between $\Hom(A,B)$ and the set of natural transformations $\Hom(-, A) \rightarrow \Hom(-, B)$ described in Yoneda's Lemma. But the set of natural transformations $\Hom(-, A) \rightarrow \Hom(-, B)$ is exactly the set of morphisms from $\Hom(-, A)$ to $\Hom(-, B)$ in the functor category, and hence the embedding is fully faithful.
+\end{proof}
+\begin{remark}
+	In fact, Proposition \ref{yoneda-up-to-iso} follows easily from the above corollary too.
+\end{remark}
+\begin{corollary}[Cayley's Theorem]\label{cayleys-theorem}
+	Let $G$ be a group. Then $G$ is isomorphic to a subgroup of $\Sym(G)$.
+\end{corollary}
+\begin{proof}
+	We can interpret $G$ as a groupoid $\sf{G}$ with one object, say $x$, and automorphism group equal to $G$. In other words, $\Hom_{\sf{G}}(x,x) = G$. Now $\Hom_{\sf{G}}(-,x)$ is the image of $x$ via the Yoneda embedding in the functor category $\Fun = \Fun(\sf{G}^\text{opp}, \Sets)$, and by the above corollary $\Aut_{\Fun}(\Hom_{\sf{G}}(-,x)) \cong G$. Now each such natural isomorphism induces a bijection of sets $\Hom_{\sf{G}}(x,x) \rightarrow \Hom_{\sf{G}}(x,x)$, in other words an element of $\Sym(G)$, and this is clearly a group homomorphism. It is also injective, since by Yoneda's lemma, a natural transformation $\Hom(-,x)\rightarrow \Hom(-,x)$ is completely determined by its value on $x$.
+\end{proof}
+\begin{definition}
+	A functor is \textit{representable} if it is in the image of the Yoneda embedding. More precisely, a functor $F$ is representable if there exists an object $X$ such that $\Hom(-, X) \cong F$ as functors. If such an $X$ exists, we say that $X$ \textit{represents} $F$.
+\end{definition}
+Of course, a natural question to ask is whether every functor is representable. The answer is an emphatic \textbf{NO}, and as we will see in the next few sections, finding a (fine) moduli space is equivalent to finding a representative of a certain $\sf{Set}$-valued contravariant functor from $\Sch$. Such a representative is unique, by Proposition \ref{yoneda-up-to-iso}.
+
+\section{Moduli Problems and Spaces}
+
+We will begin with stating our definition:
+\begin{definition}
+	Let $\sf{Sch}/k$ be the category of schemes over a ground field $k$, and let $\sf{C}$ be a subcategory of $\sf{Sch}/k$ (in practice, this will often be limited to the category of (locally) noetherian schemes, the category of schemes of finite type over $k$, or the category of varieties over $k$). A \textit{moduli problem} is a contravariant functor $\mathcal{M}: \sf{C}\rightarrow \Sets$. An element of $\mathcal{M}(S)$ is known as an (equivalence class of) \textit{families over} $S$ and $\mathcal{M}(S)$ is the \textit{set of families} (up to equivalence) over $X$. For a morphism $f: T \rightarrow S$, the induced morphism $\mathcal{M}(f): \mathcal{M}(S) \rightarrow \mathcal{M}(T)$ is known as the \textit{pullback map}. If $Y$ is in the image of $\mathcal{M}(f)$, then we say $Y$ \textit{is obtained by pullback through} $f$. In the case $T = \Spec k$ and $f$ is a $k$-valued point which we will denote $p$, we will write $X_p\in \mathcal{M}(\Spec k)$ for $\mathcal{M}(p)(X)$, and we will call $X_p$ the \textit{fibre of $X$ over $p$}.
+\end{definition}
+This is obviously a very general definition, but in practice our moduli problems will have a certain \enquote{flavour} to them. This is probably best illustrated by an example:
+\begin{example}\label{projective-space-problem}
+	Consider the problem of classifying 1-dimensional quotient spaces of $V = k^n$. We now carefully define our moduli problem: Firstly, our na\"ive moduli problem is simply the set of surjective linear maps $k^{n+1}\rightarrow k$, where two such maps are equivalent if and only if they have the same kernel, or equivalently, $\varphi \sim \psi$ if and only if there is a fixed $\lambda \in k^*$ such that $\varphi(v) = \lambda \psi(v)$ for all $v\in k^n$.
+	
+	Now let $S$ be a scheme over $k$. We will define a family over $S$ to be a line bundle $\L$ equipped with a surjection $\O_S^{n+1} \rightarrow \L$. Two families are equivalent if and only if they have the same kernel. Now given a morphism $f:T \rightarrow S$ and a family $\L$ over $S$, we define the pullback to be $f^*(\L)$, and it is not difficult to check that this satisfies the required conditions. Thus we define \[\mathcal{M}(S):= \{\O_S^{n+1}\rightarrow \L\}/\sim \] and \[\mathcal{M}(f: T \rightarrow S) := (\L \mapsto f^*(\L)).\]
+	Now observe that over $\Spec k$, the trivial rank $n$ vector bundle is exactly $k^n$, and hence the families over $\Spec k$ are exactly the 1-dimensional quotient spaces of $k^n$. 
+\end{example}
+This sets the stage for what most of our moduli problems look like. Firstly, we will state what our na\"ive moduli problem is. A family over $S$ will commonly be a morphism $X \rightarrow S$ (in this case, $\L$ is a line bundle), sometimes equipped with some extra structure, such as a coherent sheaf (in this case, a surjection $\O_S^{n+1}\rightarrow \L$), satisfying some conditions (usually including some sort of flatness), and the fibres $X_p$ in our definition are literally just the fibres of the morphism. Now over $\Spec k$ itself, the set of families will literally be our na\"ive moduli problem.
+\begin{remark}
+	This is not the usual definition for a moduli problem. A moduli problem is usually defined as the data of a family over $S$ for every $S$ and a way to pull them back, to which we associate the functor $$\mathcal{M}(S) := \{\text{families over }S\}/ \sim$$However, the author did not wish to define it this way, since using this definition it is not possible to answer the question \enquote{what is \textbf{not} a moduli problem?}. As a consequence though, we gain a \textbf{lot} of things we call \enquote{moduli problems}, which would otherwise not be the case. However, the author believes this is fine: it matters little if there are a lot of obsolete moduli problems, as we simply focus our attention on interesting moduli problems (in fact, the author believes this is also a theme in mathematics: there are a lot of uninteresting problems, but we focus on the interesting ones).
+\end{remark}
+Next, we define the notion of a coarse moduli space:
+\begin{definition}\index{moduli space ! fine}
+	Let $\mathcal{M}:\sf{C}\rightarrow \Sets$ be a moduli problem. A \textit{coarse moduli space} for $\cal{M}$ is a scheme $M$ in $\sf{C}$ equipped with a natural transformation $\eta: \mathcal{M} \rightarrow \Hom(-, M)$, known as a \textit{moduli transformation} such that the following conditions hold:
+	\begin{enumerate}
+		\item $\eta: \mathcal{M}(\Spec k) \rightarrow \Hom(\Spec k, M)$ is a bijection.
+		\item If $N$ is another scheme and $\eta': \mathcal{M} \rightarrow \Hom(-,N)$ another natural transformation, there is a unique morphism $e: M \rightarrow N$ such that $$\eta'_S(X) = e \circ \eta_S(X)$$ for any scheme $S$ in $\sf{C}$ and family $X$ over $S$. Note that this means $M$ is unique.
+	\end{enumerate}
+\end{definition}
+We unpack this definition a little. Firstly, the $k$-points of $M$ are in bijection with the na\"ive moduli problem, which is as required. The functorial condition is a little more interesting: let $S$ be a scheme in $\sf{C}$. For a $k$-point $p$, we have the following diagram:
+\begin{equation*}
+	\begin{tikzcd}[row sep = huge]
+		\mathcal{M}(S) \arrow[r, "\eta"] \arrow[d, "\mathcal{M}(p)"] & \Hom(S, M) \arrow[d, "p^*"]\\
+		\mathcal{M}(\Spec k) \arrow[r, "\eta"] & \Hom(\Spec k, M)
+	\end{tikzcd}
+\end{equation*}
+Let $X$ be a family over $S$. Then we get a morphism $\eta_S(X)\in \Hom(S,M)$; call this $f$. The commutativity of the diagram tells us that the fibre $X_p$ over $p\in S(k)$ is equal to the object in $\mathcal{M}(\Spec k)$ corresponding to the point $f(p)\in M(k)$. The second condition then tells us the $M$ is initial with respect to this property.
+
+Of course, a natural question to ask is whether or not either of the two conditions above are obsolete. The answer is no, and we will see why in various contexts.
+\begin{example}\label{projective-space-solution}
+	Let us now show that $\P^n$ is the coarse moduli space of Example \ref{projective-space-problem}. Let $S$ be a scheme, and let $\O_S^{n+1}\rightarrow \L$ be a family, so in other words the images of $e_i\in \Gamma(S,\O_S)$ generate $\L$. We define $\eta_S(\L)$ as follows: let $U = \Spec A$ be a sufficiently small open affine subset of $S$, specifically one such that $\L|_{U}\cong \O_S|_{U}$. Then the images of $e_i$ in $A$ via $\L$ generate $A$. Now let $U_i = \Spec A[e_i^{-1}]$ be the corresponding open affine subset, and we define a morphism $U_i \rightarrow \P^n$ by composing the map $U_i\rightarrow \Spec k[x_0/x_i,...,x_n/x_i]\cong \A^n$ associated to the ring homomorphism $x_j/x_i\mapsto e_j/e_i\in A$ with the inclusion $\A^n \rightarrow \P^n$. It is not hard to check that this glues, and since the $e_i$ generate $A$, it follows that the $U_i$ covers $U$. Hence we have a morphism $U \rightarrow \P^n$. Now covering $X$ with these open affines, it is clear that this glues on overlaps, and hence we have a morphism $\eta_S(\L):X \rightarrow \P^n$. The key property of $\eta_S(\L)$ is that this is the unique morphism $X \rightarrow \P^n$ such that $\eta_S(\L)^*(\O_{\P^n}^{n+1}\rightarrow \O_{\P^n}(1))$ is equal to our family; or more precisely the following diagram commutes: 
+	\begin{equation*}
+		\begin{tikzcd}[row sep = huge]
+			\O_{S}^{n+1}\arrow[r, "="] \arrow[rd]& \eta_S(\L)^*(\O_{\P^n}^{n+1}) \arrow[d]\\
+			& \eta_S(\L)^*(\O_{\P^n}(1))
+		\end{tikzcd}
+	\end{equation*}
+	and the kernel of the diagonal morphism above is equal to $\ker(\O_S^{n+1}\rightarrow \L)$. This is shown in the proof of \autocite[II Theorem 7.1]{Hart}.
+	
+%	Then the images of $e_i\in H^0(S,\O_S^{n+1})$ for $0 \leq i \leq n$ give rise to $n+1$ global sections $s_0,...,s_n$ of $\L$ which generate it. By \autocite[II Theorem 7.1]{Hart}, the choice of $\L$ and these sections, corresponding to the $n+1$ coordinates on $\P^n$, uniquely define a morphism $\varphi:S \rightarrow \P^n$ such that $\L \cong \varphi^*(\O_{\P^n}(1))$, and $s_i \mapsto x_i$ under this isomorphism. It is not hard to check that this does not depend on the equivalence class of the family. We define the moduli transformation $\eta$ to be $(\O_S^{n+1}\rightarrow \L) \mapsto \varphi$. Now given a morphism $f: T \rightarrow S$, we have to check that $\eta$ respects $f$. To see this, observe that, under $f$, the sections $s_i$ pull back to global sections $t_i$ on $T$. Now $(f\circ \varphi)^*(\O_{\P^n}(1)) = f^*(\L)$, and observe $x_i \mapsto s_i \mapsto t_i$, and since $\eta(f^*(\L))$ is the unique morphism $T \rightarrow \P^n$ such that $(\eta(f^*(\L)))^*(\O_{\P^n}(1)) = f^*(\L)$ and $x_i \mapsto t_i$, it follows $\eta(f^*(\L)) = f\circ \varphi$ as desired. 
+	
+	We now have to check that $\eta_{\Spec k}$ is bijective. Firstly, we show that it is surjective; so let $p = [p_0:...:p_n]$ be a $k$-point, and assume without loss of generality $p_0 \neq 0$. Then $p$ factors through the open affine subset $\Spec k[x_1/x_0,..., x_n/x_0]$ as the dual of the $k$-algebra homomorphism $k[x_1/x_0,..., x_n/x_0]\rightarrow k$ sending $x_i/x_0\mapsto p_i/p_0.$ Then it is clear from the definition of $\eta$ in the above paragraph that the family $L: e_i \mapsto p_i/p_0$ satisfies $\eta(L) = p$. This proves that $\eta_{\Spec k}$ is surjective. To prove that it is injective, suppose two families $L: e_i \mapsto p_i$ and $L': e_i \mapsto p_i'$ satisfy \[ [p_0:...:p_n] = \eta_{\Spec k}(L) =\eta_{\Spec k}(L') = [p_0':...:p_n'].\] Then $p_i p_j' = p_i' p_j$ for all $i,j$, hence $\ker L = \ker L'$, so in particular $L$ and $L'$ are equivalent, as desired. 
+	
+%	We claim the family $L:e_i \mapsto p_i$ over $\Spec k$ satisfies $\eta(L) = p$. Indeed, denoting the local ring of $\O_{\P^n}(1)$ at $p$ by $\O_{\P^n, p}(1)$, we obtain \[p^*(\O_{\P^n}(1)) = \O_{\P^n, p}(1)\otimes_{\O_{\P^n, p}} k = x_0k[\frac{x_1}{x_0},...,\frac{x_n}{x_0}]_{\sum\langle \frac{x_i}{x_0} - \frac{p_i}{p_0} \rangle} \otimes_{k[\frac{x_n}{x_0},...,\frac{x_1}{x_0}]_{\sum\langle \frac{x_i}{x_0} - \frac{p_i}{p_0} \rangle}} k \] but the $\O_{\P^n, p}$-module structure of $k$ is given by $x_i/x_0 \mapsto p_i/p_0$, and thus asserting $x_0 \mapsto p_0$, we fix a unique isomorphism such that $x_i \mapsto p_i$, and thus the family $\eta(L) = p$ as desired. Also note that by the calculation, this inverse of $p$ is unique, and hence $\eta_{\Spec k}$ is unique as desired.
+
+	Finally, we show the universal property, starting with existence. Let $N$ be another scheme over $k$ and $\eta':\mathcal{M}\rightarrow \Hom(-,N)$ another natural transformation. Applying to $\P^n$, we obtain a map $\eta': \mathcal{M}(\P^n)\rightarrow \Hom(\P^n, N)$, and the natural family  $\O_{\P^n}^{n+1} \rightarrow \O_{\P^n}(1)$ induces a map $\eta'(\O_{\P^n}^{n+1} \rightarrow \O_{\P^n}(1)): \P^n \rightarrow N$. We claim $e := \eta'(\O_{\P^n}^{n+1} \rightarrow \O_{\P^n}(1))$ satisfies the desired property. Indeed, let $S$ be any scheme, and chasing $\O_S^{n+1}\rightarrow\L$ a family. Then $f = \eta(\O_S^{n+1}\rightarrow\L):S \rightarrow \P^n$ satisfies $f^*(\O_{\P^n}^{n+1} \rightarrow \O_{\P^n}(1)) =\O_S^{n+1}\rightarrow\L $. The following diagram commutes: 
+	\begin{equation*}
+		\begin{tikzcd}[row sep = huge]
+			\mathcal{M}(\P^n) \arrow[r, "f^*"] \arrow[d, "\eta'"]&\mathcal{M}(S) \arrow[d, "\eta'"]\\
+			\Hom(\P^n,N) \arrow[r, "f^*"] & \Hom(S,N)
+		\end{tikzcd}
+	\end{equation*}
+	and $\O_{\P^n}^{n+1} \rightarrow \O_{\P^n}(1)$ in the above diagram, we find \[ \eta'(\O_S^{n+1}\rightarrow\L ) = e\circ f = e \circ \eta(\O_S^{n+1}\rightarrow\L), \] as desired. Uniqueness is immediate, since any such $e$ satisfies $e\circ \id = \eta'(\O_{\P^n}^{n+1} \rightarrow \O_{\P^n}(1))$. 
+	
+	This is now a good time to show that the second condition in the definition of a coarse moduli space is not obsolete. To this end, we take inspiration from \autocite[p. 4]{HarrisMorrison} and consider the moduli problem of lines through the origin in $k^2$ (which is essentially just the moduli problem above for $n = 1$), and suppose $k$ is algebraically closed. As we saw above, the moduli space for this problem is $\P^1$. However, observe that there is a natural map from $\P^1 = \Proj k[x_0, x_1]$ to the cuspidal cubic $Y = \Proj k[x,y,z]/y^2z = x^3$, dual to the ring homomorphism $x\mapsto x_0^2x_1, y\mapsto x_0^3, z\mapsto x_1^3$ (on the level of $k$-points this is just $[p:q]\mapsto [p^2q: p^3:q^3]$). In particular, this map is bijective on $k$-points (in fact, a homeomorphism), and so composing the $\eta$ above with $\P^1\rightarrow Y$, we have a natural transformation $\mathcal{M}\rightarrow \Hom(-, Y)$ such that the map $\mathcal{M}(\Spec k)\rightarrow Y(k)$ is bijective. However, the cuspidal cubic is not the coarse moduli space, because $\P^1$ is, and coarse moduli spaces are unique up to isomorphism.
+\end{example}
+
+In fact, $\P^n$ satisfies a stronger condition above, in that every family is a unique pullback of $\O_{\P^n}^{n+1} \rightarrow \O_{\P^n}(1)$. This is formalised as follows:
+\begin{definition}\index{moduli space ! fine}
+	Let $\cal{M}$ be a moduli problem. A scheme $M$ is a \textit{fine moduli space} for $\cal{M}$ if $M$ represents $\cal{M}$. 
+\end{definition}
+Note that such an $M$ is unique, by Proposition \ref{yoneda-up-to-iso}. Also, as expected, a fine moduli space is also a coarse one:
+\begin{proposition}
+	If $M$ is a fine moduli space for $\cal{M}$, then for any representation $\eta: \cal{M} \rightarrow \Hom(-,M)$, the pair $(M, \eta)$ is a coarse moduli space.
+\end{proposition}
+\begin{proof}
+	The first condition in the definition is satisfied automatically. Now let $N$ be another scheme and $\eta': \mathcal{M} \rightarrow \Hom(-,N)$ another natural transformation. Composing with $\eta^{-1}$, we get a natural transformation $\Hom(-,M) \rightarrow \Hom(-,N)$. Since the Yoneda embedding is fully faithful (Corollary \ref{fully-faithful-yoneda}), this is induced by a unique $e: M \rightarrow N$.
+\end{proof}
+\begin{definition}
+	Let $\cal{M}$ be a moduli problem with coarse moduli space $M$ and moduli transformation $\eta$. A \textit{tautological family} is a family $X\in \mathcal{M}(M)$ such that for every $p\in M(k)$, we have $X_p = \eta_{\Spec k}^{-1}(p)$. If $M$ is a fine moduli space, the family $\eta_M^{-1}(\id)$ is known as the \textit{universal family}.
+\end{definition}
+\begin{proposition}
+	Let $\mf{X}$ denote the universal family. Then it satisfies the following universal property: if $Y$ is a family over $S$ then there exists a unique morphism $f:S \rightarrow M$ such that $Y = \mathcal{M}(f)(\mf{X})$. In particular, taking $S = \Spec k$, we see that $\mf{X}$ is tautological.
+\end{proposition}
+\begin{proof}
+	Since the moduli transformation $\eta$ is an isomorphism and hence $\eta_S$ is bijective, we see that $Y$ corresponds uniquely to a morphism $f: S \rightarrow M$. The following diagram commutes:
+	\begin{equation*}
+		\begin{tikzcd}[row sep = huge]
+			\Hom(M,M) \arrow[r, "f^*"] \arrow[d, "\eta"] & \Hom(S,M) \arrow[d, "\eta"]\\
+			\mathcal{M}(M) \arrow[r] & \mathcal{M}(S)
+		\end{tikzcd}
+	\end{equation*}
+	The result then follows by chasing $\id\in \Hom(M,M)$ in the diagram.
+\end{proof}
+In fact, it is not hard to show the converse is true: if $\mf{X}$ is a family over a coarse moduli space $M$ such that every family is pulled back from $\mf{X}$ in a unique way, then $M$ is fine and $\mf{X}$ is universal.
+\begin{example}
+	The family $\O_{\P^n}^{n+1}\rightarrow \O_{\P^n}(1)$ is universal for Example \ref{projective-space-solution}, as every family is obtained uniquely by pullback from this family. In particular, $\P^n$ is fine.
+\end{example}
+\begin{example}\label{rational-curves-problem}
+	Consider the moduli problem of classifying curves isomorphic to $\P^1$, up to isomorphism. Of course, there is only one, namely $\P^1$ itself. We define a family of genus 0 curves over $S$ to be a flat proper morphism $X \rightarrow S$ such that for any $p\in S(k)$ we have \[X_p := X\times_{S} \Spec k \cong \P^1 \] and if $f: T \rightarrow S$ is a morphism and $X\rightarrow S$ is a family, we define $f^*(X) = X\times_S T$. This defines our moduli problem. By \autocite[Proposition 25.1]{Deform} the coarse moduli space for this is just $\Spec k$, and it is easy to see that $\P^1 \rightarrow \Spec k$ is the tautological family. However, there is no universal family, since there exist nontrivial ruled surfaces (\autocite[V, Section 2]{Hart}).
+\end{example} 
+\begin{remark}
+	Note that proving $\Spec k$ is the moduli space in the above example is actually nontrivial. Indeed, it is obvious that the moduli space, if it exists, is a one-point scheme and is thus necessarily equal to the spectrum of a local Artinian ring. However, in order to prove it is reduced, one must make sure that every family over a local Artinian ring is trivial; this follows from \autocite[Lemma 25.2]{Deform}.
+\end{remark}
+\section{Examples}
+We will now study in detail some examples of moduli problems and spaces. Each example will illustrate interesting phenomena, and discuss concepts which will be used as motivation later on in the thesis.
+\subsection{Conics in $\P^2$}
+Our first example is the problem of conics in $\P^2 = \Proj k[x,y,z]$. In particular, we are not considering not just the conic, but the embedding in $\P^2$ as well (some texts will refer to a moduli space parameterising objects equipped with an embedding a \textit{parameter space}, but we will not make that distinction here). We will only consider schemes of finite type over $k$, and further we make the assumption that $k$ is algebraically closed. To formalise:
+\begin{definition}
+	A \textit{conic} is a closed subscheme of $\P^2$, cut out by a homogeneous ideal of degree 2 (in particular, we are allowing degenerate conics). Two conics are equivalent if and only if they are equal as subschemes of $\P^2$. Now let $S$ be a scheme of finite type over $k$. We define a \textit{family of conics} over $S$ to be a closed subscheme $X \subseteq \P^2 \times S$, flat over $S$ via the projection, whose scheme-theoretic fibres are conics in $\P^2$. Two families are \textit{equivalent} if they are equal as subschemes of $\P^2 \times S$. Now let $f:T \rightarrow S$ be a morphism of finite type, suppose $S$ and $T$ are of finite type over $k$ and let $X \rightarrow S$ be a family over $S$. We define the \textit{pullback} of $X$ along $f$ is the fibred product of the following diagram:
+	\begin{equation*}
+		\begin{tikzcd}[row sep = huge]
+			f^*(X):= X \times_S T \arrow[r] \arrow[d]& X \arrow[d]\\
+			T \arrow[r, "f"] & S
+		\end{tikzcd}
+	\end{equation*}
+	The \textit{moduli problem of conics in $\P^2$} is the functor $\cal{M}$ defined by \[\cal{M}(S) = \{\text{families over }S\} \] and $\cal{M}$ maps a morphism $f:T \rightarrow S$ to $f^*: \mathcal{M}(S) \rightarrow \mathcal{M}(T)$.
+\end{definition}
+
+The key theorem of this section is:
+\begin{theorem}\label{conic-universal-family-theorem}
+	The scheme $\P^5 = \Proj[a_0,...,a_5]$ is a fine moduli space for the above moduli problem, and the family $\mf{X}\subseteq \P^2 \times \P^5$ cut out by the polynomial $a_0x^2 +a_1 xy+...+a_5 zx$ is the universal family.
+\end{theorem}
+
+Following the approach outlined in \autocite[Ex. 1.1]{Deform}, we will prove this after some lemmas. This approach works for general degree $d$ curves and $\P^{\binom{d+2}{2}-1}$ in place of $\P^5$, but for concreteness we will work with $d = 2$. To begin, we have the following:
+\begin{lemma}
+	Let $S$ be a scheme of finite type over $k$, and let $X\subseteq \P^2\times S$ be a family over $S$. Then $S$ can be covered by open affines $\{U=\Spec A\}$ such that the restricted family $X|_U\subseteq \P^2_A := \Proj A[x,y,z]$ is cut out by a single homogeneous polynomial (that is, the homogeneous ideal corresponding to $X|_U$ as a closed subscheme of $\P^2_A$ is principal), necessarily of degree 2.
+\end{lemma}
+\begin{proof}
+	Write $\cal{I}$ for the sheaf of ideals of $X$, which is coherent since $S$ is of finite type over $k$. We have the following short exact sequence of sheaves on $\P^2\times S$:
+	\begin{equation}\label{ses-conics-family}
+		0 \rightarrow \mathcal{I} \rightarrow \O_{\P^2\times S} \rightarrow \Ox \rightarrow 0,
+	\end{equation}
+	where $\Ox$ is considered an $\O_{\P^2\times S}$-module. Let $p$ be a $k$-point of $S$ and let $\O_{S,p}$ be the local ring of $p$, with maximal ideal $\mf{m}_p$. Pulling back (\ref{ses-conics-family}) along the morphism $\Spec \O_{S,p}\rightarrow S$ and taking the associated graded objects, we have the following sequence of graded $\O_{S,p}[x,y,z]$-modules 
+	\begin{equation}\label{ses-conics-local-ring}
+		0 \rightarrow I_p \rightarrow \O_{S,p}[x,y,z]\rightarrow \Gamma_*(\O_{X})\otimes \O_{S,p}\rightarrow 0,
+	\end{equation}
+	 which is exact because $\Spec \O_{S,p}\rightarrow S$ is just localisation on the level of rings. Now annihilating $\mf{m}_p$, since $X$ is flat over $S$ (and hence $\Gamma_*(\O_{X})\otimes \O_{S,p}$ is flat over $\O_{S,p}$), the following sequence of graded $\O_{S,p}/\mf{m}_p[x,y,z] \cong k[x,y,z] $-modules is also exact: \[ 0 \rightarrow I_p \otimes k \rightarrow k[x,y,z] \rightarrow \Gamma_*(\O_{X_p})\rightarrow 0, \] where $X_p$ is the fibre over $p$. Since $I_p\otimes k$ is generated by its degree 2 component, $I_p$ must be too, and since $S$ is of finite type over $k$, it follows $I_p$ is finitely generated as an $\O_{S,p}[x,y,z]$-module, and hence $I_{p, \deg 2}$ is finitely generated as a $\O_{S,p}$-module. Finally, since the $\O_{S,p}/\mf{m}_p$-module $I_{p, \deg 2} \otimes k = I_{p, \deg 2} / \mathfrak{m}_p I_{p,\deg 2}$ is generated by a single element, it follows by Nakayama's lemma that $I_{p, \deg 2}$, as an $\O_{S,p}$-module is also generated by a single polynomial of degree 2.
+	
+	Now let $U' = \Spec A'\subseteq S$ be an open affine subset containing $p$, so that $\mf{m}_p$ may be considered a maximal ideal of $A$ and $\O_{S,p} = A'_{\mf{m}_p}$. Then, analogous to (\ref{ses-conics-local-ring}), we have the following short exact sequence of graded $A'[x,y,z]$-modules: 
+	\begin{equation}\label{ses-conics-local-family}
+		0 \rightarrow I_{A'} \rightarrow A'[x,y,z]\rightarrow \Gamma_*(\O_{X|_{U'}})\rightarrow 0,
+	\end{equation}
+	Now as established, $I_p$ is generated by a polynomial of the form \[f=\frac{s_0}{t_0}x^2 + \frac{s_1}{t_1}xy +...+ \frac{s_5}{t_5} zx, \] where $s_i, t_i\in A'$ and $\prod t_i \notin \mf{m}_p$, and hence by the universal property of localisation, the pullback of (\ref{ses-conics-local-ring}) from (\ref{ses-conics-local-family}) along $A' \rightarrow \O_{S,p}$ factors uniquely through $A' \rightarrow A = A'[\prod t_i^{-1}]$ and it is clear that $I_A$ is generated by $f$, as desired.
+\end{proof}
+Now that we know that any family is locally cut out by a single polynomial, the plan of attack is clear: we map the coordinates of $\P^5$ to the coefficients of our polynomial. In order for this to be possible, we present the next result:
+\begin{lemma}
+	Let $A$ be a finitely generated $k$-algebra, and suppose $X\subseteq \P^2_A$ is a flat family over $A$ cut out by $f = s_0x^2 +...+s_5 zx\in A[x,y,z]_{\deg 2}$. Then $s_0,...,s_5$ generate $A$.
+\end{lemma}
+\begin{proof}
+	Observe that for every $d \geq 0$ the $A$-module $(A[x,y,z]/f)_{\deg d}$ must be flat. In particular, the map \[I \otimes (A[x,y,z]/f)_{\deg 2} \rightarrow (A[x,y,z]/f)_{\deg 2} \]is injective, where $I = \langle s_0,...,s_n \rangle$. This means $s_0\otimes x^2+...+s_5\otimes zx = 0$ in $I\otimes(A[x,y,z]/f)_{\deg 2}$, or in other words there is some $\lambda\in I$ such that $(1-\lambda)f = 0$ in $A[x,y,z]$. Now if $I \neq A$, then it is contained in some maximal ideal, say $\mf{m}$, and localising $A$ at $\mf{m}$, we deduce $(1-\lambda)f = 0$ in $A_\mf{m}$. But $1-\lambda$ is a unit in $A_\mf{m}$ and hence $f = 0$ in $A_\mf{m}$, which is absurd. Hence $I = A$.
+\end{proof}
+
+In particular, the $s_i\in A$ may be considered global sections of $\Spec A$, which generate the structure sheaf, and hence by Example \ref{projective-space-solution}, this corresponds uniquely to a morphism $\Spec A \rightarrow \P^5$ such that $\O_{\P^5}(1)$ pulls back to $\O_{\Spec A}$, and $a_i\in H^0(\P^5, \O_{\P^5}(1))$ pull back to $s_i$. It is then clear that the family $\mf{X}$ pulls back to the family $\Proj A[x,y,z]/f$. 
+\begin{proof}[Proof of Theorem \ref{conic-universal-family-theorem}]
+	Let $S$ be a scheme, and $X \subseteq \P^2\times S$ a family. Cover $X$ with open affine subsets $U_i = \Spec A_i$ such that $X|_{U_i} := X \times_{S} U_i\subseteq \P^2_{A_i}$ is cut out by a single polynomial. Then by our previous discussions, we have a collection $\varphi_i: U_i \rightarrow \P^n$ such that $\varphi_i^*(\mf{X}) = X|_{U_i}$, and hence it suffices to show that these glue. So we fix $U_i, U_j$. By \autocite[Proposition 5.3.1]{Vakil}, we can cover $U_i \cap U_j$ with affine open subsets $\{U_{ijk}\}$, which are distinguished open affine of both $U_i$ and $U_j$. Now fix some $U_{ijk} = \Spec A_{ijk}$, so that $A_i[g_1^{-1}] = A_{ijk} = A_j[g_2^{-1}]$. Now since the family $X|_{U_{ijk}}$ is also defined by a single polynomial (indeed, the same polynomial that defines $X|_{U_i}$ and $X|_{U_i}$), and the maps $\varphi_i:U_i \rightarrow \P^n$ and $\varphi_j:U_j \rightarrow \P^n$ both factor through $U_{ijk}\rightarrow \P^n$.  In particular, this means that the morphisms glue, as desired.
+\end{proof}
+
+A few comments on this problem. Note that we are crucially not defining conics up to abstract isomorphism; indeed consider the following family over $\A^1$: \[X = \Proj k[t,x,y,z]/ \langle tyz = x^2 \rangle \rightarrow \A^1 = \Spec k[t],\] where $k[t,x,y,z]$ is graded in $x,y,z$ (in other words, $t$ is degree 0). Flatness, which is equivalent to torsion-freeness, is obvious. For every nonzero $\lambda\in \A^1(k)$, the fibre $X_\lambda$ is a nondegenerate parabola defined by $\lambda yz = x^2$, and in particular is isomorphic to $\P^1$ via the 2-uple embedding followed by scaling. However, the fibre $X_0$ is the degenerate conic defined by $x^2 = 0$, which is clearly not isomorphic to the $\P^1$ (indeed, the former is not reduced but the latter is). This is an example of a \textit{jump phenomenon}, which is an obstruction to the existence of a moduli space: if a coarse moduli space $M$ exists, there would be a morphism $\A^1\rightarrow M$ which maps each nonzero $k$-point of $\A^1$ to some $s\in M(k)$, but maps $0$ to some $s' \neq s$. This is clearly not possible, and hence no coarse moduli space exists.
+
+This is now a good time to show that the first condition in the definition of a coarse moduli space is also not obsolete, which we also take from from \autocite[p. 4]{HarrisMorrison}. Consider the moduli problem of reduced conics in $\P^2$, \textbf{up to isomorphism}, and make the further assumption $\Char k \neq 2$. As we know, the family $\Proj k[t,x,y,z]/xy = tz^2$ over $\Spec k[t]$ exhibits a jump phenomenon, and so there is no coarse moduli space. However, we claim that $M = \Spec k$, with the natural transformation $\eta$ sending a $k$-scheme $S$ to the morphism $S \rightarrow \Spec k$ is a natural transformation which satisfies property (ii) of the definition of a coarse moduli space. However, $\eta_{\Spec k}$ is not injective, since the nondegenerate conic and the union of two lines are both reduced conics (in fact, the only two), but $\Hom(\Spec k, \Spec k) = \{\id\}$. Since any scheme with property (ii) is unique, this gives another proof that this moduli problem has no coarse moduli space. 
+
+So, let $N$ be a scheme equipped with a natural transformation $\eta'$ of our moduli problem into $\Hom(-, N)$. We want to show that there exists a unique $e: \Spec k \rightarrow N$ such that $\eta'(S) = e \circ \eta(S)$ for any relevant scheme $S$. Uniqueness is obvious, indeed, any such $e$ must also satisfy this property for families of nondegenerate conics, and since a family of nondegenerate conics is a family of nonsingular complete rational curves, uniqueness is guaranteed by Example \ref{rational-curves-problem}. So we now prove existence, that is, this $e$ above does satisfy the required property. Let $S$ be a scheme and let $X \subseteq \P^2\times S$ be a family. As above, let $U = \Spec A$ be a sufficiently small affine open subset of $S$, so that $X|_U$ is cut out by a single polynomial $f = s_0x^2 +...+s_5 zx\in A[x,y,z]_{\deg 2}$ (the difference is here we only care about $X$ up to isomorphism). Firstly, observe that the degenerate locus of $U$ (that is, the locus where very fibre is degenerate) is closed; indeed it is defined by the vanishing of the determinant of the following matrix:
+\begin{equation*}
+	Q = \begin{pmatrix}
+		s_0 & \frac{s_1}{2} & \frac{s_5}{2} \\
+		\frac{s_1}{2} & s_2 & \frac{s_3}{2} \\
+		\frac{s_5}{2} & \frac{s_3}{2} & s_4
+	\end{pmatrix}.
+\end{equation*}
+In particular, the nondegenerate locus of $U$, call it $U^{\flat}$ is open and {\color{red} (assuming without loss of generality $U$ is irreducible,)} dense, and taking the union across all such $U$, it follows that the nondegenerate locus of $S$, say $S^{\flat}$ is dense. Now by Example \ref{rational-curves-problem}, we have $\eta'(X|_{S^{\flat}}) = e \circ \eta(X|_{S^{\flat}})$, and since $S^{\flat}$ is dense and the image of $S^{\flat}$ in $N$ is a closed point, and moreover $\eta'(X|_{S^\flat}) = \eta'(X)|_{S^\flat}$ it follows that $\eta'(X) = e \circ \eta(X)$ too, as desired.
+\\\\
+\par{}We conclude with a remark. Observe that a family of conics (in the original problem of up to embedding) may alternatively thought of as a family of quotients (or equivalently subsheaves) of $\O_{\P^2}$. Indeed, a conic may be identified with its coherent sheaf of ideals $\cal{I}\subseteq \O_{\P^2}$. What distinguishes conics (or indeed degree $d$ curves for any $d > 0$), is their \textit{Hilbert polynomial}, a concept which will be discussed in Chapter 3. In general, given any projective variety $X$, a coherent sheaf $\F$ on $X$ and a numerical polynomial $P\in \Q[z]$ (that is, $P(n)\in \Z$ for all $n\in \Z$), there exists a fine moduli space, known as the \textit{Quot scheme} of $\F$, often denoted $\Quot_X^P(\F)$, parameterising quotients of $\F$ with Hilbert polynomial $P$. If $\F = \Ox$, then the Quot scheme is called a \textit{Hilbert scheme}; and in particular we have proven that the Hilbert scheme of $\P^2$ with Hilbert polynomial $P = 2z+1\in \Q[z]$ is $\P^5$.
+\subsection{The Grassmannian}
+We saw a brief glimpse of the Grassmannian already; indeed $\P^n$ is a special case of it. We will now study the subject in greater generality. Fix $0 < m \leq n$. Our na\"ive moduli problem is the set of surjections $k^n \rightarrow k^m$, up to equality of kernels. A family over $S$ is simply a vector bundle surjection $\O_S^{n}\rightarrow \F$ where $\F$ is of rank $n$.
+\subsection{Elliptic Curves}
+
+\indent Recall our general method in the previous example: we found a candidate space and a candidate universal family $\mathfrak{X} \rightarrow M$, showed that for a general $X \rightarrow S$, there is locally a unique morphism for an open subscheme $U \subseteq S$ such that $X\times_S U$ is pulled back from $\mathfrak{X}$, and finally we showed that these glue. This approach is quite typical for constructing moduli spaces, with some differences of course. The first is that obviously a moduli space need not be fine, and thus finding a candidate universal family is not always possible. What often instead happens is that we look for a \textbf{locally} universal family, that is, an overparameterised (i.e. there are repeated elements) family $\mathfrak{X} \rightarrow T$ with the property that for a general $X \rightarrow S$, there is an open cover $\{U_i\}$ of $S$ and for each $U_i$ a morphism $\varphi_i: U_i \rightarrow T$ such that $X\times_S U_i$ is the pullback of $\mf{X}$ via $\varphi_i$. One then needs to find a way to contract $T$, which then defines a coarse moduli space. We will illustrate this technique now, in the context of elliptic curves. Throughout this section, we fix an algebraically closed ground field $k$ of characteristic neither $2$ nor 3. 
+
+\begin{definition}
+	An \textit{elliptic curve} is a complete nonsingular curve $X$ over $k$ of genus 1, equipped with a distinguished point $p_0\in X(k)$. A \textit{family of elliptic curves} over a scheme $S$ of finite type over $k$ is a scheme $X$ equipped with a flat morphism $X \rightarrow S$ and a section $s: S \rightarrow X$ such that for any $p\in S(k)$, the fibre $X_p$ is genus 1 curve, which is an elliptic curve with distinguished point $p^*s: \Spec k \rightarrow X_p$. Two families over $S$ are equivalent if they are isomorphic as $S$-schemes. It is clear how families pull back, and so we have the moduli problem of elliptic curves, which we will denote $\cal{M}_{1,1}$. 
+\end{definition}
+A detailed study of elliptic curves will take us too far afield, all that we need to know is that for any family $(X \rightarrow S, s)$, there exists an open affine cover $\{U_i = \Spec A_i\}$ such that $X|_{U_i}$ can be embedded inside $\P^2_{A_i}$ with an equation of the form $y^2z = x^3+axz^2+bz^3$ for $a,b \in A_i$, and $4a^3+27b^2\neq 0$, and $s$ is the constant section $[0:1:0]\in X|_{U_i}\subseteq \P^2_{A_i}$ (\autocite[p. 47]{Script}). In particular, the family over $k[a,b, (4a^3+27b^2)^{-1}]$ defined by the above equation is a locally universal family.
+
+To kill any false hope that may be brewing, we have the following result:
+\begin{proposition}
+	The moduli problem of elliptic curves does not have a fine moduli space.
+\end{proposition}
+\begin{proof}
+	Consider the family $y^2z = x(x-z)(x-\lambda z)$ over $\Spec k[\lambda, \lambda^{-1}, (\lambda-1)^{-1}]$ (often called the \textit{$\lambda$-line}), and consider the automorphism of $k[\lambda, \lambda^{-1}, (\lambda-1)^{-1}]$ given by $\lambda \mapsto \lambda^{-1}$, whence $(\lambda-1)^{-1}\mapsto \lambda(1-\lambda)^{-1}$. 
+\end{proof}
+
+
+%The theory of elliptic curve endows us two moduli spaces; the moduli space of elliptic curves themselves, and the so-called \textit{Jacobian variety}, which can be defined for any complete nonsingular curve. However, we will show that on an elliptic curve, the Jacobian is simply the curve itself. So for this section, we fix a complete nonsingular curve $X$ over $k$.
+%
+%We recall some definitions:
+%\begin{definition}
+%	The \textit{(geometric) genus} of $X$, denoted $g$, is defined to be $h^0(\omega_X):=\dim_k H^0(X, \omega_X)$, where $\omega_X$ is the canonical bundle (or in this case just the cotangent bundle).
+%\end{definition}
+%To make sense of it, observe that the cotangent bundle is just the bundle of algebraic 1-forms.
+

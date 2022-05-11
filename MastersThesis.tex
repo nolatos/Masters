@@ -1,0 +1,351 @@
+
+% --------------------------------------------------------------------------------------
+%                   LATEX TEMPLATE FOR DISSERTATION (HONS)
+% --------------------------------------------------------------------------------------
+\documentclass[11pt]{book}
+\setlength{\parindent}{15pt}
+
+
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts,amsthm,amssymb,enumerate,mathrsfs}
+\usepackage{times}
+\usepackage{mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{xfrac}
+\usepackage{tikz-cd}
+%\usepackage{tikz}
+\usepackage{theoremref}
+\usepackage[backend=biber,style=numeric,autocite=inline]{biblatex}
+\addbibresource{bib.bib}
+\usepackage{imakeidx}
+\usepackage{enumitem}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{csquotes}
+\usepackage{CJKutf8}
+\usepackage{MnSymbol}
+\usepackage{CJKutf8}
+%\usepackage{geometry}
+%\usetikzlibrary{matrix,arrows}
+%\usepackage[backref=page,pagebackref=true,linkcolor = blue,citecolor = red]{hyperref}
+%\usepackage[backref=page]{backref}
+
+\makeindex[columns = 3]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\newtheorem{infdef}[definition]{Informal Definition}
+
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{construction}[definition]{Construction}
+\newtheorem{joke}[definition]{Joke}
+
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\nil}{nil}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\height}{ht}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\Ca}{Cart}
+\DeclareMathOperator{\CaCl}{CaCl}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\Hol}{Hol}
+\DeclareMathOperator{\Fr}{Fr}
+\DeclareMathOperator{\Deck}{Deck}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\E}{\mathcal{E}}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\fancyExt}{\mathcal{E}xt}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\fancyEnd}{\mathcal{E}nd}
+\DeclareMathOperator{\fancyHom}{\mathcal{H}om}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\yo}{よ}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Quot}{Quot}
+
+
+\renewcommand{\div}{\operatorname{div}}
+
+\newcommand{\p}{\mathfrak{p}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Inn}{\text{Inn }}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Sets}{\mathsf{Sets}}
+\newcommand{\Ab}{\mathsf{Ab}}
+\newcommand{\Top}{\mathsf{Open}}
+\newcommand{\Sch}{\mathsf{Sch}}
+\newcommand{\Gps}{\mathsf{Gps}}
+
+
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\Hh}{\mathcal{H}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\OxMod}{$\O_X$-{module}}
+\newcommand{\Ox}{\mathcal{O}_X}
+\newcommand{\Oy}{\mathcal{O}_Y}
+\newcommand{\Om}{\mathcal{O}_M}
+\newcommand{\K}{\mathcal{K}}
+%\newcommand{\I}{\mathcal{I}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\delbar}{\bar{\partial}}
+\renewcommand{\u}{\mathfrak{u}}
+\newcommand{\git}{\mathbin{
+		\mathchoice{/\mkern-4mu/}% \displaystyle
+		{/\mkern-4mu/}% \textstyle
+		{/\mkern-3mu/}% \scriptstyle
+		{/\mkern-3mu/}}}% \scriptscriptstyle
+
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\scr}{\mathscr}
+\newcommand{\cl}{\mathcal}
+\newcommand{\mf}{\mathfrak}
+\renewcommand{\sf}{\mathsf}
+\newcommand{\bb}{\mathbb}
+\renewcommand{\labelenumi}{\normalfont(\roman*)}
+
+%\newcommand{\yo}{\text{\usefont{U}{min}{m}{n}\symbol{'210}}}
+%\DeclareFontFamily{U}{min}{}
+%\DeclareFontShape{U}{min}{m}{n}{<-> dmjhira}{}
+
+
+
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\makeatletter
+\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{}{}{}% Removes space above \chapter head
+\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{}{}{}% Removes space above \chapter* head
+\makeatother
+
+%\setlength{\oddsidemargin}{1.5cm}
+%\setlength{\evensidemargin}{0cm}
+%\setlength{\topmargin}{1mm}
+%\setlength{\headheight}{1.00cm}
+%\setlength{\headsep}{1.00cm}
+%%\setlength{\textheight}{20.84cm}
+%\setlength{\textheight}{20.5cm}
+%\setlength{\textwidth}{15.5cm}
+%\setlength{\marginparsep}{1mm}
+%\setlength{\marginparwidth}{3cm}
+%\setlength{\footskip}{2.36cm}
+
+\setlength{\oddsidemargin}{1cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{.5mm}
+\setlength{\headheight}{.5cm}
+\setlength{\headsep}{1.00cm}
+%\setlength{\textheight}{20.84cm}
+\setlength{\textheight}{20.5cm}
+\setlength{\textwidth}{15.5cm}
+\setlength{\marginparsep}{1mm}
+\setlength{\marginparwidth}{3cm}
+\setlength{\footskip}{2.36cm}
+
+
+\newcommand{\Mod}{\mathrm{mod}\ }
+\newcommand{\lag}[2]{\mathchoice{\left(\frac{#1}{#2}\right)}{\bigl(\frac{#1}{#2}\bigr)}{??}{??}}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand*{\fullref}[1]{\hyperref[{#1}]{\nameref*{#1} (\autoref*{#1})}} % One single link
+
+
+
+
+
+%\emph correction to bold
+%\makeatletter
+%\DeclareRobustCommand{\em}{%
+%	\@nomath\em \if b\expandafter\@car\f@series\@nil
+%	\normalfont \else \bfseries \fi}
+%\makeatother
+
+
+
+
+
+
+
+\begin{document}
+
+\pagestyle{empty}
+
+%: ----------------------------------------------------------------------
+%:                  TITLE PAGE: name, degree,..
+% ----------------------------------------------------------------------
+
+
+\begin{center}
+
+\vspace{1cm}
+
+%%% Type the thesis title below%%%%%%%%%%%%%%%%
+{\Huge  Moduli of Vector Bundles over an Algebraic Curve}
+
+\vspace{35mm} 
+
+\includegraphics[width=2cm]{logo}
+
+ \vspace{45mm}
+
+%%%%%Type Your Name Below%%%%%%%%%%%%
+{\Large   Oliver Li    }
+
+	\vspace{1ex}
+
+Department of Mathematics
+
+The University of Auckland
+
+	\vspace{5ex}
+
+ %%%%%Typing Your Supervisors Name Below%%%%%%%%%%%%
+Supervisor:           Dr Pedram Hekmati
+
+	\vspace{30mm}
+
+A thesis  submitted in partial fulfillment of the requirements for the degree of MSc in Mathematics, The University of Auckland, 2021.
+
+\end{center}
+
+
+  \newpage
+
+
+
+%: --------------------------------------------------------------
+%:                  FRONT MATTER:  abstract,..
+% --------------------------------------------------------------
+\chapter*{Abstract}      
+
+\setcounter{page}{1}
+\pagestyle{headings}
+ \pagenumbering{roman}
+
+\addcontentsline{toc}{chapter}{Abstract}
+
+
+
+
+
+
+
+
+
+%: --------------------------------------------------------------
+%:                  END:  abstract
+% --------------------------------------------------------------
+\chapter*{Acknowledgements}       
+\addcontentsline{toc}{chapter}{Acknowledgements}
+
+
+%: ----------------------- contents ------------------------
+\setcounter{secnumdepth}{3} % organisational level that receives a numbers
+\setcounter{tocdepth}{2}    % print table of contents for level 3
+{\small \tableofcontents }           % print the table of contents
+% levels are: 0 - chapter, 1 - section, 2 - subsection, 3 - subsection
+
+
+
+%: --------------------------------------------------------------
+%:                  MAIN DOCUMENT SECTION
+% --------------------------------------------------------------
+	
+
+
+
+\mainmatter
+
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+\part{Algebraic Theory}
+
+\chapter{Moduli Theory}
+\input{Moduli}
+
+\chapter{Geometric Invariant Theory}
+\input{GIT}
+
+\chapter{Construction of the Moduli Space}
+\input{Stab}
+
+\part{Analytic Theory}
+
+\chapter{Hodge Theory}
+\input{Hodge}
+
+\chapter{The Narasimhan Seshadri Theorem}	
+\input{NS}			
+%			
+% --------------------------------------------------------------
+
+% --------------------------------------------------------------
+
+
+
+\appendix%%% start appendices here 
+\chapter{Preliminaries}
+\input{Vector}
+%\begin{theorem}\thlabel{matsu}
+%	Let $k$ be a field, $A$ a finitely generated $k$-algebra that is also an integral domain and $\p$ a prime ideal of $A$. Then \[\height \p + \dim A/\p = \dim A\].
+%\end{theorem}
+%Where $\dim A$ is the Krull Dimension of $A$
+%\begin{proof}
+%	\autocite[p.92]{Matsu}
+%\end{proof}
+%
+%This is an optional chapter for any additional material that does not fit 
+%conveniently into the body of the text (e.g., data, copies of computer programmes). 
+%Note that appendices won't necessarily be marked.
+\printindex
+%\addcontentsline{toc}{chapter}[Index]
+\renewcommand{\bibname}{References} % changes the header; default: Bibliography
+\printbibliography
+
+
+\end{document}
