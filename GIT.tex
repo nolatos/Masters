@@ -109,8 +109,18 @@ Now assuming $G$ and $X$ are both affine, equal to $\Spec R$ and $\Spec A$ respe
 	A homomorphism $\rho: G \rightarrow \GL_n$ will be called a \textit{representation}. Composing this with the action on $\A^n$, we see that $\rho$ induces an action of $G$ on $\A^n$ and hence of $G(k)$ on $V = k^n$.
 \end{definition}
 \begin{example}
+	Let $G$, $H$ be any affine algebraic groups. Then the \textit{trivial group homomorphism} $G \rightarrow H$ is the morphism of schemes 
+	\begin{equation*}
+		\begin{tikzcd}
+			G \arrow[r] & \Spec k \arrow[r, "e_H"] & H.
+		\end{tikzcd}
+	\end{equation*}
+	Clearly the square commutes.
+\end{example}
+\begin{example}
 	Consider the representation $\rho: \bb{G}_m \rightarrow \GL_2$ induced by \[\rho^*(x_{ij}) = \delta_{ij}t^{2i-3} \] composing this with the natural action of $\GL_2$ on $\A^2$ described in Example \ref{gl-action} we obtain the action in Example \ref{naive-quotient-scheme}.
 \end{example}
+
 Note that the image of the induced morphism $k^* \rightarrow \GL_2(k)$ in the above representation is contained in the subgroup of diagonal matrices. This is no coincidence, as we will show below. This result is hugely important, and as we will soon see, representations of $\bb{G}_m$ play a huge role in our further discussions (for example, in our analysis of stability). For now, we end with the following theorem:
 \begin{theorem}\label{torus-reductive}
 	Let $\rho: \bb{G}_m \rightarrow \GL_n$ be a representation. Then there is a decomposition \[k^n =: V = \bigoplus_{i\in \Z} V_i \] where \[V_i:= \{v\in V \mid \lambda \cdot v = \lambda^i v \space, \forall \lambda \in k^*\} \]
@@ -224,7 +234,7 @@ We will state without proof the key properties of the affine GIT quotient.
 \end{proof}
 Let us investigate some consequences. Firstly, observe that any orbit closure is $G$-invariant; indeed let $G\cdot p$ be an orbit, and let $I$ denote the ideal of functions vanishing on this orbit. Now by definition, $I$ is the set of $f\in A$ such that $f\in \mathfrak{m}_{g\cdot p}$, or equivalently $g^{-1}\cdot f\in \mf{m}_p$ for all $g\in G(k)$, so in particular it is $G$-invariant, and hence $\overline{G\cdot p}$, which is the closed subset cut out by $I$, is $G$-invariant too. Since $\varphi^G$ is a quotient, property (iii) implies that orbit closures are contracted to a point. By property (iv), the converse is also true: two points are mapped to the same point if and only if their orbit closures intersect. By the same property, it follows that the set-theoretic fibre of every $p\in Y(k)$ contains a unique polystable orbit. In particular, every equivalence class of orbits (the relation being intersection of closure) contains a unique polystable orbit. In particular, this means that the set $Y(k)$ is in canonical 1-1 correspondence with the polystable orbits of $X$.  
 \begin{definition}
-	Let $G$ be a reductive algebraic group acting on a scheme $X$. A quotient $\varphi^G: X \rightarrow Y$ is a \textit{good quotient} if the five conditions in the above theorem hold. The quotient $\varphi^G$ is said to be a \textit{geometric quotient} if it is a good quotient and additionally the mapping $G \cdot p \rightarrow \varphi^G(p)$ is a bijection between the orbit space and $Y(k)$.
+	Let $G$ be a reductive algebraic group acting on a scheme $X$. A quotient $\varphi^G: X \rightarrow Y$ is a \textit{good quotient} if the five conditions in the above theorem hold. The quotient $\varphi^G$ is said to be a \textit{geometric quotient} if it is a good quotient and additionally the mapping $G \cdot p \mapsto \varphi^G(p)$ is a bijection between the orbit space and $Y(k)$.
 \end{definition}
 So in particular, the affine GIT quotient is a good quotient, and since it can also be shown that a good quotient is a categorical quotient (\autocite[Proposition 3.30]{ModuliNotes}), it follows that the GIT quotient is a categorical quotient. However, it is not always a geometric quotient:  
 \begin{example}
@@ -366,9 +376,9 @@ We now present our first criterion for stability:
 
 The main issue with the above is that it is oftentimes very difficult to compute the closure of an orbit, and in fact it may even be unknown what the homogeneous coordinate ring of our linearisation is in the first place! And thus we will require a slightly different notion, which is more computation-friendly. This is the \textit{Hilbert-Mumford criterion}, which relates stability to 1-parameter subgroups, which we will now define:
 \begin{definition}\index{1-parameter subgroup}
-	Let $G$ be an algebraic group acting on a scheme $X$, separated over $k$. A \textit{1-parameter subgroup}, or just \textit{1-PS}, is a group homomorphism $\lambda: \bb{G}_m \rightarrow G$. 
+	Let $G$ be an algebraic group. A \textit{1-parameter subgroup}, or just \textit{1-PS}, is a group homomorphism $\lambda: \bb{G}_m \rightarrow G$. 
 	
-	Now let $f: \bb{G}_m \rightarrow X$ be any morphism. Then by the valuative criterion for separation, $f$ has at most one extension to a morphism $f^\sharp: \A^1 \rightarrow X$. If this extension does exist, we define the \textit{limit} of $f$ at 0, denoted $\lim_{t\to 0} f(t)$, to be \[\lim_{t\to 0} f(t):= f^\sharp(0). \] If this extension does not exist, we say the \textit{limit does not exist}.
+	Now let $X$ be a scheme, separated over $k$ and let $f: \bb{G}_m \rightarrow X$ be any morphism. Then by the valuative criterion for separation, $f$ has at most one extension to a morphism $f^\sharp: \A^1 \rightarrow X$. If this extension does exist, we define the \textit{limit} of $f$ at 0, denoted $\lim_{t\to 0} f(t)$, to be \[\lim_{t\to 0} f(t):= f^\sharp(0). \] If this extension does not exist, we say the \textit{limit does not exist}.
 \end{definition}
 %\begin{lemma}
 %	Let $\lambda: \bb{G}_m \rightarrow G$ be a 1-PS. Then $\lim_{t \to 0} \lambda(t)$ exists if and only if $\lambda$ is trivial.
@@ -376,21 +386,32 @@ The main issue with the above is that it is oftentimes very difficult to compute
 %\begin{proof}
 %	content...
 %\end{proof}
+\begin{lemma}
+	Let $G$ be an affine algebraic group and let $\lambda: \bb{G}_m \rightarrow G$ be a 1-PS. Then $\lim_{t \to 0} \lambda(t)$ exists if and only if $\lambda$ is trivial.
+\end{lemma}
+\begin{proof}
+	If $\lambda$ is trivial then the limit exists trivially. Conversely, suppose the limit exists, that is to say the ring homomorphism $\lambda^\sharp:\Gamma(G,\O_G) \rightarrow k[t^{\pm 1}]$ factors through $k[t] \rightarrow k[t^{\pm 1}]$. In particular, the image of $\lambda^\sharp$ cannot intersect the ideal $\langle t \rangle$ in $k[t]$, since if $\lambda^\sharp(f) = Ft$, then $\lambda^\sharp(\iota^\sharp(f)) = \iota^\sharp(\lambda^\sharp(f)) = \iota^\sharp(F)t^{-1}$, and hence the homomorphism cannot factor through $k[t]$. Therefore the image of $\lambda^\sharp$ is contained in the image of $k$ in $k[t^{\pm 1}]$, and {\color{red}we can show using the group axioms that }$\lambda^\sharp$ must factor through $e^\sharp$, as desired.
+\end{proof}
 
-Now suppose $X$ is projective. Then given an embedding $X\subseteq \P^n$ and $p\in X(k)$, the morphism $\lambda_p$ may be considerd a morphism into $\P^n$, and if we define the lift $\lambda_p^\sharp$ as a morphism into $\P^n$, it is clear that the limit will be contained in the closed subscheme $X$, and thus we reduce to the case $X = \P^n$. 
+Let $G$ be an affine algebraic group acting on a quasi-projective variety $X$, and fix a 1-PS $\lambda: \bb{G}_m \rightarrow G$. We have an induced morphism $\lambda_p: \bb{G}_m \rightarrow \A^{n+1}$, and if the limit at 0 does exist, then either the limit is $p$ (in which case the 1-PS acts trivially), or the limit is in the boundary of $G\cdot p$, {\color{red} by the above lemma}. In particular, the stability of $p$ is encoded in whether or not the limit exists. The idea is now to find a numerical criterion for determining whether the limit will exist; this is done using the following definition: %This is clear. What is not clear is that the converse is also true:
+%\begin{theorem}\label{fundamental-theorem-git}
+%	Let $G$ be a reductive affine algebraic group acting on $\A^n$, with the action induced by a representation $G \rightarrow \GL_n$. Then for any $p\in \A^n(k)$, a the origin is in the closure of $G\cdot p$ if and only if there exists a nontrivial 1-PS $\lambda: \bb{G}_m \rightarrow G$ such that \[\lim_{t\to 0} \lambda_p(t) = 0.\]
+%\end{theorem}
+%The {\color{red}proof relies on the Cartan-Iwahori decomposition theorem}, which is beyond the scope of this thesis, but it can be found in \autocite[p. 48]{ModuliNotes} or \autocite[p. 53]{GIT}. This result is highly analogous to the theorem in analysis, which states that a point is in the closure of a set in a metric space if and only if there is some sequence which converges to it. 
 
-Now suppose we have a linearisation $\L$, and hence a linear action of $G$ on the affine cone $\widetilde{\P^n} = \A^{n+1}$. Then given a $p\in \A^n(k)$ and a 1-PS $\lambda: \bb{G}_m \rightarrow G$, we have an induced morphism $\lambda_p: \bb{G}_m \rightarrow \A^{n+1}$, and if the limit does exist, then the limit is contained in the closure of $G\cdot p$. This is clear. What is not clear is that the converse is also true:
-\begin{theorem}\label{fundamental-theorem-git}
-	Let $G$ be a reductive affine algebraic group acting on $\A^n$, with the action induced by a representation $G \rightarrow \GL_n$. Then for any $p\in \A^n(k)$, a $k$-point $q$ is in the closure of $G\cdot p$ if and only if there exists a nontrivial 1-PS $\lambda: \bb{G}_m \rightarrow G$ such that \[\lim_{t\to 0} \lambda_p(t) = q.\]
-\end{theorem}
-The {\color{red}proof relies on the Cartan-Iwahori decomposition theorem}, which is beyond the scope of this thesis, but it can be found in \autocite[p. 48]{ModuliNotes} or \autocite[p. 53]{GIT}. This result is highly analogous to the theorem in analysis, which states that a point is in the closure of a set in a metric space if and only if there is some sequence which converges to it. 
 
-The significance of this theorem is that we can study the closure of an orbit by studying linear actions of $\bb{G}_m$, which we know has a weight space decomposition, by Theorem \ref{torus-reductive}. More precisely, we have the following definition:
 \begin{definition}
-	Let $G$ be a reductive affine algebraic group acting on $\P^n$, with a linearisation on $\O_{\P^n}(1)$. Then we have a linear action of $G$ on $\A^{n+1}$. Now given a 1-PS $\lambda: \bb{G}_m \rightarrow G$, we have a weight space decomposition \[ k^{n+1}=: V = \bigoplus_{r\in \Z} V_r. \] Choose a basis $\{e_i\}$ for $V$ such that $\lambda \cdot e_i = \lambda^{r_i} e_i$ for all $\lambda\in \bb{G}_m(k)$. Now let $p\in \P^n(k)$, and let $\tilde{p}\in \A^{n+1}(k)$ be a lift. We may write $\tilde{p} = \sum p_i e_i$. The \textit{Hilbert-Mumford weight of $\lambda$ at $p$}, denoted $\mu(p, \lambda)$, is the integer \[\mu(p, \lambda) := \max\{-r_i \mid p_i \neq 0\}.\] Note that this does not depend on the choice of $\tilde{p}$.
+	Let $G$ be a reductive affine algebraic group acting on $X \subseteq \P^n$, with a linearisation on $\O_{X}(1)$. Then we have a linear action of $G$ on $\widetilde{X}\subseteq \A^{n+1}$. Now given a 1-PS $\lambda: \bb{G}_m \rightarrow G$, we have a weight space decomposition \[ k^{n+1}=: V = \bigoplus_{r\in \Z} V_r. \] Choose a basis $\{e_i\}$ for $V$ such that $\lambda \cdot e_i = \lambda^{r_i} e_i$ for all $\lambda\in \bb{G}_m(k)$. Now let $p\in X(k)$, and let $\tilde{p}\in \widetilde{X}(k)$ be a lift. We may write $\tilde{p} = \sum p_i e_i$. The \textit{Hilbert-Mumford weight of $\lambda$ at $p$}, denoted $\mu(p, \lambda)$, is the integer \[\mu(p, \lambda) := \max\{-r_i \mid p_i \neq 0\}.\] Note that this does not depend on the choice of $\tilde{p}$.
 \end{definition}
+We are now in a position to state the theorem:
+\begin{theorem}[The Hilbert-Mumford Criterion]
+	Let $p$ be a $k$-point. Then $p$ is semistable if and only if $\mu(p, \lambda)\geq 0$ for all nontrivial 1-PS $\lambda$, with stability holding if and only if the condition holds with strict inequality.
+\end{theorem}
+\begin{proof}
+	\autocite[pp. 49-54]{GIT}
+\end{proof}
+Let us break down the theorem a little. The \enquote{only if} is actually quite intuitive: let $\lambda$ be a 1-PS. If $\mu(p, \lambda) < 0$, this means that all the $r_i$ in the preceding definition are positive. In particular, \[\lim_{t\to 0} \lambda_p(t) = 0, \] and so $p$ is unstable. Conversely, if $\lim_{t\to 0} \lambda_p(t) = 0,$ then it must be the case that all the $r_i$ are positive. Hence $p$ is unstable for this induced $\bb{G}_m$-action if and only if $\mu(p, \lambda) < 0$. Now if $\mu(p, \lambda) = 0$, then all the $r_i$ are nonnegative, with at least one strictly zero, and so the limit does exist, and it easy to see \[\lim_{t\to 0} \lambda_p(t) = \sum_{r_i = 0}  p_i e_i. \] In particular, if $\lambda$ is not trivial, then either the limit lies outside the orbit, whence $p$ is not polystable, and thus not stable, or the 1-PS is contained in the stabiliser $G_p$, whence $p$ is still not stable. If all the weights are nonpositive, the same argument can be made for $\lambda^{-1}$ in place of $\lambda$, and so in order for $p$ to be stable, there must be a mixture of positive and negative weights. 
 
-We unwrap this definition a little. If $\mu(p, \lambda) < 0$, this means that all the $r_i$ are postive. In particular, \[\lim_{t\to 0} \lambda_p(t) = 0, \] and so $p$ is unstable. If $\mu(p, \lambda) = 0$, then all the $r_i$ are nonnegative, with at least one strictly zero, and so the limit does exist, and it easy to see \[\lim_{t\to 0} \lambda_p(t) = \sum_{r_i = 0}  p_i e_i. \] In particular, if $\lambda$ is not trivial, then $p$ is {\color{red} not polystable}.
-
+The significance of this theorem is that the \enquote{if} is also true: in particular it is saying that if $p$ is unstable (or not stable), then there is a 1-PS which can detect this, which is not at all obvious. Moreover, it is also saying that if the stabiliser $G_p$ of $p$ is positive dimensional, then there is a nontrivial 1-PS $\lambda: \bb{G}_m \rightarrow G_p$.
 
 
