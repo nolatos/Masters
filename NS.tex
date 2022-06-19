@@ -1,4 +1,4 @@
-\par {\color{red} We have constructed the spaces $V^s_{n,d}$ of stable vector bundles on a curve. In this chapter, we turn our attention to the case $k = \C$ (in particular, our vector bundles are \textbf{complex} vector bundles). This choice is necessary, as it gives us access to methods from analysis and differential geometry. In this setting, it turns out $V^s_{n,d}$ has a nice characterisation, known as the \textit{Narasimhan-Seshadri Correspondence}, or the \textit{Narasimhan-Seshadri Theorem}. }So let us fix once and for all a compact Riemann surface $X$ of genus $g$ (which may be identified as the $\C$-valued points of a projective curve over $\C$, given the complex topology). The basic result is the following:
+We have constructed the spaces $V^s_{n,d}$ of stable vector bundles on a curve. The next question to ask is \enquote{what does this space look like}? It turns out in the case $k = \C$ (This choice is necessary, as it gives us access to methods from analysis and differential geometry), there is a correspondence known as the \textit{Narasimhan-Seshadri Correspondence}, or the \textit{Narasimhan-Seshadri Theorem}, which asserts a bijection between stable holomorphic vector bundles (which is equivalent to algebraic vector bundles, by GAGA) of degree zero and irreducible unitary representations of the fundamental group, which turns out to be an homeomorphism of moduli spaces, {\color{red}although we do not show this. }So let us fix once and for all a compact Riemann surface $X$ of genus $g$ (which may be identified as the $\C$-valued points of a nonsingular projective curve over $\C$, given the complex topology). The basic result is the following:
 \begin{theorem}[Narasimhan-Seshadri, 1965]
 	Suppose $g\geq 2$. Then there is a bijection between $V^s(n,0)$ with irreducible representations $\pi_1(X) \rightarrow U(n)$ up to conjugation.
 \end{theorem}
@@ -8,10 +8,11 @@ This is first given as Corollary 1 of \autocite{NS}. Since then, Donaldson gave 
 \end{theorem}
 We will survey these results in this chapter.
 \\\\
-\indent Of course, since we are moving into analytic territory, some comments are in order. \textit{Open} and \textit{closed} will always mean with respect to the usual topology. \textit{Point} will always refer to a usual point. We will make use of the correpondence between vector bundles and locally free sheaves without comment, and we will also use without comment the correspondence between holomorphic vector bundles on $X$ and algebraic vector bundles on $X$. 
-\section{Parameterising Holomorphic Structures}
-\indent Within the problem of classifying holomorphic bundles, a subproblem is to classify all holomorphic bundles that restrict to a given smooth bundle $E$. As we will see in the next section, the degree of a holomorphic bundle is actually a smooth invariant, and in fact, along with the rank, completely classifies $E$! Thus $V_{n,d}$, the isomorphism classes of all holomorphic bundles with signature $(n,d)$, is equal to the set of holomorphic structures on $E$, up to isomorphism. It turns out that this space is, in turn, parameterised by so-called unitary connections (to be defined) on $E$, and this correspondence, known as the \textit{Chern Correspondence}, is a key ingredient in the Narasimhan-Seshadri theorem. We will study the Chern corespondence in this section.
+\indent Of course, since we are moving into analytic territory, some comments are in order. \textit{Open} and \textit{closed} will always mean with respect to the usual complex topology. We will make use of the correpondence between vector bundles and locally free sheaves (of an appropriate structure sheaf) without comment, and we will also use without comment the correspondence between holomorphic vector bundles on $X$ and algebraic vector bundles on $X$. 
 
+\section{Holomorphic Structures on a Smooth Bundle}
+\indent The goal of this section is to study the space of holomorphic bundles that restrict to a given smooth bundle. Indeed, as we will see, the degree of a holomorphic bundle is actually a smooth invariant, and in fact, along with the rank, completely classifies $E$! Thus $V_{n,d}(\C)$, the isomorphism classes of all holomorphic bundles with signature $(n,d)$, is equal to the set of holomorphic structures on $E$, up to isomorphism. It turns out that this space is, in turn, canonically identified with the space of unitary connections (to be defined) on $E$, and this correspondence, known as the \textit{Chern Correspondence}, gives us a tool to turn the study of holomorphic bundles into the study of connections. 
+\subsection{The Chern Correspondence}
 Recall some notation. Let $\Omega^{p,q}_X$ denote the sheaf of smooth $(p,q)$-forms on $X$, and let \[\Omega^{p,q}_E:= \Omega^{p,q}_X \otimes E.\] Note that $\Omega^0_E \cong E$.
 \begin{definition}\index{Dolbeault operator}
 	A \textit{Dolbeault operator} on $E$ is a homomorphism of abelian sheaves (in particular, \textbf{NOT} as $\Ox$-modules) \[\delbar_E: \Omega^0_E \rightarrow \Omega^{0,1}_E\] such that for any smooth $f\in C^\infty(U)$ and local section $s\in \Omega^0_U$, we have \[\delbar_E(fs) =  \delbar(f)\otimes s + f\delbar_E(s).\]
@@ -86,9 +87,9 @@ We now want to extend this to the space of all unitary connections, so let $\nab
 	(u\cdot \nabla)(s) := \nabla(s) -(\delbar_{\fancyEnd E}u)u^{-1}(s) +  ((\delbar_{\fancyEnd E}u)u^{-1} )^*(s)
 \end{equation}
 is a unitary connection, and its associated Dolbeault operator is equal to  \[\delbar_E(s) -(\delbar_{\fancyEnd E}u)u^{-1}(s) = \delbar_E(s) - \delbar_E(uu^{-1}(s)) + u\delbar_E(u^{-1}(s)) = u\delbar_E(u^{-1}(s)) \] as desired. Hence defining the action of the gauge group by the formula in (\ref{gauge-group-unitary-connection}) (and it is easy to check that this is indeed a group action) extends the gauge group action on Dolbeault operators, and in particular two unitary connections induce isomorphic holomorphic structures if and only if they lie in the same gauge orbit. In summary, we have the following bijection:\[\{\text{Holomorphic structures on }E\}/\text{isomorphism} \leftrightarrow \{\text{unitary connections on }E \}/ \text{gauge equivalence}. \]
-We conclude this section with a discussion about the Sobolev completions of various spaces we have been working with, and how the above bijection extends. To begin, we first recall that since $X$ is a Riemann surface, it is K\"ahler with its Fubini-Study form. This fixes a volume form $\vol$ and hence a Hodge star product $\star$. The \textit{Hodge inner product} is defined on $\Omega^p_X$ as \[\langle\alpha, \beta\rangle := \int_X \alpha \wedge \star \beta. \] Completing this with 
-\section{Chern Classes}
-In this section, we will study Chern classes (or more precisely, the first Chern class), which are smooth invariants which are intimately connected with the notion of degree, and uniquely define the bundle up to smooth isomorphism. Once again, we fix a smooth bundle $E$. We begin with a result:
+{\color{red} We conclude this section with a discussion about the Sobolev completions of various spaces we have been working with, and how the above bijection extends. To begin, we first recall that since $X$ is a Riemann surface, it is K\"ahler with its Fubini-Study form. This fixes a volume form $\vol$ and hence a Hodge star product $\star$. The \textit{Hodge inner product} is defined on $\Omega^p_X$ as \[\langle\alpha, \beta\rangle := \int_X \alpha \wedge \star \beta. \] Completing this with }
+\subsection{Degree of a Smooth Bundle}
+In this section, we will be giving a classification of all smooth vector bundles on $X$. In particular, we will show that the degree of a bundle is actually a \textbf{smooth} invariant, and in fact, along with the rank, the only smooth invariant there is! Thus for each signature $(n,d)\in \N \times \Z$, there is a unique smooth bundle with that signature. The vehicle for showing this is the invariant known as the \textit{first Chern class}. To define it, we fix a smooth bundle $E$. We begin with a result:
 \begin{lemma}
 	Let $\nabla_1, \nabla_2$ be connections on $E$ with curvature forms $\Theta_1, \Theta_2$ respectively. Then $\tr \Theta_1$ and $\tr \Theta_2$ are cohomologous.
 \end{lemma}
@@ -103,8 +104,16 @@ The key theorem we will be proving in this section is the following:
 	For any holomorphic bundle $\E$ with underlying smooth bundle $E$, we have \[\int_X c_1(E) = \deg(\E)\] up to sign. A choice of orientation fixes the sign.
 \end{theorem}
 Let us take a moment to appreciate this result. We defined the degree of a line bundle $\L$ on a curve $X$ over an algebraically closed field $k$ to be the degree of its corresponding divisor class, and we defined the degree of a vector bundle $\E$ to be the degree of $\det(\E)$. Note that this is purely algebraic. The theorem states that in the case $k = \C$, where we have access to analytic tools, when we equip $\E$ with a connection (any connection, in fact), take its curvature, take the trace of the curvature, multiply by $i/2\pi$ and integrate it, we get, not only an integer, but the same integer representing the degree of the divisor associated to its determinant bundle!
-\\\\
-\par Before we proceed, we would like to review the Snake Lemma; in particular how the \enquote{snake} is constructed. We recall the statement:
+
+The way to prove this is to reduce to the case of line bundles, and to do this, we present the following well-known result:
+\begin{theorem}[Structure Theorem of Smooth Vector Bundles]
+	There is a diffeomorphism \[E \cong \det E \oplus \Ox^{\rk E - 1}. \]
+\end{theorem}
+Before we give the proof, we first recall it can be shown (\autocite[II, Theorem 15.3]{Bredon}) that every section $s$ has a section $s'$ which intersects $s$ transversally (i.e. if $s$ and $s'$ intersect at $P\in X$, then $\im s_{*,P}\oplus \im s'_{*,P} = T_{s(P)}E$; in other words the images of the differential of $s, s'$ at $P$ generate the tangent space of $s(P)$ in $E$). 
+\begin{proof}
+	We proceed by induction on the rank, with the rank 1 case being trivial. Now supposing $rk E > 1$, we observe that by the above there is a section $s$ which intersects the zero section transversally. However, the real dimension of $E$ is $\dim_\R E = 2+ 2\rk E > 4$ and thus $s$ and the zero section cannot intersect at all (otherwise the space spanned by the images of their differential is at most 4), or in other words $s$ is nonvanishing. In particular, the bundle spanned by $s$, which is a trivial line bundle, is a subbundle of $E$, and thus we may write $E = \Ox \oplus E'$ for some complement $E'$ (for example, placing a hermitian metric $h$ on $E$ and taking the orthogonal complement of $s$ with respect to $h$), and by the inductive hypothesis the result follows.
+\end{proof}
+\par Before we proceed, we review the Snake Lemma; in particular how the \enquote{snake} is constructed. We recall the statement:
 \begin{proposition}[Snake Lemma]\index{Snake Lemma}
 	Suppose we have the following diagram of $A$-modules with exact rows:
 	\begin{equation*}
@@ -207,24 +216,13 @@ To make further arguments easier, we will henceforth choose the orientation such
 \end{example}
 
 \begin{proof}[Proof of Theorem \ref{chern-weil-degree}]
-	By Theorem \ref{chern-weil-degree-line}, it suffices to show that there is some connection $\{\omega_\alpha\}$ on $E$, such that $\{\tr \omega_\alpha\}$ is a connection on $\det E$. To this end, we first observe that $E$ can be decomposed into a direct sum of line bundles (for example, letting $L$ be a subbundle, fixing a hermitian metric on $E$ and taking the unitary complement of $L$ induces a splitting $E = L \oplus L^\perp$; and repeating with $L^\perp$ we deduce the result). So let \[E = \bigoplus_{1 \leq i \leq n} L_i \] be such a decomposition, and for each $L_i$ we fix a connection $\{\omega_\alpha^i\}$ on each $L_i$, relative to the frames $\{s_{i, \alpha}\}$. Now observe that $s_\alpha:=(s_{1, \alpha},...,s_{n, \alpha})$ is a frame on $E$, and clearly we have an induced connection described by $\omega_\alpha:= \diag(\omega_\alpha^1,...,\omega_\alpha^n)$ with respect to the frame $s_\alpha$. Now the transition functions are also diagonal matrices described by $\diag(g_{\alpha\beta, 1},...,g_{\alpha\beta, n})$ where $g_{\alpha\beta, i}$ is the relevant transition function on $L_i$. Now we compute. By Proposition \ref{connection-transformatino-rule},  it suffices to show \[\tr(\omega_\beta) = \det g^{-1}d(\det g) + \tr(\omega_\alpha)  \] for any two $\omega_\alpha, \omega_\beta$. To this end, simply note \[\det g^{-1}d(\det g) + \tr(\omega_\alpha) =( \prod_{1\leq i \leq n} g_i^{-1})(\sum_{1 \leq i \leq n} dg_i\prod_{j\neq i} g_j) + \sum_i \omega_{\alpha}^i = \sum_i g_i^{-1}dg_i + \omega_\alpha^i = \sum \omega_\beta^i = \tr \omega_\beta \] as desired.
+	By the structure theorem we know $E = \det E \oplus \Ox^{\rk E -1}$. Then given connections on $\det E$ and $\Ox^{rk E - 1}$, we can build a connection on $E$ with a diagonal matrix of associated 1-forms. More precisely, if $\nabla$ is a connection on $\det E$ with local 1-forms $\{\omega_\alpha\}$, then $\{\diag(\omega_\alpha,0,...,0)\}$ is the matrix of 1-forms for a connection on $\det E \oplus \Ox^{\rk E - 1}= E$. Thus \[\int_X c_1(E) = \int_X c_1(\det E) = \deg(E) \] as desired.
 \end{proof}
-Finally, we need to prove Theorem \ref{chern-weil-degree} and the fact that the Chern class (and hence degree) classifies all smooth bundles up to diffeomorphism. Both follow immediately from the following result:
-\begin{theorem}[Structure Theorem of Smooth Vector Bundles]
-	There is a diffeomorphism \[E \cong \det E \oplus \Ox^{\rk E - 1}. \]
-\end{theorem}
-\begin{proof}
-	It suffices to prove that every bundle of rank greater than one has a nonvanishing global section. {\color{red} This follows form the fact that there always a section transverse to the zero section, and by dimensionr reasons, these sections must not intersect}.
-\end{proof}
-\begin{corollary}
-	For any holomorphic bundle $\E$ with underlying smooth bundle $E$, we have \[\int_X c_1(E) = \deg(\E).\] 
-\end{corollary}
-\begin{proof}
-	If $\nabla$ is a connection on $\det E$ with local 1-forms $\{\omega_\alpha\}$, then $\diag(\omega_\alpha,0,...,0)$ is the matrix of 1-forms for a connection on $\det E \oplus \Ox^{\rk E - 1}$. Thus \[\int_X c_1(E) = \int_X c_1(\det E) = \deg(E) \] as desired.
-\end{proof}
+
 \begin{corollary}
 	For each $(n,d)\in \N \times \Z\cong \N \times H^2(X, \Z)$, there exists a unique smooth bundle $E$ over $X$ with signature $(n,d)$.
 \end{corollary}
 
-
+To summarise, we have given an interpretation of $V^s_{n,d}(\C)$, the set of $\C$-points of $V^s_{n,d}$ as the set of holomorphic structures on the unique smooth bundle $E$ of signature $(n,d)$. In particular, our earlier work on the Chern correspondence may be interpreted as giving a map from $V^s_{n,d}(\C)$ to the space of unitary connections modulo gauge equivalence. This observation will be key in the sequel.
+\input{RH}
 \input{Donaldson}

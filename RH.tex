@@ -1,0 +1,32 @@
+\section{The Riemann-Hilbert Correspondence}
+In this section, we will be constructing and demonstrating the equivalence between the moduli space of flat unitary connections and the so-called \textit{character variety} (which, despite the name, is not actually a variety by any definition) of $U(n)$, the space of representations of $\pi_1(X)$ modulo conjugacy. Since some of the more enlightening examples will not be on a Riemann surface, we will instead work with an arbitrary smooth manifold $Y$. To begin, we give the following informal example:
+\begin{example}\label{circle-riemann-hilbert}
+	Being the free group on one element, there is a canonical isomorphism $\Hom_{\Gps}(\Z, G )\cong G$ for any group $G$. In the case $G = \R^*$, there is a perverse way to see this: firstly, let $U_1 = S^1 \setminus \{1\}$ and $U_2 = S^1\setminus\{-1\}$. Let $u\in \R^*$, and let $E\rightarrow S^1$ be the (real) line bundle defined by gluing $U_1\times \R$ and $U_2 \times \R$ together with locally constant transition function \[g_{1,2}(z):=\begin{cases}
+		1&\text{ if } \Im(z) > 0\\
+		u&\text{ if } \Im (z) < 0
+	\end{cases} \] on the intersection of $U_1$ and $U_2$ (which is just the intersection of $S^1$ and the union of the two half-planes). Observe that if $u < 0$ we get a M\"obius strip, but if $u > 0$ we get a cylinder. Now for any $x\in \R$, define the section $s_x$ to be the section $s_x(z) := (z, x)\in U_1 \times \R$, and define the path $\gamma: [0,1)\rightarrow E$ as \[\gamma(t) := \begin{cases}
+	(1, x) \in U_2 \times \R&\text{ if } t = 0 \\
+	s_x(\exp(2i\pi t))&\text{ otherwise}
+	\end{cases}. \] Observe that the section is smooth, and \[\lim_{t\to 1} \gamma(t) = (1, ux)\in U_2\times \R; \] and in particular by \enquote{transporting} the vector $x$ along the loop, we have caused it to increase by a factor of $u$. In particular, this may be thought of as a map $\pi_1(S^1) \rightarrow \R^*$, taking a loop and seeing how much it deforms a vector transported along the loop. In this particular case, $\pi_1(S^1) =\Z$, and the map $\pi_1(S^1) \cong \Z\rightarrow \R^*$ is given by $1\mapsto u$. 
+\end{example}
+And indeed, this is a very simple example of the Riemann-Hilbert correspondence, which relates flat connections to representations of the fundamental group. The key concept here is the idea of \textit{parallel transport}, which we will now study, beginning with the following definition:
+\begin{definition}
+	Let $\nabla$ be a connection on a smooth vector bundle $E$, let $\gamma:[0,1]\rightarrow U$ be a piecewise smooth path and suppose $\gamma^\sharp: [0,1] \rightarrow E$ is a lift of $\gamma$ (that is, $\pi\circ\gamma^\sharp = \gamma$). We say $\gamma^\sharp$ is \textit{parallel} if \[\nabla_{\gamma'(t)}(\gamma^\sharp(t)) = 0 \] for every $t\in [0,1]$ such that $\gamma(t)$ is smooth.  
+\end{definition}
+\begin{proposition}
+	Let $\gamma$ be a piecewise smooth path in $Y$ and let $(p,v)\in E$. Then there exists a unique parallel lift $\gamma^\sharp$ such that $\gamma^\sharp(0) = (p,v)$.
+\end{proposition}
+\begin{proof}
+	Since we may break up our path into finitely many pieces, we may suppose without generality $\gamma$ is contained in some open subset $U_\alpha$ on which $E$ is trivial. Let $(s_1,...,s_n)_\alpha$ be a frame for $E$ on $U_\alpha$ and suppose $(\omega_\alpha)_{ij}$ is the associated matrix of 1-forms for $\nabla$. We are solving the first-order linear ODE \[\sum_j da_j(\gamma(t))(\gamma'(t))\otimes s_j(\gamma(t)) + \sum_i a_i(\gamma(t)) (\omega_\alpha)_{ij}(\gamma'(t))s_j \] in $t$ with an initial condition, and hence there exists a unique solution.
+\end{proof}
+\begin{example}
+	We will construct a connection $\nabla$ such that that $s_x\circ \gamma$ in Example \ref{circle-riemann-hilbert} is a parallel section with respect to the loop $\gamma(t) = \exp(2\pi i t)$. To this end, let $s,t$ be the sections $s(z): = (z,x)\in U_1 \times \R$ and $t(z):=(z,x)\in U_2\times\R$. One then defines both 1-forms of $\nabla$ to be zero, it is clear they satisfy the transformation rule and that $s_x\circ \gamma$ is parallel. 
+\end{example}
+And now we can define parallel transport:
+\begin{definition}
+	Let $\gamma$ be a piecewise smooth path in $Y$, let $P\in E$ and let $\gamma^\sharp$ be the unique parallel lift along $\gamma$ beginning at $P$. The \textit{parallel transport} of $P$ is the element $\gamma^\sharp(1)$. 
+\end{definition}
+Now observe that since the ODE for parallel transport is linear, this means that parallel transport itself is linear. In fact, we have the following:
+\begin{proposition}
+	Let $E$ be a bundle over $X$, and let $\nabla$ be a unitary connection. Then for any $P\in X$ and any loop beginning and ending at $P$, parallel transport $T: E_P \rightarrow E_P$ is unitary. 
+\end{proposition}
