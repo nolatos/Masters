@@ -1,15 +1,15 @@
 
-\section{Donaldson's Proof}
-\par Finally, we will conclude the thesis with an exposition of Donaldson's paper \autocite{Donaldson}. This builds on earlier work by Atiyah and Bott in \autocite{AtiBot}, and provides {\color{red} a short proof of the theorem of Narasimhan and Seshadri}. We fix the following data: let $\E$ be an indecomposable holomorphic vector bundle of signature $(n,d)$ with underlying smooth bundle $E$ and fix a hermitian metric $h$. Let $\nabla$ denote the Chern connection. Furthermore, since $X$ is a compact Riemann surface, it is K\"ahler, and we make the further assumption that the volume of $X$ is 1. The result is the following:
+\section{An Overview of Donaldson's Proof}
+\par Finally, we will conclude the thesis with an exposition of Donaldson's paper \autocite{Donaldson}. This builds on earlier work by Atiyah and Bott in \autocite{AtiBot}, and provides {\color{red} a short proof of the theorem of Narasimhan and Seshadri}. We fix the following data: let $\E$ be an indecomposable holomorphic vector bundle of signature $(n,d)$ with underlying smooth bundle $E$ and fix a hermitian metric $h$. Furthermore, since $X$ is a compact Riemann surface, it is K\"ahler, and we make the further assumption that the volume of $X$ is 1 (that is, we fix a volume form such that $\int_X \vol = 1$). The result is the following:
 \begin{theorem}[Donaldson-Narasimhan-Seshadri]
-	The bundle $\E$ is stable if and only if there is some unitary connection $\nabla'$ on $E$ with curvature $\Theta\in H^0(\Omega^2_X)\otimes \End E$ satisfying 
+	The bundle $\E$ is stable if and only if there is some unitary connection $\nabla$ on $E$ giving rise to $\E$ with curvature $\Theta\in H^0(\Omega^2_X)\otimes \End E$ satisfying 
 	\begin{equation}\label{NS-equality}
 		\Theta = -2\pi i \mu \vol \otimes \id_E 
 	\end{equation}
-	and a gauge transformation $g$ such that $\nabla = g \cdot \nabla'$. Moreover, $\nabla'$ is unique up to the action of the unitary gauge group.
+	Moreover, $\nabla$ is unique up to the action of the unitary gauge group.
 \end{theorem}
 \begin{example}
-	Of course, over $\P^1$ the only stable bundles are line bundles. So let $\Ox(n)$ be a line bundle. In Example \ref{chern-class-line-bundle-on-p1}, we defined a hermitian metric and computed the Chern class, Chern connection and curvature. Now we will need to compute the volume form. Of course, $X$ is obviously K\"ahler with its Fubini-Study metric (which can be realised as the metric of $\mathcal{T}_X = \Ox(2)$ or its dual $\Ox(-2) = \Omega_X^1$ described in Example \ref{chern-class-line-bundle-on-p1}), and so by taking the real part of this complex inner product, we have a natural Riemannian structure. Locally, if we pick an affine patch with holomorphic coordinate $z = x + iy$, and frame $(\partial x, \partial y)$ of $T_X$ (the smooth tangent space) the metric is given by \[g = \begin{pmatrix*}
+	Of course, over $\P^1$ the only stable bundles are line bundles. So let $\Ox(n)$ be a line bundle. In Example \ref{chern-class-line-bundle-on-p1}, we defined a hermitian metric and computed the Chern class, Chern connection and curvature. Now we will need to compute the volume form. Of course, $X$ is obviously K\"ahler with its Fubini-Study metric (which can be realised as the metric of $\mathcal{T}_X = \Ox(2)$ or its dual $\Ox(-2) = \Omega_X^1$ described in Example \ref{chern-class-line-bundle-on-p1}), and so by taking the real part of this complex inner product, we have a natural Riemannian structure. Locally, if we pick an affine patch with holomorphic coordinate $z = x + iy$, and frame $(\partial x, \partial y)$ of $T_X$ (the real smooth tangent space) the metric is given by \[g = \begin{pmatrix*}
 		\frac{1}{\sqrt{\pi}(1 + x^2+y^2)^2} & 0 \\
 		0 & \frac{1}{\sqrt{\pi}(1 + x^2+y^2)^2} 
 	\end{pmatrix*} \] The $\sqrt{\pi}$ is there so that the resulting volume is 1. An orthonormal frame is given by $(\sqrt{\pi}(1 + x^2+y^2)\partial x , \sqrt{\pi}(1 + x^2+y^2)\partial y)$, and hence the volume form is \[\vol = \frac{dx \wedge dy}{\pi(1 + x^2 + y^2)^2} = \frac{idz \wedge d\bar{z}}{2\pi(1 + |z|^2)^2}. \] Now we computed the curvature of the Chern connection on $\Ox(n)$ to be \[ \Theta =\frac{n}{(1+|z|^2)^2} dz \wedge d\bar{z} = -2\pi i \deg(\Ox(n)) \vol \] as expected. Hence the theorem is true for $\P^1$.
@@ -26,11 +26,42 @@ In fact, we will first prove the theorem for line bundles in general:
 	Observe that $d\eta$ is real and closed and therefore the following Poisson equation has a solution (\autocite[Theorem 4.7]{Aubin}): \[2\delbar\partial f = \Delta f = id\eta. \] Now write $g:= \exp f$, let $\nabla' = g\cdot \nabla$, and write $\Theta'$ for the curvature of $\nabla'$. Firstly, observe that since $\fancyEnd \L$ is trivial, the operators induced by the connection, $\partial_{\fancyEnd \L}$ and $\delbar_{\fancyEnd \L}$, are just the usual $\partial$ and $\delbar$ operators. Hence \[\Theta' = \theta - d(\delbar g)g^{-1} + d\overline{(\delbar g)g^{-1}} = \Theta - \partial \delbar f +  \]
 \end{proof}
 
-Observe that the condition (\ref{NS-equality}) is a little awkward to work with, so we introduce the \textit{Donaldson $J$-functional} on the {\color{red} Sobolev }space of unitary connections, which satisfies the property that $J(\nabla) = 0$ if and only if $\nabla$ satisfies (\ref{NS-equality}). It is defined as follows: Firstly recall that the \textit{trace norm} of a square matrix $M\in \C^{r\times r}$ is defined to be \[\nu(M) := \tr((MM^*)^{\frac{1}{2}}), \] where $(MM^*)^{\frac{1}{2}}$ is the unique positive semidefinite matrix $B$ such that $B^2 = MM^*$, which exists since $MM^*$ is hermitian (and hence diagonalisable) and positive semidefinite. In fact, if $M$ is diagonalisable, it is easy to see that \[\nu(M) = \sum |\lambda_i|, \] where the sum is taken across all eigenvalues of $M$, counting multiplicity. We define the \textit{$N$-norm} on $\End E$, the space of smooth endomorphisms of $E$, as \[N(s):= \left(\int_X \nu^2(s) \vol\right)^{\frac{1}{2}}. \]
+Observe that the condition (\ref{NS-equality}) is a little awkward to work with, so we introduce the \textit{Donaldson $J$-functional} on the {\color{red} Sobolev }space of unitary connections, which satisfies the property that $J(\nabla) = 0$ if and only if $\nabla$ satisfies (\ref{NS-equality}). It is defined as follows: Firstly recall that the \textit{trace norm} (which despite its name, is not a norm in general) of a square matrix $M\in \C^{r\times r}$ is defined to be \[\nu(M) := \tr((MM^*)^{\frac{1}{2}}), \] where $(MM^*)^{\frac{1}{2}}$ is the unique positive semidefinite matrix $B$ such that $B^2 = MM^*$, which exists since $MM^*$ is hermitian (and hence diagonalisable) and positive semidefinite. In fact, if $M$ is diagonalisable, it is easy to see that \[\nu(M) = \sum |\lambda_i|, \] where the sum is taken across all eigenvalues of $M$, counting multiplicity. The key property is the following:
+\begin{lemma}
+	For any hermitian matrix $M$, we have \[\nu(M) = \sup_{\{s_i\}}\sum_{i = 1}^n |\langle Ms_i, s_i \rangle|, \] where the supremum is taken across all unitary bases $\{s_i\}$ of $\C^n$.
+\end{lemma}
+\begin{proof}
+	We first observe that $M$ has a unitary basis of eigenvectors, say $\{v_i\}$ and letting $\{s_i\} = \{v_i\}$ we deduce \[\nu(M) = \sum|\lambda_i| = \sum_{i = 1}^n |\langle Mv_i, v_i \rangle| \leq  \sup_{\{s_i\}}\sum_{i = 1}^n |\langle Ms_i, s_i \rangle|. \] For the reverse inequality, let $\{s_i\}$ be a unitary basis, and let $(g_{ij})\in U(n)$ denote the matrix taking $\{v_i\}$ to $\{s_i\}$; that is, $s_i = \sum g_{ij}v_j.$ We compute:
+	\begin{align*}
+		\sum_{i = 1}^n |\langle Ms_i, s_i\rangle | &= \sum_{i = 1}^n|\langle M\sum_{j = 1}^n g_{ij} v_j,\sum_{k = 1}^n g_{ik}v_k \rangle | \\
+		&= \sum _{i = 1}^n |\sum_{j = 1}^ng_{ij}\langle Mv_j, \sum_{k = 1}^n g_{ik}v_k \rangle| \\
+		&= \sum _{i = 1}^n |\sum_{j = 1}^ng_{ij}\langle Mv_j, g_{ij}v_j \rangle|\\
+		&= \sum _{i = 1}^n |\sum_{j = 1}^n\lambda_j\langle g_{ij}v_j, g_{ij}v_j \rangle|\\
+		&\leq \sum_{i = 1}^n\sum_{j = 1}^n |\lambda_j||\langle g_{ij}v_j, g_{ij}v_j \rangle|\\
+		&= \sum_{i = 1}^n \sum_{j = 1}^n |\lambda_j||g_{ij}|^2 = \sum_{j = 1}^n |\lambda_j|
+	\end{align*} 
+	as desired.
+\end{proof}
+Of course, this in itself is not particularly interesting or useful, but it does give us two very important corollaries:
+\begin{corollary}\label{trace-norm-properties}
+	Let $H(n)$ denote the vector space of hermitian $n$-by-$n$ matrices.
+	\begin{enumerate}
+		\item $\nu$ is a norm on $H(n)$.
+		\item If $M\in H(n)$ is can be written in the form \[M = \begin{pmatrix*}
+			A & B\\
+			B^* & C
+		\end{pmatrix*}, \] then $\nu(M) \geq |\tr A| + |\tr C|$.
+	\end{enumerate}
+\end{corollary}
+\begin{proof}
+	To prove (i), we need only check the triangle inequality. So suppose $M,N\in H(n)$ are given. Then \[\nu(M +N) = \sup_{\{e_i\}} \sum |\langle (M+N)e_i, e_i \rangle| = \leq \sup_{\{e_i\}} \sum |\langle Me_i, e_i \rangle|+ |\langle Ne_i, e_i \rangle|\leq \nu(M) + \nu(N) \] as desired. To prove (ii), let $\{e_i\}$ denote the standard basis of $\C^n$. Then \[\nu(M) \geq \sum_{i = 1}^n |\langle M e_i, e_i \rangle | \geq |\sum_{i = 1}^{\rk A} \langle M e_i, e_i \rangle | + |\sum_{i = \rk A + 1}^n \langle M e_i, e_i \rangle | = |\tr A | + |\tr C| \] as desired.
+\end{proof}
 
-Now let $\nabla$ be a $W^{1,2}$-connection with curvature $\Theta\in H^0(\Omega_{\fancyEnd E}^{2})$. Then we define the \textit{Donaldson $J$-functional} as \[J(\nabla):= N(\frac{\star \Theta}{2\pi i} + \mu)= \left(\int_X \nu^2\left(\frac{\star \Theta}{2\pi i} + \mu\right)\vol\right)^{\frac{1}{2}}, \] where $\nu^2(s) := (\nu(s))^2$ and $\star$ is the Hodge star operator. Observe that $J=0$ if and only if $\nabla$ is a connection of the type we want (known as, \textit{projectively flat}, or \textit{Yang-Mills connections}). Thus we have turned our problem into one of finding zeroes of $J$.
+With this in mind, we define the \textit{$N$-norm} on the space of self-adjoint smooth endomorphisms of $E$, as \[N(s):= \left(\int_X \nu^2(s) \vol\right)^{\frac{1}{2}}. \] By the above corollary, this is a norm.
 
-The rough idea of the proof is as follows: let $\nabla$ denote the Chern connection of $\E$, and let $O_\nabla$ denote the $W^{2,2}$-gauge orbit of $\nabla$. We will show that if $\E$ is stable, then the infimum of $J(O_\nabla)$ is attained; that is there is some $\nabla'\in O_\nabla$ such that $J(\nabla') = \inf J(O_\nabla)$. One then deduces that the infimum must be zero, by looking at infinitesimal deformations of $\nabla'$. In order to deduce that the infimum is attained, we take a minimising sequence (that is, a sequence $\nabla_i$ such that $J(\nabla_i)\to \inf J(O_\nabla)$) in $O_\nabla$ and extract, using Uhlenbeck's weak compactness theorem (to be stated), a weakly convergent subsequence that converges to $\nabla'$. Now $\nabla'$ defines a holomorphic bundle, say $\F$, and the key property is that $\Hom(\E, \F)\neq 0$. So we take a nonzero $\varphi: \E \rightarrow \F$, and apply Proposition \ref{canonical-extension-proposition} to get a factorisation of $\varphi$ through two exact rows, and apply estimates to these rows to deduce that $\E$ is stable if and only if $\E \cong\F$. The converse (that if there is some connection annihilating $J$ then $\E$ is stable) also follows from these estimates.
+Now let $\nabla$ be a unitary $W^{1,2}$-connection with curvature $\Theta\in H^0(\Omega_{\fancyEnd E}^{2})$. Since the matrix of a unitary connection with respect to a unitary frame is skew-hermitian, its curvature $\Theta$ is also skew-hermitian, and since the volume form is real, it follows that $\star\Theta$ is also skew-hermitian. In particular, it follows that $\frac{\star \Theta}{2\pi i}$ is actually \textbf{hermitian}. Thus we define the \textit{Donaldson $J$-functional} as \[J(\nabla):= N(\frac{\star \Theta}{2\pi i} + \diag(\mu))= \left(\int_X \nu^2\left(\frac{\star \Theta}{2\pi i} + \diag(\mu)\right)\vol\right)^{\frac{1}{2}}, \] where $\nu^2(s) := (\nu(s))^2$. Observe that $J=0$ if and only if $\nabla$ is a unitary connection of the type we want (known as, \textit{projectively flat}, or \textit{Yang-Mills connections}). Thus we have turned our problem into one of finding zeroes of $J$.
+
+The rough idea of the proof is as follows: we fix a reference Chern connection $\nabla_0$ of $\E$, and use gauge transformations to find our desired $\nabla$. Denote the $W^{2,2}$-gauge orbit of $\nabla_0$ by $O_{\nabla_0}$. We will show that if $\E$ is stable, then the infimum of $J(O_{\nabla_0})$ is attained; that is there is some $\nabla\in O_{\nabla_0}$ such that $J(\nabla) = \inf J(O_{\nabla_0})$. One then deduces that the infimum must be zero, by looking at near $\nabla$. In order to deduce that the infimum is attained, we take a minimising sequence (that is, a sequence $\nabla_i$ such that $J(\nabla_i)\to \inf J(O_\nabla)$) in $O_{\nabla_0}$ and extract, using Uhlenbeck's weak compactness theorem (to be stated), a weakly convergent subsequence that converges to $\nabla$. Now $\nabla$ defines a holomorphic bundle, say $\F$, and the key property is that $\Hom(\E, \F)\neq 0$. So we take a nonzero $\varphi: \E \rightarrow \F$, and apply Proposition \ref{canonical-extension-proposition} to get a factorisation of $\varphi$ through two exact rows, and apply estimates to these rows to deduce that $\E$ is stable if and only if $\E \cong\F$. The converse (that if there is some connection annihilating $J$ then $\E$ is stable) also follows from these estimates.
 \\\\
 \par Now we begin with a {\color{red} statement of Uhlenbeck's compactness theorem}:
 \begin{theorem}[Uhlenbeck's weak compactness]
@@ -39,18 +70,19 @@ The rough idea of the proof is as follows: let $\nabla$ denote the Chern connect
 \begin{proof}
 	\autocite[p. 41]{Uhlenbeck}.
 \end{proof}
-So let $(\nabla_i)$ be a sequence in $O_{\nabla}$ with curvatures $(\Theta_i)$, such that $J(\nabla_i)\to \inf J(\O_\nabla)$. In order to use the theorem, we need to check that $||\Theta_i||_{L^2}$ is bounded. To this end, we first observe that $N(\star \Theta_i)$ is bounded, since $J(\nabla_i)$ is and $N$ is a norm. Now note that \[\nu^2(\star \Theta_i) \vol =\tr(\sqrt{(\star \Theta_i)(\star \Theta_i)^*})^2\vol,\] and similarly, \[\tr(\Theta_i) \wedge \star\tr(\overline{\Theta_i}) = \tr(\star\Theta )(\star\Theta)^*\vol. \] Since all norms are equivalent in finite dimensions, it follows that there is some $m,M>0$ such that for any matrix $A$ we have \[m\tr(AA^*)\leq \tr\sqrt{AA^*}^2 \leq M \tr(AA^*),   \] thus since $\{N(\star\theta_i)\}$ is bounded, it follows that $\{||\Theta_i||_{L^2}\}$ is also bounded. Thus there is some $\nabla_\infty$ which is the weak limit, and hence defines a holomorphic bundle, say $\F$ with signature $(n,d)$.
+So let $(\nabla_i)$ be a sequence in $O_{\nabla_0}$ with curvatures $(\Theta_i)$, such that $J(\nabla_i)\to \inf J(\O_{\nabla_0})$. In order to use the theorem, we need to check that $||\Theta_i||_{L^2}$ is bounded. To this end, we first observe that $N(\star \Theta_i)$ is bounded, since $J(\nabla_i)$ is and $N$ is a norm. Now note that \[\nu^2(\star \Theta_i) \vol =\tr(\sqrt{(\star \Theta_i)(\star \Theta_i)^*})^2\vol,\] and similarly, \[\tr(\Theta_i) \wedge \star\tr(\overline{\Theta_i}) = \tr(\star\Theta )(\star\Theta)^*\vol. \] Since all norms are equivalent in finite dimensions, it follows that there is some $m,M>0$ such that for any matrix $A$ we have \[m\tr(AA^*)\leq \tr\sqrt{AA^*}^2 \leq M \tr(AA^*),   \] thus since $\{N(\star\theta_i)\}$ is bounded, it follows that $\{||\Theta_i||_{L^2}\}$ is also bounded. Thus (replacing $\nabla_i$ with $g\cdot \nabla_i$, and replacing the sequence with a weakly convergent subsequence) we may assume without loss of generality $\nabla_i$ converges weakly to some $\nabla_\infty$, which is a unitary connection and hence defines a holomorphic bundle, say $\F$ with signature $(n,d)$.
 \begin{proposition}
 	Let $\E, \F$ be as above.
 	\begin{enumerate}
-		\item Then $\inf J(O_\nabla) \geq \inf J(O_{\nabla_\infty})$.
+		\item Then $\inf J(O_{\nabla_0}) \geq \inf J(O_{\nabla_\infty})$.
 		\item The group $\Hom(\E, \F)$ is nonzero.
 	\end{enumerate}
 \end{proposition}
-\begin{proof}
-	\color{red} TODO
+\begin{proof}[Proof Sketch]
+	To prove (i), we first observe that for any $\varepsilon > 0$ the set $C_\varepsilon = \{\alpha\in \End E \mid N(\alpha + \diag(\mu)) < J(\nabla_\infty) - \varepsilon\}$ is convex and closed, and thus by the Hahn-Banach separation theorem, we can separate $\frac{\star \Theta}{2\pi i}$ from $C_\varepsilon$ by a hyperplane. Now if \[\inf J(O_{\nabla_\infty}) > \inf J(O_{\nabla_0}) = \liminf_{n\to \infty} J(\nabla_i), \] then picking some $\varepsilon_0$ such that $\inf J(O_{\nabla_\infty})  - \varepsilon_0 > \inf J(O_{\nabla_0})$, we find that infinitely many $\frac{\star \Theta_i}{2\pi i}$ lie in $C_{\varepsilon_0}$. But that means $\Theta_i$ cannot converge weakly to $\Theta_\infty$ in $L^2$, and since the curvature is a bounded linear operator, it follows that weak convergence is preserved, and thus we have a contradiction. This proves (i).
+	
+	To prove (ii), we first observe that an element of $\Hom(\E, \F)$ is just a global section of $\fancyHom(\E, \F) = \E^\vee \otimes \F$. Now the underlying smooth bundle of $\E^\vee \otimes \F$ is just $\fancyEnd(E) = E^\vee \otimes E$, and it is easy to see that given any Dolbeault operators $\delbar_{\E}$ and $\delbar_{\F}$ giving rise to the holomorphic structures on $\E$ and $\F$, the operator \[\delbar_{\E^\vee \otimes \F} := 1\otimes\delbar_{\F} - \delbar_{\E}\otimes 1\] is a Dolbeault operator for $\E^\vee \otimes \F$. Since $\E$ and $\F$ have Chern connections $\nabla_0$ and $\nabla_\infty$ respectively, and since the $\nabla_i$ for $i \geq 0$ all give rise to the same (more precisely isomorphic) holomorphic structures, we can take the $(0,1)$ part of these connections to build the Dolbeault operators $\delbar_{i, \infty}:= (1\otimes \nabla_\infty - \nabla_i \otimes 1)_{0,1}$. Now to say $\Hom(\E, \F) = 0$ is to say that the Dolbeault operators $\delbar_{i, \infty}$ for $i \geq 0$, considered as maps $\End E \rightarrow \End E \otimes H^0(X, \Omega^{0,1})$ have trivial kernel. One can then apply the theory of elliptic operators and the Sobolev embedding theorem to deduce that $\delbar_{0, i}:= 1\otimes\nabla_i -\nabla_0\otimes 1 $ also has no kernel. But that would imply $\End \E = 0$, a clear contradiction.
 \end{proof}
-
 With this result in hand, we fix a nonzero homomorphism $\varphi: \E \rightarrow \F$ and apply Proposition \ref{canonical-extension-proposition}, so that we have the following commutative diagram:
 	\begin{equation}\label{proper-factorisation-equation-donaldson}
 	\begin{tikzcd}
@@ -60,24 +92,91 @@ With this result in hand, we fix a nonzero homomorphism $\varphi: \E \rightarrow
 \end{equation}
 with exact rows, $\E' \cong \ker \varphi$, $\E''\cong \im \varphi$ and $\rk \E'' = \rk \F'$, $\deg \E'' \leq \deg \F'$. The key now is to apply estimates to these rows. 
 \begin{proposition}[First Estimate]
-	Consider the following short exact sequence of vector bundles: \[ 0 \rightarrow \F' \rightarrow \F \rightarrow \F'' \rightarrow 0,\] and suppose $\mu(\F') \geq \mu(\F)$. Then for any unitary connection $\nabla_\F$ on $\F$, we have \[J(\nabla_\F) \geq \rk \F'(\mu(\F') - \mu(\F)) + \rk \F''(\mu(\F) - \mu(\F')). \] Equality holds only if the sequence splits.
+	Consider the following short exact sequence of vector bundles: \[ 0 \rightarrow \F' \rightarrow \F \rightarrow \F'' \rightarrow 0,\] and suppose $\mu(\F') \geq \mu(\F)$. Then if $\nabla_\F$ is a unitary connection on $E$ giving rise to the holomorphic structure of $\F$, we have \[J(\nabla_\F) \geq \rk \F'(\mu(\F') - \mu(\F)) + \rk \F''(\mu(\F) - \mu(\F'')). \] Equality holds only if the sequence splits.
 \end{proposition}
 \begin{proof}
-	Firstly, we fix a local unitary frame $s_\alpha$ and consider the matrix of one-forms of $\nabla_\F$. It is then not hard to see that.
+	Firstly, we fix a local unitary frame $s_\alpha$ compatible with a local holomorphic splitting and consider the matrix of one-forms of $\nabla_\F$, which is skew-hermitian. One can show that it has the shape \[\omega_\alpha = \begin{pmatrix*}
+		\omega_\alpha' & \beta_\alpha \\
+		-\beta^*_\alpha & \omega_\alpha''
+	\end{pmatrix*}, \] where the $\beta_\alpha$ glue to the second fundamental form (c.f. Remark \ref{ext-dolbeault}) $\beta $, and the $\omega_\alpha'$ are the 1-forms of a Chern connection $\nabla'$ on $\F'$, and similarly with $\omega_\alpha''$. If we compute the curvature, we see that it is of the form \[\Theta_\F = \begin{pmatrix*}
+	\Theta' - \beta \wedge \beta^* & \nabla_{\F'', \F}\beta\\
+	-\nabla_{\F'', \F}\beta^*& \Theta'' - \beta^* \wedge \beta
+	\end{pmatrix*}, \] where $\Theta'$ and $\Theta''$ are the curvatures of $\nabla'$ and $\nabla''$ respectively and $\nabla_{\F'', \F}: \Omega^1(\fancyHom(\F'', \F))\rightarrow \Omega^2(\fancyHom(\F'', \F))$ is built from the connections $\nabla', \nabla''$ (see \autocite[p. 78]{GriHa} for details). Now by Corollary \ref{trace-norm-properties}, it follows that \[\nu\left(\frac{\star\Theta_\F}{2\pi i} + \diag_{\rk \F}(\mu)\right) \geq \left|\tr\left(\frac{\star(\Theta' - \beta \wedge \beta^*)}{2\pi i} + \diag_{\rk \F'}(\mu)\right)\right| + \left|\tr\left(\frac{\star(\Theta''- \beta^*\wedge \beta)}{2\pi i} + \diag_{\rk \F''}(\mu)\right)\right|, \] where $\mu = \mu(\F)$. Applying H\"older's inequality, we deduce
+	\begin{align*}
+		J(\nabla_\F) &\geq \int_X\nu\left(\frac{\star\Theta_\F}{2\pi i} + \diag_{\rk \F}(\mu)\right) \vol\\
+		&= \left|\int_X\tr\left(\frac{\star(\Theta' - \beta \wedge \beta^*)}{2\pi i} + \diag_{\rk \F'}(\mu)\right)\vol\right| + \left|\int_X	·\tr\left(\frac{\star(\Theta''- \beta^*\wedge \beta)}{2\pi i} + \diag_{\rk \F''}(\mu)\right)\vol\right|
+	\end{align*}
+	 Let us consider the term $\star(\beta \wedge \beta^*)$. Observe that $\beta$ is a (0,1)-form and so $\beta \wedge \beta^*$ has entries of the form $|f|d\bar{z} \wedge dz$ for any holomorphic coordinate $z$. Since, by our conventions, our orientation is $ i dz \wedge d\bar{z}$, this means that $-i\tr \star(\beta \wedge \beta^*)$ will be nonnegative.
+	 
+	 Next we observe that by Theorem \ref{chern-weil-degree}, we have \[\int_X\tr\left(\frac{\star \Theta'}{2\pi i}\right)\vol= -\deg \F' \leq -\rk \F' \mu(\F) = -\tr \diag_{\rk \F}(\mu) = -\int_X \tr \diag_{\rk \F'}(\mu) \vol,\] where the last equality follows from the assumption $\int_X \vol = 1$. Hence 
+	 \begin{align*}
+	 	\left|\int_X\tr\left(\frac{\star(\Theta' - \beta \wedge \beta^*)}{2\pi i} + \diag_{\rk \F'}(\mu)\right)\vol\right| &= -\int_X\tr\left(\frac{\star(\Theta' - \beta \wedge \beta^*)}{2\pi i} + \diag_{\rk \F'}(\mu)\right)\vol\\
+	 	&=\rk\F'(\mu(\F')- \mu(\F)) +\frac{1}{2\pi i} \tr \star(\beta \wedge \beta^*)
+	 \end{align*} and note that $\frac{1}{2\pi i} \tr \star(\beta \wedge \beta^*) \geq 0$ by the above discussion. Similarly, note that \[\left|\int_X	\tr\left(\frac{\star(\Theta''- \beta^*\wedge \beta)}{2\pi i} + \diag_{\rk \F''}(\mu)\right)\vol\right| = \rk \F''(\mu(\F) - \mu(\F'')) +\frac{1}{2\pi i} \tr \star(\beta\wedge \beta^*) \]
+
+	And putting it all together we get 
+	\begin{align*}
+		J(\nabla_\F) &\geq \rk\F'(\mu(\F')- \mu(\F))+\rk \F''(\mu(\F) - \mu(\F'')) +\frac{1}{\pi i} \tr \star(\beta \wedge \beta^*) \\&\geq \rk\F'(\mu(\F')- \mu(\F))+\rk \F''(\mu(\F) - \mu(\F'')).
+	\end{align*}
+	as desired. Finally, if equality occurs, that means $\beta = 0$, but $\beta$ defines an element of $\Ext^1(\F'', \F')$ via the Dolbeault cohomology representation of sheaf cohomology (Remark \ref{ext-dolbeault}), and in particular if it is zero then the sequence splits. 
 \end{proof}
+
+And in fact, from this we may already deduce one direction of the Donaldson-Narasimhan-Seshadri theorem:
+\begin{corollary}
+	Suppose $\E$ is indecomposable, and there is a Chern connection $\nabla$ giving rise to $\E$ such that $J(\nabla) = 0$. Then $\E$ is stable.  
+\end{corollary}
+\begin{proof}
+	Suppose for contradiction $\E$ is not stable. Then there is some subbundle $\E'$ such that $\mu(\E') \geq \mu(\E)$, whence $\mu(\E) \geq \mu(\E/\E')$. Then \[0 = J(\nabla) \geq \rk \E'(\mu(\E') - \mu(\E)) + \rk(\E/\E')(\mu(\E) - \mu(\E/\E')) \geq 0,\] which means the sequence \[0 \rightarrow \E' \rightarrow \E \rightarrow \E/\E' \rightarrow 0 \] splits, by the above proposition, contradicting the indecomposability of $\E$.
+\end{proof}
+\begin{remark}
+	In fact, we can deduce that if $\E$ has a Chern connection which is a zero of $J$, then $\E$ must be polystable, since the proposition tells us that $\E$ can be written as a direct sum of two subbundles of equal slope.
+\end{remark}
 
 Our next estimate applies to the top row. However, it is more technical and requires the stronger hypothesis that the Donaldson-Narasimhan-Seshadri theorem has been proven for bundles of smaller rank:
 \begin{proposition}[Second Estimate]
-	Consider the following short exact sequence of vector bundles: \[ 0 \rightarrow \E' \rightarrow \E \rightarrow \E'' \rightarrow 0,\] suppose this exension is proper, that $\E$ is stable and the Donaldson-Narasimhan-Seshadri theorem has been proven for bundles of smaller rank. Then there exists a {\color{red} connection} $\nabla_{\E}$ on $\E$ such that \[J(\nabla_{\E}) < \rk \E'(\mu(\E) - \mu(\E')) + \rk \E''(\mu(\E'') - \mu(\E)). \]
+	Consider the following short exact sequence of vector bundles: \[ 0 \rightarrow \E' \rightarrow \E \rightarrow \E'' \rightarrow 0,\] suppose this exension is proper, that $\E$ is stable and the Donaldson-Narasimhan-Seshadri theorem has been proven for bundles of rank less than $\rk \E$. Then there exists a unitary connection $\nabla_{\E}$ on $E$ giving rise to $\E$ such that \[J(\nabla_{\E}) < \rk \E'(\mu(\E) - \mu(\E')) + \rk \E''(\mu(\E'') - \mu(\E)). \]
 \end{proposition}
-\begin{proof}	
-	We consider the Harder-Narasimhan filtration of $\E$:
+\begin{proof}[Proof Sketch]	
+	The idea here is to use the Harder-Narasimhan and Jordan-H\"older filtrations and the inductive hypothesis to build this $\nabla_{\E}$. So let $(\E_i')$ be the Harder-Narasimhan filtration of $\E'$, and for each $i$ let $(\E_{ij}')$ denote the Jordan-H\"older filtration of $\E_i'/\E_{i-1}'$. Now since $\rk \E_{i,{j}}'/\E_{i,j-1}< \rk \E$, by assumption we know that there is a projectively flat Chern connection $\nabla'_{ij}$ on $\E_{i,{j}}'/\E_{i,j}$. Now given any \[0 \rightarrow \E'_{i,j}\rightarrow \E'_{i,{j+1}}\rightarrow \E'_{i,{j+1}}/\E'_{i,j}\rightarrow 0 \] with second fundamental form $B_{i,j}$, one can inductively (starting with $j = 0$) build a connection on $\E'_{i,{j+1}}$ from one on $\E'_{i,j}$ and the on $\E'_{i,{j+1}}/\E'_{i,j}$ given to us, and now letting the $i$ vary we can build a connection on each $\E'_i$. Now given any short exact sequence of vector bundles \[0 \rightarrow \F' \rightarrow \F \rightarrow \F''\rightarrow 0\] with second fundamental form $B\in \Ext(\F'', \F')$, one can scale $B$ by any nonzero constant $t\in \C\setminus \{0\}$ and the resulting bundle in the middle is isomorphic to $\F$, by the proof of Theorem \ref{if-extension-then-jump}. In particular, given any short exact sequence from any of our filtrations above (which either looks like \[0 \rightarrow \E'_{i,j}\rightarrow \E'_{i,{j+1}}\rightarrow \E'_{i,{j+1}}/\E'_{i,j}\rightarrow 0 \] or \[0 \rightarrow \E'_{i}\rightarrow \E'_{i+1}\rightarrow \E'_{i+1}/\E'_{i}\rightarrow 0), \] the connection built in the middle is of the form  \[\begin{pmatrix*}
+		\nabla_1, B \\
+		-B^*, \nabla_2
+	\end{pmatrix*}\] where $\nabla_1$ and $\nabla_2$ are connections on the left and right respectively and $B$ is the second fundamental form. Now as mentioned, we may scale $B$ by any nonzero constant $t> 0$ and retain the same extension class, so the matrix\[\begin{pmatrix*}
+		\nabla_1, tB \\
+	-tB^*, \nabla_2
+	\end{pmatrix*}\] gives rise another Chern connection on the middle bundle. Doing this (with a fixed $t > 0$) for every step of both filtrations, we have a collection of Chern connections $\{\nabla'_t\}$ on $\E'$, but their limit $\nabla'_0$ is a Chern connection for $\bigoplus_{i,j} \E'_{ij}$, and moreover by construction we have \[\star \Theta'_0 = -2\pi i \diag(\mu (\E_{ij}')), \] where $\Theta'_t$ is the curvature of $\nabla'_t$. Similarly, we can build a collection of Chern connections $\nabla''_t$ on $\E''$ that converge to a connection $\nabla''_0$ on some $\bigoplus_{i',j'} \E''_{i'j'}$ and $\star\Theta''_0 =- 2\pi i \diag(\mu(\E''_{i',j'}))$.
+
+	Let $[\beta]\in \Ext^1(\F'', \F')$ denote the extension class of $\E$. Now for each $\nabla_t', \nabla''_t$, one can build a connection $\nabla^t_{\E'', \E'}$ on $\fancyHom(\E'', \E')$, and for each $\nabla^t_{\E'', \E'}$, standard arguments from Hodge theory tell us that there is a representative of $[\beta]$, call it $\beta_t$, such that $\nabla^t_{\E'', \E'}(\beta_t) = 0$. Now letting $s>0$ be another variable, we have connections depending on $s$ and $t$ \[\nabla_{s,t} =\begin{pmatrix*}
+		\nabla_t' & s\beta_t \\
+		-s\beta_t^*& \nabla_t''
+	\end{pmatrix*} \] with curvature \[\Theta_{s,t} = \begin{pmatrix*}
+	\Theta_t' - s^2\beta_t\wedge \beta^*_t & 0 \\
+	0 & \Theta_{t}'' - s^2\beta_t^*\wedge\beta_t
+\end{pmatrix*} \] that converge to $\nabla_{0,0}$ with curvature $\Theta_{0,0} =\diag(\Theta_0', \Theta_0'')$. Now we observe \[\tr (\frac{\star \Theta_0'}{2\pi i} + \diag_{\rk \E'}(\mu(\E)))= \sum (\mu(\E) - \mu(\E'_{ij})) = \rk \E'(\mu(\E) - \mu(\E')) > 0\] and similarly \[\tr (\frac{\star \Theta_0''}{2\pi i} + \diag_{\rk \E''}(\mu(\E)))  = \rk \E''(\mu(\E) - \mu(\E'')) < 0, \] and put together this tells us \[J(\nabla_{0,0}) = \rk \E'(\mu(\E) - \mu(\E')) + \rk \E''(\mu(\E'') - \mu(\E)). \] Our task now is to show that for sufficiently small $s,t$ we have $J(\nabla_{s,t}) < J(\nabla_{0,0})$. To this end, we first note that since $A' := \diag(\mu - \mu(\E'_{ij}) )$ is a diagonal matrix with positive entries and hence has negative eigenvalues, it follows that $\nu(A') = \tr A'$, and hence the same is true for matrices sufficiently close to $A'$.  Now it can be shown that the $i\tr \star(\beta_t^*\wedge \beta_t)$ {\color{red} are uniformly bounded}, and hence for sufficiently small $s,t$, it follows 
+\begin{align*}
+	\nu(\frac{\star(\Theta_{t}' - s^2 \beta_t\wedge \beta_t^*)}{2\pi i} + \diag_{\rk \E'}(\mu)) &=\tr (\frac{\star\Theta_{t}' - s^2 \beta_t\wedge \beta_t^*}{2\pi i} + \diag_{\rk \E'}(\mu)) \\&= \rk \E'(\mu(\E) - \mu(\E')) - s^2\tr\star(\frac{\beta_t \wedge \beta_t^*}{2\pi i}) + \varepsilon_1(t),
+\end{align*}
+where $\varepsilon_1(t)$ is some error term that vanishes as $t \to 0$, and the uniform bound is used to control the $|\tr\star(\frac{\beta_t \wedge \beta_t^*}{2\pi i})|$, so that the matrix does not deviate from $A'$ too much. Similarly,
+\begin{align*}
+	\nu(\frac{\star(\Theta_{t}' + s^2 \beta_t\wedge \beta_t^*)}{2\pi i} + \diag_{\rk \E'}(\mu)) &=-\tr (\frac{\star\Theta_{t}'' + s^2 \beta_t\wedge \beta_t^*}{2\pi i} + \diag_{\rk \E'}(\mu)) \\&= \rk \E''(\mu(\E'') - \mu(\E)) - s^2\tr\star(\frac{\beta_t \wedge \beta_t^*}{2\pi i}) + \varepsilon_2(t), 
+\end{align*} and hence \[\nu(\frac{\star \Theta_{s,t}}{2\pi i} + \diag_{\rk\E}(\mu)) = J(\nabla_{0,0}) - s^2\tr\star(\frac{\beta_t \wedge \beta_t^*}{\pi i}) + \varepsilon(t).\] Integrating, we find 
+\begin{align*}
+	J(\nabla_{s,t})^2 &= \int_X \nu^2\left(\frac{\star \Theta}{2\pi i} + \diag(\mu)\right)\vol \\&= \int_X \left(J(\nabla_{0,0}) - s^2\tr\star(\frac{\beta_t \wedge \beta_t^*}{\pi i}) + \varepsilon(t)\right)^2 \vol\\
+	&= J(\nabla_{0,0})^2 +  \varepsilon'(s,t) + \int_X  \left(s^4\tr\star(\frac{\beta_t \wedge \beta_t^*}{\pi i})^4 - C_ts^2\tr\star(\frac{\beta_t \wedge \beta_t^*}{\pi i})^2\right) \vol
+\end{align*}
+where $C_t$ is some term depending on $t$ which is positive and bounded for sufficiently small $t$ and $\varepsilon'$ is some error term depending on $s$ and $t$ which goes to zero. In particular, one can choose an $s,t$ so small that the term in the integral is negative (since $s^4$ is much smaller than $s^2$ for sufficiently small $s$) and $\varepsilon'$ is negligible, whence $J(\nabla_{s,t})< J(\nabla_{0,0})$, as desired.
 \end{proof}
 \begin{corollary}
-	Suppose the Donaldson-Narasimhan-Seshadri theorem has been proven for lower-rank bundles. If $\E$ is stable, we have $\E \cong \F$. In particular, $J(\nabla_\infty) = \inf J(O_\nabla)$.
+	Suppose the Donaldson-Narasimhan-Seshadri theorem has been proven for lower-rank bundles. If $\E$ is stable, we have $\E \cong \F$. In particular, $J(\nabla_\infty) = \inf J(O_{\nabla_0})$.
 \end{corollary}
 \begin{proof}
-	content...
+	Recalling Proposition \ref{canonical-extension-proposition}, $\varphi$ factors through
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \arrow[r] & \cal{E'}\arrow[r] & \E \arrow[r] \arrow[d, "\varphi"]& \E'' \arrow[d]\arrow[r]& 0\\
+			0  & \F''\arrow[l]& \F \arrow[l] & \F'\arrow[l] &\arrow[l] 0.
+		\end{tikzcd}
+	\end{equation*}
+	Now applying the first estimate to the bottom row, we find that \[ J(\nabla_\infty) \geq \rk \F'(\mu(\F') - \mu(\F)) + \rk \F''(\mu(\F) - \mu(\F'')),  \] and similarly, by the second estimate there is some Chern connection $\nabla_{\E}$ on $\E$ such that \[J(\nabla_{\E}) < \rk \E'(\mu(\E) - \mu(\E')) + \rk \E''(\mu(\E'') - \mu(\E)). \] But by assumtion, $J(\nabla_{\infty}) = \inf J(O_{\nabla_{0}})\leq J(\nabla_{\E})$, and so \[\rk \F'(\mu(\F') - \mu(\F)) + \rk \F''(\mu(\F) - \mu(\F'')) <  \rk \E'(\mu(\E) - \mu(\E')) + \rk \E''(\mu(\E'') - \mu(\E)). \] But using the additivity of ranks and degrees, the fact that $\deg \E'' \leq \deg \F'$ and the fact that $\E$ and $\F$ have the same signatures, we deduce
 \end{proof}
 
 

@@ -1,4 +1,4 @@
-In this chapter, we will put together everything we have learnt so far to construct the moduli space of vector bundles. Let $X$ be a fixed nonsingular curve of genus $g$ over an algebraically closed field $k$ of characteristic zero (that is, an integral scheme of dimension 1 whose local rings at $k$-points are regular, quasi-projective over $k$). 
+In this chapter, we will put together everything we have learnt so far to construct the moduli space of vector bundles. Let $X$ be a fixed quasiprojective nonsingular curve over an algebraically closed field $k$ of characteristic zero. 
 
 
 \section{Divisors and Line Bundles}
@@ -66,7 +66,7 @@ We now come to the definition of the degree:
 	Let $X$ be the elliptic curve $X=\Proj k[x,y,z]/ \langle y^2z = x^3 - xz^2 \rangle$, and let $\Ox(1)$ be the pullback of $\O_{\P^2}(1)$ induced by the embedding (or equivalently the twisting sheaf of Serre). We will show $\deg \Ox(1) = 3$ and is isomorphic to $\L = \L(3[0:1:0])$. Note that $x\neq 0$ implies $z\neq 0$, hence we can cover $X$ by two open sets $U_z = \{z\neq 0\}$ and $U_y = \{y \neq 0\}$. Thus we have \[\Ox(1)(U_z) = zk[y/x, z/x]/ (y^2z/x^3 = 1 - z^2/x^2) = z\Ox(U_z) \] and \[\Ox(1)(U_y) = yk[x/y, z/y]/ (z/y = (x/y)^3 - xz^2/y^3) = y\Ox(U_y).\] Now observe that \[\L(U_z) = \Ox(U_z)\] but \[\L(U_y) = (y/z)\Ox(U_y) \] since $D = 3[0:1:0]$ is the divisor of $z/y$ on $U_y$. It then follows we have a global isomorphism $\L \rightarrow \Ox(1)$ defined by $f \mapsto zf$.
 \end{example}
 
-We conclude this section with some technical results about vector bundles. This library of results will be used throughout the rest of this chapter.
+We conclude this section with some technical results about vector bundles. This collection of results will be used throughout the rest of this chapter.
 \begin{proposition}\label{subbundle exists}
 	Let $\E$ be a vector bundle. Then $\E$ has a line subbundle (a \textbf{subbundle} is a subsheaf $\F$ of $\E$ such that $\E/\F$ is also locally free; note that this is a property of the inclusion $\F \subseteq \E$, not of $\F$ itself).
 \end{proposition}
@@ -105,11 +105,11 @@ We conclude this section with some technical results about vector bundles. This 
 \begin{proof}
 	Suppose $\L$ is the line bundle associated to a divisor $D$ and suppose $s\in H^0(X, \L)$ is a nonzero global section. Then by Proposition \ref{divisor-of-zeroes-effective}, the divisor of zeroes of $s$, say $D_0$, is effective, and linearly equivalent to $D$. But since $D_0$ is effective, it has nonnegative degree, and thus $\L = \L(D) = \L(D_0)$ has nonnegative degree. Moreover, if the degree of $D_0$ is zero, then it is trivial, and thus so is $\L$.
 \end{proof}
-\begin{lemma}
-	Let $\E$ and $\F$ be vector bundles of rank $n$, and suppose there is a homomorphism $ \E \rightarrow \F$ with nonzero determinant (i.e. the determinant is not identically zero). Then $\deg \E \leq \deg \F$.
+\begin{lemma}\label{nonzero-determinant}
+	Let $\E$ and $\F$ be vector bundles of rank $n$, and suppose there is a homomorphism $ \E \rightarrow \F$ with nonzero determinant (i.e. the determinant is not identically zero). Then $\deg \E \leq \deg \F$. Equality holds if and only if the map is an isomorphism.
 \end{lemma}
 \begin{proof}
-	Taking the determinant, we get a nonzero homomorphism $\det \E \rightarrow \det \F$. Now a nonzero homomorphism $\det \E \rightarrow \det \F$ is nothing more than a global section of $\fancyHom(\det\E, \det\F) = (\det\E) ^\vee \otimes \det\F$, and since $\deg((\det\E) ^\vee \otimes \det \F) = \deg \F - \deg \E$, the result follows from Lemma \ref{negative-degree-no-h0}.
+	Taking the determinant, we get a nonzero homomorphism $\det \E \rightarrow \det \F$. Now a nonzero homomorphism $\det \E \rightarrow \det \F$ is nothing more than a global section of $\fancyHom(\det\E, \det\F) = (\det\E) ^\vee \otimes \det\F$, and since $\deg((\det\E) ^\vee \otimes \det \F) = \deg \F - \deg \E$, the result follows from Lemma \ref{negative-degree-no-h0}. Moreover, if equality holds, then $\det \E \cong \det \F$, and moreover the determinant never vanishes (being a global section of $\Ox$), and hence is invertible on every stalk, which means the map is an isomorphism.
 \end{proof}
 \begin{proposition}\label{canonical-extension-proposition}
 	Let $\E \rightarrow \F$ be a nonzero homomorphism of vector bundles. Then there is a factorisation:
@@ -122,43 +122,68 @@ We conclude this section with some technical results about vector bundles. This 
 	where each sheaf above is locally free, the rows are exact, and $\E' \cong \ker \varphi$, $\E''\cong \im \varphi$ and $\rk \E'' = \rk \F'$, $\deg \E'' \leq \deg \F'$.
 \end{proposition}
 \begin{proof}
-	Define $\E'$ and $\E''$ as in the theorem statement, so that the top row is exact. Since $\F$ is locally free and since $X$ is covered by the spectra of Dedekind domains (which are hereditary), it follows that $\E'' = \im \varphi\subseteq \F$ is locally free. Now the sheaf $\coker \varphi$ is coherent, and hence if $U = \Spec A$ is an affine open subset of $X$, where $A$ is a Dedekind domain, then $\coker \varphi$ is isomorphic to $\widetilde{M}$ for some finitely-generated $A$-module $M$. Let $M'$ be the torsion submodule of $M$ and we define $\F''$ to locally be the sheaf $(M/M')^\sim$. It is not hard to see that this is well-defined. Observe that since $A$ is a Dedekind domain and $M/M'$ is a torsion-free module, it is also a projective module, and hence $\F''$ is locally free, by the Serre-Swan Theorem. We then define $\F'$ to be the kernel of $\F \rightarrow \F''$. Now since the map $\E'' \rightarrow \F''$ defined by composing the obvious maps is zero, by the universal property of kernels there is unique homomorphism $\E'' \rightarrow \F'$ making everything commute. This unique homomorphism has nonzero determinant, because $\varphi$ is nonzero, and $\E'' \rightarrow \F$ is the inclusion of the image. Finally, in light of the above lemma, it suffices to show that $\rk \E'' = \rk \F'$. But this follows directly from the observation that the local ring at any $k$-point is a DVR, and thus a PID, and so any finitely generated module splits into its torsion and free parts.
-\end{proof}
-\begin{proposition}
-	Let $\Ox^n\rightarrow \E$ be a surjective homomorphism of vector bundles, let $\F$ be a subbundle pf $\E$ and
-\end{proposition}
-\begin{proof}
-	The existence and uniqueness of the homomorphism follows from the universal property of kernels. To prove the homomorphism is surjective, it suffices to check this on the level of stalks. So let $p\in X$ be a point. Since $\E$ is a subbundle, there exists a basis $\{v_1,..,v_n\}$ of the stalk $\G_p\cong \O_{X,p}^n$, where $n = \rk \G$, such that $\{v_1,...,v_m\}$ is a generating set for $\E_p$, and $\{v_{m+1},...,v_{n}\}$ is a generating set for $(\G/\E)_p$. 
+	Define $\E'$ and $\E''$ as in the theorem statement, so that the top row is exact. Since $\F$ is locally free and since $X$ is covered by the spectra of Dedekind domains (which are hereditary), it follows that $\E'' = \im \varphi\subseteq \F$ is locally free. Now the sheaf $\coker \varphi$ is coherent, and hence if $U = \Spec A$ is an affine open subset of $X$, where $A$ is a Dedekind domain, then $\coker \varphi$ is isomorphic to $\widetilde{M}$ for some finitely-generated $A$-module $M$. Let $M'$ be the torsion submodule of $M$ (these $M'$ glue to form the \textit{torsion subsheaf} of $\coker \varphi$) and we define $\F''$ to locally be the sheaf $(M/M')^\sim$. It is not hard to see that this is well-defined. Observe that since $A$ is a Dedekind domain and $M/M'$ is a torsion-free module, it is also a projective module, and hence $\F''$ is locally free, by the Serre-Swan Theorem. We then define $\F'$ to be the kernel of $\F \rightarrow \F''$. Now since the map $\E'' \rightarrow \F''$ defined by composing the obvious maps is zero, by the universal property of kernels there is unique homomorphism $\E'' \rightarrow \F'$ making everything commute. This unique homomorphism has nonzero determinant, because $\varphi$ is nonzero, and $\E'' \rightarrow \F$ is the inclusion of the image. Finally, in light of the above lemma, it suffices to show that $\rk \E'' = \rk \F'$. But this follows directly from the observation that the local ring at any $k$-point is a DVR, and thus a PID, and so any finitely generated module splits into its torsion and free parts.
 \end{proof}
 
+
 \section{Stable and Semistable Bundles}
-To motivate the definitions that follow, we begin by stating our moduli problem. We now make the assumption that $X$ is complete, and we fix a very ample line bundle $\Ox(1)$ on $X$.
+To motivate the definitions that follow, we begin by stating our moduli problem. We now make the assumption that $X$ is complete of genus $g$, and we fix a very ample line bundle $\Ox(1)$ on $X$.
 \begin{definition}
-	The \textit{moduli problem of vector bundles of signature $(n,d)$ on $X$} is the functor $\mathcal{V}_{n,d}: \Sch/k \rightarrow \Sets$ defined as follows: for any scheme $S/k$, we define a family of vector bundles over $S$ to be a coherent sheaf $\E$ on $X\times S$, flat over $S$ such that for any $s\in S(k)$, the fibre $\E_s $ defined to be the pullback of $\E$ along the map $s\times \id: \Spec k \times X \rightarrow S \times X$ is a locally free sheaf of signature $(n,d)$ on $X$. Two families $\E, \F$ are \textit{equivalent}, written $\E \sim \F$, if there is a line bundle $\L$ on $S$ such that \[\E \cong \F \otimes \pi_S^*\L. \] Note that dualising commutes with pullbacks, so this is an equivalence relation. We may also pull back families in the obvious way, and clearly equivalent families are pulled back to equivalent families. We then define $\mathcal{V}_{n,d}$ to be \[\mathcal{V}_{n,d}(S):= \{\text{families over }S\}/ \sim. \]
+	The \textit{moduli problem of vector bundles of signature $(n,d)$ on $X$} is the functor $\mathcal{V}_{n,d}: \mathsf{Var}/k \rightarrow \Sets$ defined as follows: for any variety $S/k$, we define a family of vector bundles over $S$ to be a coherent sheaf $\E$ on $X\times S$, flat over $S$ such that for any $s\in S(k)$, the fibre $\E_s $ defined to be the pullback of $\E$ along the map $s\times \id: \Spec k \times X \rightarrow S \times X$ is a locally free sheaf of signature $(n,d)$ on $X$. Two families $\E, \F$ are \textit{equivalent} if and only if there exists some line bundle $\L$ on $S$ such that \[\E \cong \F \otimes \pi^*_S\L. \] We may also pull back families in the obvious way, and clearly equivalent families are pulled back to equivalent families. We then define $\mathcal{V}_{n,d}$ to be \[\mathcal{V}_{n,d}(S):= \{\text{families over }S\}/ \sim. \]
 \end{definition}
-However, even in the simple case of signature (2,0)-bundles over $\P^1 = \Proj k[x,y]$, there is a jump phenomenon:
+Of course, there are some interesting choices we have made, which we will briefly justify now, but will become clearer as more details are presented. Firstly, the reason we work with varieties is that Grauert's theorem (\autocite[III Corollary 12.9]{Hart}) is needed in the argument, and Grauert's theorem requires an integrality condition. Of course, we could just work with noetherian integral schemes, or integral schemes of finite type over $k$, but working with varieties seems more natural. Also, the equivalence relation may seem unusual; the reason for this is that we will have a $\GL_N$ (where $N$ is some constant which will be defined later) action on some base space, and this extra condition allows us to work with $\SL_N$ instead, so we have an extra hypothesis to use.
+\\\\
+\par{}However, even in the simple case of signature (2,0)-bundles over $\P^1 = \Proj k[x,y]$, there is a jump phenomenon:
 \begin{example}
-	We consider the following family $\E_t$ over the affine line $\A^1 = \Spec k[t]$: let $U_0$ (resp. $U_1$) be the open subset where $x$ (resp. $y$) does not vanish. Then we glue $\O_{U_0\times \A^1}^2$ and $\O_{U_1\times \A^1}^2$ on the overlap via the transition function \[g_{0,1}:= \begin{pmatrix*}
+	We consider the following family $\E$ over the affine line $\A^1 = \Spec k[t]$: let $U_0$ (resp. $U_1$) be the open subset where $x$ (resp. $y$) does not vanish. Then we glue $\O_{U_0\times \A^1}^2$ and $\O_{U_1\times \A^1}^2$ on the overlap via the transition function \[g_{0,1}:= \begin{pmatrix*}
 		\frac{x}{y} & t \\
 		0 & \frac{y}{x}
-	\end{pmatrix*} \in \GL_2(k[t, \frac{y}{x}, \frac{x}{y}])= \GL_2(\Gamma(U_0 \cap U_1, \O_{\A^1\times \P^1})). \] More precisely, on $U_0$ we have the standard basis $r_1, r_2\in \Gamma(U_0, \O_{U_0\times \A^1}^2)$, and on $U_1$ the standard basis $s_1, s_2\in \Gamma(U_0, \O_{U_1\times \A^1}^2)$. We then define an isomorphism sending $s_1 \mapsto ( x/y)r_1$ and $s_2 \mapsto rs_1 + (y/x) s_2$, and define $\E_t$ to be the gluing of the two sheaves on the overlap via this isomorphism. Since $\E_t$ is locally free, it is flat over $\A^1 \times \P^1$ and by the transitivity of flatness is also flat over $\A^1$. 
+	\end{pmatrix*} \in \GL_2(k[t, \frac{y}{x}, \frac{x}{y}])= \GL_2(\Gamma(U_0 \cap U_1, \O_{\A^1\times \P^1})). \] More precisely, on $U_0$ we have the standard basis $r_1, r_2\in \Gamma(U_0, \O_{U_0\times \A^1}^2)$, and on $U_1$ the standard basis $s_1, s_2\in \Gamma(U_0, \O_{U_1\times \A^1}^2)$. We then define an isomorphism sending $s_1 \mapsto ( x/y)r_1$ and $s_2 \mapsto tr_1 + (y/x) r_2$, and define $\E$ to be the gluing of the two sheaves on the overlap via this isomorphism. Since $\E$ is locally free, it is flat over $\A^1 \times \P^1$ and by the transitivity of flatness is also flat over $\A^1$. 
 	
 	Now we claim that the fibre $\E_0$ is isomorphic to $\O_{\P^1}(-1) \oplus \O_{\P^1}(1)$, but every other fibre is isomorphic to $\O_{\P^1} \oplus \O_{\P^1}$ (and of course, these are not isomorphic, the latter has a nowhere-vanishing global section, but the former does not). To see this, first observe that clearly when $t = 0$, the transition map is just $\diag(y/x, x/y)$, which is the transition map of $\O_{\P^1}(-1) \oplus \O_{\P^1}(1)$. However, for a nonzero $\lambda$, we will define an isomorphism $\varphi: \E_\lambda \rightarrow \O_{\P^1} \oplus \O_{\P^1}$ as follows: let $e_1, e_2$ be the standard basis of $\O_{\P^1}\oplus \O_{\P^1}$. We define $\varphi$ to be the map 
 	
 	\begin{align*}
-		r_1 \mapsto \frac{y}{x}e_1 - e_2,\; r_2 \mapsto \lambda e_1
+		r_1 \mapsto \frac{y}{x}e_1 - e_2,\; r_2 \mapsto -\lambda e_1
 	\end{align*} 
 	on $U_0$ and
 	\begin{align*}
-		s_1 \mapsto e_1 - \frac{x}{y}e_2,\;   s_2 \mapsto \lambda e_2
+		s_1 \mapsto e_1 - \frac{x}{y}e_2,\;   s_2 \mapsto - \lambda e_2
 	\end{align*}
-	on $U_1$. To see that these glue, observe that $r_1 = (y/x)s_1$ and $r_2 = \lambda s_1 + (x/y)s_2$, and so on the overlap we have \[\varphi(\frac{y}{x}s_1) = \frac{y}{x}(e_1- \frac{x}{y}e_2) =\frac{y}{x}e_1 - e_2  \] \[\varphi(\lambda s_1 + \frac{x}{y} s_2) = \lambda e_1 - \frac{\lambda x}{y} e_2 + \frac{x}{y} \lambda e_2 = \lambda e_1 \] as desired. Finally, observe that $\varphi$ maps local free generators to local free generators, and thus this is an isomorphism.
+	on $U_1$. To see that these glue, observe that $s_1 = (x/y)r_1$ and $s_2 = \lambda r_1 + (y/x)r_2$ on the overlap, and so \[\varphi(s_1) = \varphi(\frac{x}{y}r_1) = e_1-\frac{x}{y}e_2,\;\varphi(s_2) = \varphi(\lambda r_1+\frac{y}{x} r_2) = \lambda(\frac{y}{x}e_1 - e_2) -\lambda\frac{y}{x} e_1 = -\lambda e_2, \] as expected. Finally, observe that $\varphi$ maps local free generators to local free generators, and so is an isomorphism.
+	
+	%observe that $r_1 = (y/x)s_1$ and $r_2 = \lambda s_1 + (x/y)s_2$, and so on the overlap we have \[\varphi(\frac{y}{x}s_1) = \frac{y}{x}(e_1- \frac{x}{y}e_2) =\frac{y}{x}e_1 - e_2  \] \[\varphi(\lambda s_1 + \frac{x}{y} s_2) = \lambda e_1 - \frac{\lambda x}{y} e_2 + \frac{x}{y} \lambda e_2 = \lambda e_1 \] as desired. Finally, observe that $\varphi$ maps local free generators to local free generators, and thus this is an isomorphism.
 \end{example}
-\begin{remark}
-	Of course, the fibres of the family $\E_t$ given above are canonically identified with the elements of the group \[\Ext^1(\O_{\P^1}(1), \O_{\P^1}(-1)) \cong \Ext^1(\O_{\P^1},\O_{\P^1}(-2) ) \cong H^1(\P^1, \O_{\P^1}(-2)) \cong k.\] {\color{red} We may generalise this idea as follows}: let $\E, \F$ be two vector bundles over $X$, so that $\Ext^1(\F, \E) \cong H^1(X, \fancyHom(\F, \E))$. Let $\{U_\alpha\}$ be a sufficiently fine open cover of $X$, let $e_{\alpha\beta}$ (resp. $f_{\alpha\beta}$) be a set of transition functions representing $\E$ (resp. $\F$), and let $\{g_{\alpha\beta}\}$ be a \v{C}ech 1-cocycle representing some element of $H^1(X, \fancyHom(\G, \F))$. 
+
+
+In fact, we can generalise this example: observe that for any $\lambda\in k$ above there is a short exact sequence \[ 0 \rightarrow \O_{\P^1}(-1)\rightarrow \E_\lambda \rightarrow \O_{\P^1}(1) \rightarrow 0, \] with the only split fibre being at $\lambda = 0$. In particular, the $\E_\lambda$ are canonically identified with elements of the group $\Ext^1(\O_{\P^1}(1), \O_{\P^1}(-1))$, and this idea is what we use to generalise the example. Firstly, let us look explicitly at how the $\Ext^1$ group parameterises extensions, using \v{C}ech cohomology. Suppose we have a short exact sequence of vector bundles 
+\begin{equation}\label{ses-vector-bundle-extensions}
+	0 \rightarrow \E \rightarrow \F \rightarrow \G \rightarrow 0.
+\end{equation} 
+Since these sheaves are locally free, there is an open affine cover $\{U_\alpha\}$ on which the restricted sequence does split, so let us choose a collection of splittings $\{f_\alpha: \G|_{U_\alpha} \rightarrow \F|_{U_\alpha} \}$. On overlaps, we have two splittings and we see that their differences $f_{\alpha\beta}:= f_\alpha - f_\beta$ have image in $\E|_{U_{\alpha}\cap U_\beta}$, and satisfy a cocycle condition, and in particular the $\{f_{\alpha\beta}\}$ form a \v{C}ech 1-cocycle for the sheaf $\fancyHom(\G, \E)$ with respect to the cover $\{U_\alpha\}$, which has no cohomology, and hence define an element of $ H^1(X, \fancyHom(\G, \E))\cong \Ext^1(\G, \E)$. Moreover, it is not hard to check that a different choice of splittings gives a cohomologous cocycle, and thus the class $\delta_\F:=[\{f_{\alpha\beta}\}]\in H^1(X, \fancyHom(\G, \E))$ depends only on $\F$. Moreover, if (\ref{ses-vector-bundle-extensions}) does split then $\delta_\F = 0$ as can easily be seen. 
+
+Even more explicitly, let us compute some transition functions of $\F$. Let $\{e_1^\alpha,...,e_{\rk \E}^\alpha\}$ denote a frame for $\E$ on $U_\alpha$ (or equivalently the image of the standard basis of $\Gamma(U_\alpha,\Ox))^{\rk \E}$ in $\Gamma(U_\alpha,\E))$ via a choice of local trivialisation), let $\{e_{\alpha\beta}\in \GL_{\rk \E}(U_\alpha\cap U_\beta,\Ox)\}$ denote the transition functions satisfying \[e^\beta_j = \sum (e_{\alpha\beta})_{ij}e^\alpha_i \] on overlaps, and we similarly define $\{g_1^\alpha,...,g_{\rk \G}^\alpha\}$, and $\{g_{\alpha\beta}\}$. Now letting $\{f_\alpha :\G|_{U_\alpha} \rightarrow \F|_{U_\alpha} \}$ denote a choice of local splittings as before, the set \[\{e_1^\alpha,...,e_{\rk \E}^\alpha, f_\alpha(g_1^\alpha),...,f_\alpha(g_{\rk \G}^\alpha)\}\] forms a frame for $\F$ on $U_{\alpha}$. The $e_i$ are related as before, but observe that on $U_{\alpha\beta}$ we have \[f_\beta(g_j^\beta) = f_\alpha(g_j^\beta) - f_{\alpha\beta}(g_j^\beta) = (\sum_i (g_{\alpha\beta})_{ij}(f_\alpha(g_i^\alpha))) -  f_{\alpha\beta}(g_j^\beta),\] and so the transition matrix is of the form \[\begin{pmatrix*}
+	e_{\alpha\beta} & -[f_{\alpha\beta}]_{\beta} \\
+	0 & g_{\alpha\beta},
+\end{pmatrix*} \] where $[f_{\alpha\beta}]_{\alpha\beta} $ is the matrix of $f_{\alpha\beta}\in \Hom(\G|_{U_{\alpha\beta}}, \E|_{U_{\alpha\beta}})$ with respect to the bases $\{e_{i}^\beta\}, \{f_\beta(g_i)^\beta\}$. With this in mind, we have the following result:
+\begin{theorem}\label{if-extension-then-jump}
+	Suppose there is a vector bundle $\F$ of signature $(n,d)$ which fits in a short exact sequence  \[0 \rightarrow \E \rightarrow \F \rightarrow \G \rightarrow 0 \] that does not split. Then $\mathcal{V}_{n,d}$ does not have a coarse moduli space.
+\end{theorem}
+\begin{proof}
+	Fix a sufficiently fine open cover $\{U_\alpha\}$ and frames and transition maps retaining the notations as above. We now build a family $\{\F_t\}$ parameterised by $\A^1 = \Spec k[t]$ by gluing the frames via the transition function \[\begin{pmatrix*}
+		e_{\alpha\beta} & -t[f_{\alpha\beta}]_{\alpha\beta} \\
+		0 & g_{\alpha\beta}
+	\end{pmatrix*}. \] Observe that the fibre $\F_0$ splits, since the obstruction is zero, but we claim that all the other fibres are isomorphic to $\F = \F_1$. Indeed, fixing $\lambda \in k^*$, we define a map $\varphi:\F \mapsto \F_\lambda$ sending $f_\alpha(g_i^\alpha)$ to itself, but $e_i^\alpha$ to $\lambda e_i^\alpha$. To see that these glue, note that the $e_i^\alpha$ will clearly not cause problems, and observe 
+	\begin{align*}
+		\varphi(f_\beta(g_j^\beta)) &= \varphi((\sum_i (g_{\alpha\beta})_{ij}(f_\alpha(g_i^\alpha))) -  f_{\alpha\beta}(g_j^\beta)) = (\sum_i (g_{\alpha\beta})_{ij}(f_\alpha(g_i^\alpha))) -  \lambda f_{\alpha\beta}(g_j^\beta) = f_\beta(g_j^\beta).
+	\end{align*} 
+	It is clear this is an isomorphism, and that both bundles do not split, and hence there is a jump phenomenon, and so $\mathcal{V}_{n,d}$ has no coarse moduli space.
+\end{proof}
+\begin{remark}\label{ext-dolbeault}
+	To tease our eventual defection into the analytic theory, we will give an alternative description of the $\Ext^1$ group in the special case $k = \C$ using Dolbeault cohomology. In this case, $X(\C)$ is just a compact Riemann surface, and there is a natural equivalence of categories between holomorphic vector bundles on $X(\C)$ and algebraic vector bundles on $X$ (in fact, this equivalence extends to coherent sheaves), so we identify them. Now a holomorphic vector bundle may be thought of as a smooth vector bundle $E$ equipped with a Dolbeault operator $\delbar_{\E}: \Omega^0(E)\rightarrow \Omega^{0,1}(E)$ (this will be elaborated upon in the next chapter), and using $\delbar_{\E}$ we may build a complex $\Omega^{0,q}(E)\rightarrow \Omega^{0, q+1}(E)$ which is an acyclic resolution of $\E$, so in particular its cohomology, denote it $H^{0,q}_{\delbar_{\E}}(E)$ is canonically isomorphic to the sheaf cohomology $H^q(X, {\E})$ (see \autocite[Corollary 2.6.25]{CmplxGmtry} for details). In particular, in the above situation, there is an isomorphism $\Ext^1(\G, \E) \cong H^1(X, \fancyHom(\G, \E)) \cong H^{0,1}_{\delbar_{\fancyHom(\G, \E)}}(\fancyHom(G, E))$, where $E,G$ are the underlying smooth bundles of $\E, \G$ and $\fancyHom(G, E)$ is the bundle of smooth homomorphisms from $G$ to $E$. To give an explicit isomorphism, firstly observe that the sequence \[0 \rightarrow E \rightarrow F \rightarrow G \rightarrow 0 \] splits smoothly, so we have a splitting map $f: G \rightarrow F$. Composing with $\delbar_{\F}$ and projecting onto $E$, we have a map from $G$ to $\Omega^{0,1}(E)$; i.e. an element $\beta$ of $H^{0,1}_{\delbar_{\fancyHom(\G, \E)}}(\fancyHom(G, E))$, and one can check this process defines the isomorphism. $\beta$ is called the \textit{second fundamental form} of the extension, and will be important in the next chapter.
 \end{remark}
+And this unfortunately kills any hope of finding a moduli space. However, as with the conics revisited example in the previous chapter, one could hope that a stability condition, similar to nondegeneracy of conics in that example, will fix this problem; and indeed, we will dedicate the rest of this chapter to showing that this is indeed the case. To define this stability condition, which we will just call stability, we first make the following definition
 \begin{definition}\index{vector bundle ! slope}
-	Let $\E$ be a vector bundle. The \textit{slope} of $\E$, denoted $\mu(\E)$, is defined to be \[\mu(\E):= \frac{\deg \E}{\rk \E} \]
+	Let $\E$ be a vector bundle. The \textit{slope} of $\E$, denoted $\mu(\E)$, is defined to be \[\mu(\E):= \frac{\deg \E}{\rk \E}  \]
 \end{definition}
 \begin{lemma}\label{subbundle-quotient-slope}
 	Let \[0 \rightarrow \E \rightarrow \F \rightarrow \G \rightarrow 0 \] be a short exact sequence of vector bundles. Then $\mu(\E) \leq \mu(\F)$ if and only if $\mu(\G) \geq \mu(\F)$, with equality holding in one if and only if in the other.
@@ -174,21 +199,23 @@ And finally, the definition:
 		&(\leq)
 	\end{align*}
 	$\E$ is \textit{polystable} if it is a direct sum of stable bundles of the same slope.
+	
+	A \textit{family} of (semi)-stable vector bundles over a variety $S$ over $k$ is a family of vector bundles whose fibres are all (semi)-stable. The \textit{moduli problem of stable vector bundles} is the functor $\mathcal{V}^{s}$ taking a variety $S$ to the set of stable vector bundles over $S$. Note that we do not define the moduli problem of semistable vector bundles.
 \end{definition}
-Observe that we can alternatively define stability in terms of quotient bundles: by Lemma \ref{subbundle-quotient-slope}, $\E$ is (semi) stable if and only if for every quotient bundle $\G$ we have:
+Observe that we can alternatively define stability in terms of quotient bundles: by Lemma \ref{subbundle-quotient-slope}, $\E$ is (semi)-stable if and only if for every quotient bundle $\G$ we have:
 \begin{align*}
 	\mu(\E) &\,< \mu(\G)\\
 	&(\leq)
 \end{align*}
 
-\par Let us mention some more basic properties of stability:
+\par Let us mention some basic properties of stability:
 \begin{lemma}\label{stability-properties}
 	Let $\E$ be a vector bundle. 
 	\begin{enumerate}
 		\item $\E$ is (semi)-stable if and only if $\E \otimes \L$ is (semi)-stable for every line bundle $\L$.
 		\item If $\rk \E = 1$ (i.e. $\E$ is a line bundle) then $\E$ is always stable.
 		\item If $\E'$ is another vector bundle then $\E \oplus \E'$ is not stable. It is semistable only if $\mu(\E) = \mu(\E')$ and both are semistable. 
-		\item If $\varphi: \E\rightarrow \F$ is a nonzero morphism of vector bundles, and both bundles are semistable, then $\mu(\E)\leq \mu(\F)$.
+		\item If $\varphi: \E\rightarrow \F$ is a nonzero morphism of vector bundles, and both bundles are semistable, then $\mu(\E)\leq \mu(\F)$. If both are stable, then equality occurs if and only if $\varphi$ is an isomorphism. 
 		\item If $\E$ is stable, then it is simple (that is, $\End(\E) = k$).
 		\item $\E$ is semistable if and only if for any \textbf{subsheaf} $\F$ we have $\mu(\F) \leq \mu(\E)$. Stability holds if and only if strict inequality holds. 
 	\end{enumerate}
@@ -203,16 +230,24 @@ Observe that we can alternatively define stability in terms of quotient bundles:
 			0  & \F''\arrow[l]& \F \arrow[l] & \F'\arrow[l] &\arrow[l] 0
 		\end{tikzcd}
 	\end{equation}
-	where $\E' \cong \ker \varphi$, $\E''\cong \im \varphi$ and $\rk \E'' = \rk \F'$, $\deg \E'' \leq \deg \F'$. Since $\E$ and $\F$ are both stable, it follows 
+	where $\E' \cong \ker \varphi$, $\E''\cong \im \varphi$ and $\rk \E'' = \rk \F'$, $\deg \E'' \leq \deg \F'$. Since $\E$ and $\F$ are both semistable, it follows 
 	\begin{equation}\label{chain-of-slop-inequalities-equation}
-		\mu(\E) \leq \mu(\E'') \leq \mu(\F') \leq \mu(\F)
+		\mu(\E) \leq \mu(\E'') \leq \mu(\F') \leq \mu(\F).
 	\end{equation}
-	as desired. 
+	Moreover, if are both are stable $\varphi$ is not an isomorphism, then either the inclusion $\F'\subseteq \F$ is proper, whence $\mu(\F') < \mu(\F)$, or the inclusion $\E' \subseteq \E$ is proper, whence $\mu(\E) < \mu(\E'')$.
 	
 	To prove (v), suppose $\varphi: \E \rightarrow \E$ is an endomorphism. If $\varphi$ is zero, we are done. If not, we must have equality in (\ref{chain-of-slop-inequalities-equation}), and by the stability of $\E$ we have $\E = \E'' = \im \varphi$, so in particular $\varphi$ is an isomorphism. We have proven that any nonzero endomorphism of $\E$ is an isomorphism. Now fix some $p\in X(k)$; we have an induced map of fibres $\E_p/\mf{m}_p\E_p\rightarrow \E_p/\mf{m}_p\E_p$, and since $k$ is algebraically closed, this map has an eigenvalue, say $\lambda$. But $\varphi - \lambda: \E \rightarrow \E$ is no longer an isomorphism, hence must be zero, and thus $\varphi = \lambda$ as desired. 
 	
 	Finally, to prove (vi), suppose $\E$ is semistable and let $\F$ be a subsheaf of $\E$. Then applying Proposition \ref{canonical-extension-proposition} to the inclusion $\F \subseteq \E$, we deduce there is a subbundle $\F'$ of $\E$ with $\deg (\F') \geq \deg(\F)$ and $\rk(\F') = \rk(\F)$, and hence $\mu(\F)\leq \mu(\F') \leq \mu(\E)$. If $\E$ is stable, then the inequality is strict. The converse is trivial.
 \end{proof}
+And as a first application, we will show that the jump phenomenon cannot happen when we restrict to stable bundles:
+\begin{proposition}
+	Let $S$ be a variety over $k$, let $p\in S(k)$ be a $k$-valued point, and let $\E, \F$ be two families of vector bundles of signature $(n,d)$ parameterised by $S$. Suppose $\E_s\cong \F_s$ for all points $p\neq s\in S$ and suppose further both $\E_p$ and $\F_p$ are stable. Then $\E_p \cong \F_p$.
+\end{proposition}
+\begin{proof}
+	Following \autocite[p. 193]{Deform}, recall that the function \[s\mapsto \dim_{k(s)} H^0(\fancyHom(\E_s, \F_s)),\] where $k(s)$ is the residue field of $s\in S$, is upper semicontinuous, by the semicontinuity theorem (\autocite[III Theorem 12.8]{Hart}). Since $\E_s\cong \F_s$, it follows that $\dim_{k(s)} H^0(\fancyHom(\E_s, \F_s)) > 0$ for all $s\neq p$, and hence $\dim_k H^0(\fancyHom(\E_p, \F_p)) \neq 0$, so in particular there is a nonzero homomorphism $\E_p \rightarrow \F_p$. Since both are stable of the same signature, this homomorphism must be an isomorphism, by (iv) of Lemma \ref{stability-properties}.
+\end{proof}
+We now give an explicit description of stability for vector bundles on $\P^1$.
 \begin{example}
 	It is well-known that every vector bundle on $\P^1$ is a direct sum of line bundles, and moreover every line bundle is of the form $\O_{\P^1}(n)$. Thus we may write any vector bundle $\E$ on $\P^1$ as \[\E = \bigoplus_{n\in \Z} \O_{\P^1}(n)^{r_n}, \] where $\O_{\P^1}(n)^{r_n}$ means $r_n$ direct copies of $\O_{\P^1}(n)$, and all but finitely many of the $r_n$ are zero. In this situation, stability has a very easy description: the only stable bundles are line bundles by (ii) in the above lemma, semistable and polystable bundles coincide and they all look like $\O_{\P^1}(n)^r$, and as soon as two distinct summands $\O_{\P^1}(n)$ and $\O_{\P^1}(m)$ turn up the bundle is unstable. 
 \end{example}
@@ -232,8 +267,24 @@ Before we prove this, we extract the following lemma:
 	 To prove uniqueness, suppose $(\E_i)_{i = 1}^n$ and $(\E_i')_{i = 1}^m$ are two filtrations satisfying the property. Let $\mu = \mu(\E_1)$ and let $\mu' = \mu(\E_1')$. Supposing without loss of generality $\mu \geq  \mu'$, we consider the map $\E_1 \rightarrow \E \rightarrow \E/\E_{m-1}'$. By assumption, $\mu \geq \mu' > \mu(\E/\E_{m-1}')$ and since both bundles are semistable, by (iv) of Lemma \ref{stability-properties} it follows the map is zero; in particular, $\E_1$ is contained in $\E_{m-1}'$. But applying the same argument inductively with $\E_{m-i}'$ in place of $\E$ and $\E_{m-i-1}'$ in place of $\E_{m-1}'$, we deduce $\E_1$ is contained in $\E_1'$. Now if $\mu > \mu'$, then by the same argument $\E_1 = 0$ which obviously cannot happen, and thus $\mu = \mu'$ and $\E_1$ is contained in $\E_1'$. But reversing the roles of $\E_1$ and $\E_1'$ we deduce $\E_1'$ is contained in $\E_1$ and thus they are equal. The result then follows by inductively applying the argument to $(\E_i/\E_1)$ and $(\E_i'/\E_1')$.  
 \end{proof}
 \begin{definition}
-	The filtration above is known as the \textit{Harder-Narasimhan filtration} of $\E$. 
+	The filtration defined above is known as the \textit{Harder-Narasimhan filtration} of $\E$. 
 \end{definition}
+We conclude this section by zooming in on a particular $\mu\in \Q$, and studying the category $\sf{V}^{ss}(\mu)$ of semistable vector bundles of slope $\mu$. In particular, we have the following result:
+\begin{theorem}[Seshadri]
+	The category $\sf{V}^{ss}(\mu)$ is abelian.
+\end{theorem}
+\begin{proof}
+	Being a subcategory of the abelian category of coherent sheaves on $X$, the Hom-sets naturally inherit an abelian group structure and the composition law clearly distributes over addition; moreover it is clear finite direct sums exist. Now observe that if $\varphi: \E \rightarrow \F$ is a morphism in $\sf{V}^{ss}(\mu)$, then Proposition \ref{canonical-extension-proposition} combined with Lemma \ref{nonzero-determinant} tell us that $\im \varphi$ is a subbundle and has slope $\mu$ as well, whence $\ker \varphi$ has slope $\mu$. Clearly both are semistable, and hence $\sf{V}^{ss}(\mu)$ has kernels and cokernels. That every monomorphism is the kernel of its cokernel and that every epimorphism is the cokernel of its kernel are immediate, and that every morphism can be factored into an epimorphism followed by a monomorphism is just the Proposition \ref{canonical-extension-proposition}-Lemma \ref{nonzero-determinant} combo again.
+\end{proof}
+
+And finally, we observe that for any object $\E$ in $\sf{V}^{ss}(\mu)$, every increasing and decreasing filtration terminates (we say $\sf{V}^{ss}(\mu)$ is \textit{noetherian} and \textit{artinian}), and in particular one can show that a Jordan-H\"older filtration (that is, a filtration $0 = \E_0 \subseteq \E_1\subseteq...\subseteq \E_r = \E$ such that every $\E_i/\E_{i-1}$ is simple) exists, and the Jordan-H\"older theorem, which states that the quotients are unique up to permutation and isomorphisms (\autocite[Theorem 2.1]{Seshadri}). 
+\begin{example}
+	Of course, on $\P^1$ the only semistable bundles are of the form $\Ox(d)^n$, and so its Jordan-H\"older filtration is of the form \[0 \subseteq \Ox(d) \subseteq \Ox(d)^2\subseteq...\subseteq \Ox(d)^n. \]
+\end{example}
+\begin{example}
+	In fact, one can define an equivalence relation on semistable bundles by asserting $\E \sim \F$ if and only if they have equivalent Jordan-H\"older filtrations (that is, the quotients are isomorphic up to permutation). Of course, within each class one finds a unique representative, which is the polystable bundle built by taking the direct sum of each stable quotient. Note the similarity between this and the equivalence of semistable orbits in the context of the previous chapter.
+\end{example}
+
 %We next study the interplay between bundles of various stability. To begin, we have the following result:
 %\begin{proposition}
 %	Semistability and stability are open conditions. 
@@ -244,11 +295,11 @@ Before we prove this, we extract the following lemma:
 
 \section{Constructing the Moduli Space}
 
-{\color{red} We will now construct the moduli space of stable bundles of signature $(n,d)$. Firstly, line bundles are always stable, and in fact we have a natural isomorphism of functors $\mathcal{V}_{1,d}\cong \mathcal{V}_{1,0}$ by tensoring with a degree 1 line bundle.} {\color{blue}Thus $\mathcal{V}_{1,d}$ is represented the Jacobian of $X$}. {\color{red}Thus we may now assume $n \geq 2$. We have a trichotomy: $g = 0, g=1, g\geq 2$ (these correspond to the cases of the anticanonical bundle being ample, neither the canonical nor the anticanonical bundle are ample, or the canonical bundle is ample, as is usual in algebraic geometry). If $g=0$, then the result is trivial; indeed, since every vector bundle over $\P^1$ is a direct sum of line bundles, the only stable bundles on $\P^1$ are line bundles, thus $V^s_{n,d} = \emptyset$. 
+We will now construct the moduli space of stable bundles of signature $(n,d)$. To simplify matters, we will assume $g \geq 2$. Indeed, if $g=0$, then the result is trivial: since every vector bundle over $\P^1$ is a direct sum of line bundles, the only stable bundles on $\P^1$ are line bundles, thus $V^s_{1,d} = \Spec k $ and $V^s_{n, d} = \emptyset$ if $n > 1$. 
 
-If $g = 1$...}
+%If $g = 1$, then firstly if $n = 1$ then tensoring by a degree 1 line bundle, we have natural isomorphisms $\mathcal{V}_{1,d} \cong \mathcal{V}_{1,0}$. But $\mathcal{V}_{1,0}$ is just the $\Pic^\circ$ functor, and it is well-known that the Jacobian variety of a genus 1 curve is itself, so $V^s_{1,d} \cong V^s_{1,0} \cong X$. 
 
-We will now suppose $g \geq 2$. Our first job is to construct a bounded family of semistable bundles; that is, a family that parameterises every semistable bundle of given signature, so that we may take a GIT quotient of the parameter space. To this end, we will first require the Riemann-Roch theorem:
+We will now suppose $g \geq 1$. Our approach is similar to the elliptic curves example in Chapter 1: we find a locally versal family equipped with a group action, and we show that the GIT quotient is the moduli space. In contrast to the aforementioned example, we do not find a locally versal first and then attach a group action; instead we find a scheme parameterising a family that contains every semistable bundle (known as a \textit{bounded family}), but also parameterising things we do not want. We define the action first and then construct the locally versal family as the semistable locus of this action. In order to construct the bounded family, we will first require the Riemann-Roch theorem:
 \begin{theorem}[Riemann-Roch for Vector Bundles]\index{Riemann-Roch Theorem}
 	Let $\F$ be a vector bundle on $X$ of signature $(n,d)$. Then \[\chi(\F) = d + n(1-g), \] where $\chi(\F) := \sum_{i = 0}^\infty (-1)^i h^i(\F) = h^0(\F) - h^1(\F) $ is the Euler characteristic of $\F$. 
 \end{theorem}
@@ -277,46 +328,52 @@ The importance of the Riemann-Roch theorem is that it allows us to relate the qu
 	\begin{equation}\label{skyscraper-ses}
 		0 \rightarrow \mathcal{I}_p\otimes \E \rightarrow \E \rightarrow k_p^n \rightarrow 0.
 	\end{equation}  
-	Now we claim that $\mathcal{I}_p\cong \L(-p)$. To see this, let $U = \Spec A$ be an open affine subset. If $p\notin U$, then $\mathcal{I}_p|_U = \Ox|_U$. Otherwise, $p$ is cut out by some $f\in A$, and hence $\mathcal{I}_p|_U = f\Ox|_U$. But this is exactly the definition of $\L(-p)$, as claimed. Now observe that $\mathcal{I}_p\otimes \E = \E \otimes \L(-p)$ is semistable and has degree $n(2g-2)$ and thus by part (i) we have $H^1(X, \E\otimes \L(-p)) = 0$. Now taking cohomology of (\ref{skyscraper-ses}), it follows we have a surjection \[H^0(X, \E ) \rightarrow H^0(X, k_p^n) = k^n. \] Finally, we apply Nakayama's lemma (\autocite[Corollary 4.8]{EisAlg}) on the local ring $\O_{X,p}$ to deduce that the map $H^0(X, \E)\rightarrow \E_p$ is surjective too.
+	Now we claim that $\mathcal{I}_p\cong \L(-p)$. To see this, let $U = \Spec A$ be an open affine subset. If $p\notin U$, then $\mathcal{I}_p|_U = \Ox|_U$. Otherwise, $p$ is cut out by some $f\in A$, and hence $\mathcal{I}_p|_U = f\Ox|_U$. But this is exactly the definition of $\L(-p)$, as claimed. Now observe that $\mathcal{I}_p\otimes \E = \E \otimes \L(-p)$ is semistable and has degree $n(2g-2)$ and thus by part (i) we have $H^1(X, \E\otimes \L(-p)) = 0$. Now taking cohomology of (\ref{skyscraper-ses}), it follows we have a surjection \[H^0(X, \E ) \rightarrow H^0(X, k_p^n) = k^n. \] Finally, we apply Nakayama's lemma on the local ring $\O_{X,p}$ to deduce that the map $H^0(X, \E)\rightarrow \E_p$ is surjective too.
 \end{proof}
 The consequence of the above lemma combined with the Riemann-Roch theorem is that every semistable vector bundle of signature $(n,d)$ for $d$ sufficiently large is a quotient of $\Ox^{d+n(1-g)}$. Now it just so happens that there is a scheme, known as the \textit{Quot scheme} that that is a fine moduli space parameterising quotients of a given coherent sheaf, with certain constraints.
 \subsection{The Quot Functor and its Scheme}
 To define the moduli problem the Quot scheme represents, we first require the following result.
 \begin{proposition}
-	Let $Y$ be a projective variety, let $\F$ be a coherent sheaf on $Y$ and let $\O(1)$ be a very ample line bundle. For any $m\in \Z$, write $\F(m):=\F\otimes \O(m):= \F \otimes \O(1)^{\otimes m}$. Then the map \[P:m\mapsto \chi(\F(m)) \] coincides with a polynomial with rational coefficients.
+	Let $Y$ be a projective variety, let $\F$ be a coherent sheaf on $Y$ and let $\O(1)$ be a very ample line bundle. For any $m\in \Z$, write $\F(m):=\F\otimes \O(m):= \F \otimes \O(1)^{\otimes m}$. Then there is a polynomial $P\in \Q[z]$ such that \[P(m) = \chi(\F(m)) \] for all $m\in \Z$.
 \end{proposition}
 \begin{proof}[Proof Sketch]
-	Embed $Y$ into $\P^n = \Proj k[x_0,...,x_n]$ via $\O(1)$. We induct on $r=\dim \Supp \F$. If $r = 0$, then $\F$ is supported on a discrete subset, and hence tensoring with $\O(1)$ does nothing, and so $P$ is constant, equal to $\chi(\F)$. Now supposing true for some $r \geq 0$, we suppose $\dim \Supp \F = r+1$, and write $M$ for the graded module $M:= \bigoplus_{m\in \Z} H^0(X, \F(m))$, so that $\widetilde{M} \cong \F$ (\autocite[II. Proposition 5.15]{Hart}). We note that the map $M(-1)\rightarrow M$ given by multiplication by $x_i$ induces the following short exact sequence of sheaves \[ 0 \rightarrow \E \rightarrow \F(-1)\rightarrow \F \rightarrow \G \rightarrow 0 \] where $\E$ and $\G$ are the kernel and cokernel respectively. Now if $\dim \Supp \E = r+1$, then {\color{red} TO FINISH }.
+	Embed $Y$ into some projective space via $\O(1)$. We use without proof the following two facts:
+	\begin{enumerate}
+		\item If $F: \Z \rightarrow \Z$ is a function and there is a polynomial $Q\in \Q[z]$ such that $F(m)-F(m-1) = Q(m)$ for all $m\in \Z$, then there is some polynomial $P\in \Q[z]$ such that $P(m) = F(m)$ for all $m\in \Z$ (\autocite[I Proposition 7.3 (b)]{Hart}).
+		\item There is some $f\in H^0(Y, \O(1))$ such that multiplication by $f$ induces an injective homomorphism of sheaves $\F(-1) \rightarrow \F$ (\autocite[p. 489]{Vakil}).
+	\end{enumerate}
+	
+	With these in mind, we induct on $r=\dim \Supp \F$. If $r = 0$, then $\F$ is supported on a discrete subset, and hence tensoring with $\O(1)$ does nothing, and so $P$ is constant, equal to $\chi(\F)$. Now supposing true for some $r \geq 0$, we suppose $\dim \Supp \F = r+1$, and write $M$ for the graded module $M:= \bigoplus_{m\in \Z} H^0(X, \F(m))$, so that $\widetilde{M} \cong \F$ (\autocite[II. Proposition 5.15]{Hart}). We note that the map $M(-1)\rightarrow M$ given by multiplication by $f$ as in fact (ii) above induces the following short exact sequence of sheaves \[ 0 \rightarrow \F(-1)\rightarrow \F \rightarrow \G \rightarrow 0 \] where $\G$ is the cokernel. We claim that $\Supp \G$ is contained in the hyperplane $\{f=0\}$ of our ambient projective space. Indeed, on any open affine subset $U = \Spec A$ of $Y$, we have $\Supp \G\cap U = V(\Ann H^0(U, \G|_U))$, and by assumption $f|_U$ annihilates $H^0(U, \G|_U)$, which proves the claim. But that means $\dim \Supp \G < r+1$, and thus by assumption we know there is some $Q\in \Q[z]$ such that $Q(m) = \chi(\G(m))$ for all $m\in \Z$, and so the result follows from the additivity of the Euler characteristic on short exact sequences combined with fact (i) above.
 \end{proof}
 \begin{definition}\index{Hilbert polynomial}
 	The polynomial $P$ above is known as the \textit{Hilbert polynomial} of $\F$ with respect to $\O(1)$. 
 \end{definition}
 \begin{example}
-	Take $Y = \P^r$, take $\F = \Oy$ and take $\O(1)$ to be the usual twisting sheaf of Serre. Observe that if $m \geq 0$ then $h^0(\O(m)) = \binom{m+r}{r},$ and {\color{red}$h^i(\O(m)) = 0$} for all $i > 0$, and hence\[ P = \binom{z+r}{r}:= \frac{1}{r!}\prod_{i = 1}^{r} (z+i)\in \Q[z].\]
+	Take $Y = \P^r$, take $\F = \Oy$ and take $\O(1)$ to be the usual twisting sheaf of Serre. Observe that if $m \geq 0$ then $h^0(\O(m)) = \binom{m+r}{r},$ and $h^i(\O(m)) = 0$ for all $i > 0$, and hence\[ P = \binom{z+r}{r}:= \frac{1}{r!}\prod_{i = 1}^{r} (z+i)\in \Q[z],\] since $P(m)$ and $\binom{m+r}{r}$ agree on infinitely many values.
 \end{example}
 \begin{example}
 	Let $\E$ be a vector bundle of signature $(n,d)$ on $X$. By the Riemann-Roch theorem we know \[\chi(\E(m)) = d+nm\deg \Ox(1) + n(1-g), \] and so $\E$ has Hilbert polynomial $P = d + n\deg \Ox(1)z + n(1-g)\in \Q[z]$ with respect to $\Ox(1)$. Conversely, if $\F$ is a vector bundle with Hilbert polynomial $P = d + n\deg \Ox(1)z + n(1-g)\in \Q[z]$, then $\chi(\F) = d+n(1-g)$ and $\chi(\F(1)) = d+n\deg \Ox(1)+n(1-g)$, and so we know $\rk(\F) = n$ by Corollary \ref{twisting-by-line-bundle-degree} and $\deg(\F) = d$ by Riemann-Roch. In particular, the data of the Hilbert polynomial on $\E$ (with respect to $\Ox(1)$) is equivalent to the data of the signature of $\E$.
 \end{example}
 A key property of the Hilbert polynomial is the following:
-\begin{theorem}
-	Let $X \rightarrow S$ be a projective flat morphism of noetherian schemes, and let $\F$ be a coherent sheaf on $X$. Then the map \[s \mapsto \chi(\F_s) = \sum_{i = 0}^\infty (-1)^i \dim_{k(s)}H^i(S, \F_s), \] where $\F_s$ is the fibre of $\F$ over $s\in S$ and $k(s)$ is the residue field of $s$ is locally constant. In particular, the Hilbert polynomials of $\F_s$ all agree on a connected component.
+\begin{theorem}\label{Hilbert-polynomial-is-constant}
+	Let $T \rightarrow S$ be a projective morphism of noetherian schemes, and let $\F$ be a coherent sheaf on $T$, flat over $S$. Then the map \[s \mapsto \chi(\F_s) = \sum_{i = 0}^\infty (-1)^i \dim_{k(s)}H^i(S, \F_s), \] where $\F_s$ is the fibre of $\F$ over $s\in S$ and $k(s)$ is the residue field of $s$ is locally constant. In particular, the Hilbert polynomials of $\F_s$ all agree on a connected component.
 \end{theorem}
 \begin{proof}
-	content...
+	\autocite[p. 669]{Vakil}
 \end{proof}
 Next, we define the following moduli problem:
 \begin{definition}
-	Let $\F$ be a coherent sheaf on a projective scheme $Y$ with an embedding $Y\subseteq \P^n$, and let $P\in \Q[z]$ be a numerical polynomial. For any scheme $S$ of finite type over $k$, a \textit{family of quotients of $\F$ with Hilbert polynomial $P$ parameterised by $S$} is a coherent sheaf $\G$ on $S \times Y$, flat and with proper support over $S$, equipped with a surjective map $\F_S \rightarrow \G$, where $\F_S$ is the pullback of $\F$ to $S\times X$ via the projection, such that all closed fibres $\G_p$ are coherent quotient sheaves of $\F$ with Hilbert polynomial $P$. Two families over $S$ are \textit{equivalent} if they have the same kernel. It is clear how families pull back, and so we have a functor \[\mathcal{Q}uot^{P}_Y(\F): \sf{C} \rightarrow \Sets, \] where $\sf{C}$ is the category of schemes of finite type over $k$, sending a scheme $S$ to the equivalence classes of families over $S$.
+	Let $\F$ be a coherent sheaf on a projective variety $Y$ with equipped with a very ample line bundle $\O(1)$, and let $P\in \Q[z]$ be a numerical polynomial. For any scheme $S$ of finite type over $k$, a \textit{family of quotients of $\F$ with Hilbert polynomial $P$ parameterised by $S$} is a coherent sheaf $\G$ on $S \times Y$, flat and with proper support over $S$, equipped with a surjective map $\F_S \rightarrow \G$, where $\F_S$ is the pullback of $\F$ to $S\times X$ via the projection, such that all closed fibres $\G_p$ are coherent quotient sheaves of $\F$ with Hilbert polynomial $P$. Two families over $S$ are \textit{equivalent} if they have the same kernel. It is clear how families pull back, and so we have a functor \[\mathcal{Q}uot^{P}_Y(\F): \sf{C} \rightarrow \Sets, \] where $\sf{C}$ is the category of schemes of finite type over $k$, sending a scheme $S$ to the equivalence classes of families over $S$.
 \end{definition}
 \begin{theorem}[Grothendieck]
-	The $\mathcal{Q}uot^{P}_Y(\F)$ functor is representable. 
+	The $\mathcal{Q}uot^{P}_Y(\F)$ functor is representable by a projective variety over $k$. 
 \end{theorem}
 \begin{definition}
-	Let $P\in \Q[z]$ be a numerical polynomial. The \textit{quot scheme of $\F$ with respect to $P$}, denoted $\Quot_Y^P(\F)$, is the fine moduli space of $\mathcal{Q}uot^{P}_Y(\F)$. A \textit{Hilbert scheme} is a Quot scheme of the form $\Quot_Y^P(\Oy)$, which we will simply denote $\Hilb_Y^P$.
+	Let $P\in \Q[z]$ be a numerical polynomial. The \textit{quot scheme of $\F$ with respect to $P$}, denoted $\Quot_Y^P(\F)$, is the fine moduli space of $\mathcal{Q}uot^{P}_Y(\F)$. A \textit{Hilbert scheme} is a Quot scheme of the form $\Quot_{\P^n}^P(\O_{\P^n})$, which we will simply denote $\Hilb_n^P$.
 \end{definition}
-The idea of the construction, which can be found in \autocite{HilbQuot}, is to define an injective natural transformation from $\mathcal{Q}uot^{P}_Y(\F)$ into a certain Grassmannian functor, and show that this defines a scheme structure. However, this construction is far beyond the scope of this thesis, so we will be content with our examples from Chapter 1, where we showed that $\Quot_{\Spec k}^1(k^{n+1}) = \P^n$ and $\Hilb_{\P^2}^{2z+1} = \P^5$.
+The idea of the construction, which can be found in \autocite{HilbQuot}, is to define an injective natural transformation from $\mathcal{Q}uot^{P}_Y(\F)$ into a certain Grassmannian functor, and show that this defines a scheme structure. However, this construction is far beyond the scope of this thesis, so we will be content with our examples from Chapter 1, where we showed that $\Quot_{\Spec k}^1(k^{n+1}) = \P^n$ and $\Hilb_{2}^{2z+1} = \P^5$.
 
-In particular, from Lemma \ref{bounding-family}, it follows that all semistable vector bundles of signature $n,d$ with $d > n(2g-1)$ are found in the universal family over the scheme \[Q = \Quot_X^{P}(\Ox^N),\] where $N := d+n(1-g)$ and $P$ is the polynomial $P(z) =d+nz\deg \Ox(1) + n(1-g)$. However, $Q$ also parameterises other quotients, which we would like to ignore. It turns out there is an $\SL_N$ action on $Q$ and a linearisation such that if $d$ is large enough, the (semi)stable points are exactly locally free (semi)stable quotients where the induced map of global sections is an isomorphism. We will give the construction below, following \autocite[68-84]{ModuliNotes}, where more details may be found. Various proofs below will also be found in the quoted citation, so we will not cite them individually.
+In particular, from Lemma \ref{bounding-family}, it follows that all semistable vector bundles of signature $(n,d)$ with $d > n(2g-1)$, an assumption we will fix from now on are found in the universal family over the scheme \[Q = \Quot_X^{P}(\Ox^N),\] where $N := d+n(1-g)$ and $P$ is the polynomial $P(z) =d+nz\deg \Ox(1) + n(1-g)$. However, $Q$ also parameterises other quotients, which we would like to ignore. It turns out there is an $\SL_N$ action on $Q$ and a linearisation such that if $d$ is large enough, the (semi)stable points are exactly locally free (semi)stable quotients where the induced map of global sections is an isomorphism, and in particular taking the stable locus of the projective GIT quotient will yield a coarse moduli space. We will give the construction below, following \autocite[68-84]{ModuliNotes}. Various proofs below are based one ones found in the quoted citation, so we will not cite them individually.
 \subsection{The $\SL_N$ action on $Q$ and its stability}
 %The following result allows us to do so:
 %\begin{proposition}
@@ -332,7 +389,14 @@ Now let $U:\O_{Q\times X}^N \rightarrow\scr{E}$ denote the universal family on $
 One can check that this is indeed a group action. 
 
 The next question to ask is what this does to $k$-points. Let $(g,p)$ be a $k$-point in $\SL_N \times Q$ (by abuse of notation, we identify $p$ with its fibre in its universal family). Then we one can check that $\sigma(g,p)$ is the quotient \[\sigma(g,p) = p\circ g^{-1}, \] where $g$ acts on $\O_{\SL_N\times Q \times X}^N$ in the obvious way; indeed, pulling $\iota$ back via $g: \Spec k \rightarrow \SL_N$ is just the map $g^{-1}: k^N \rightarrow k^N$, and thus pulling $\pi^*_{\SL_N}(\iota)$ back via $g\times \id \times \id: \Spec k \times Q \times X \rightarrow \SL_N \times Q \times X$ is just $g^{-1}: \O_{Q \times X}^N \rightarrow \O_{Q\times X}^N$ (where we abused a lot of notation). Finally, pulling the universal quotient back via $p$, we obtain the required  \[\sigma(g,p) = p\circ g^{-1}. \]
-\par{} Finally, since we are doing a stability analysis, we will need to study the 1-PS's of this action. So let $\lambda: \bb{G}_m \rightarrow \SL_N$ be a 1-PS, and as before, we have a weight space decomposition \[k^N = V = \bigoplus_{r\in \Z} V_r. \] Write $V_{\leq r} = \bigoplus_{s\leq r} V_s$, so that we have a filtration $V_{\leq r} \subseteq V_{\leq r+1}$. Now if $q: \Ox^N \rightarrow \E$ is a $k$-point in $Q$, write \[\E_{\leq r}:= \im q|_{V_{\leq r}\otimes_k \Ox}\] and \[\E_r:= \E_{\leq r}/\E_{\leq r-1}. \] We are now in a position to state:
+
+The key theorem to be proven is the following:
+\begin{theorem}
+	Fix $n$ and let $d$ be sufficiently large (depending on $n$). Then there exists a very ample linearisation $\L$ of this $\SL_N$ action such that a $k$-point $q: \Ox^N \rightarrow \E$ of $Q$ is semistable if and only if $\E$ is a semistable vector bundle and $H^0(q)$ is an isomorphism.
+\end{theorem}
+The rest of this subsection will be dedicated to its proof. However, what follows is essentially a series of unenlightening computations in sheaf cohomology, so if the reader wishes, they may just take this as a black box and move onto the next section.
+
+To begin proving this, we will need to study the 1-PS's of this action. So let $\lambda: \bb{G}_m \rightarrow \SL_N$ be a 1-PS, and as before, we have a weight space decomposition \[k^N = V = \bigoplus_{r\in \Z} V_r. \] Write $V_{\leq r} = \bigoplus_{s\leq r} V_s$, so that we have a filtration $V_{\leq r} \subseteq V_{\leq r+1}$. Now if $q: \Ox^N \rightarrow \E$ is a $k$-point in $Q$, write \[\E_{\leq r}:= \im q|_{V_{\leq r}\otimes_k \Ox}\] and \[\E_r:= \E_{\leq r}/\E_{\leq r-1}. \] We are now in a position to state:
 
 \begin{proposition}\label{HM weight of large linearisation}
 	There exists a natural number $M_0 > 0$ such that for any $M\geq M_0$, there is a very ample linearisation $\L_M$ of this $\SL_N$ action, depending on $M$, such that for a $k$-point $q: \Ox^N \rightarrow \E$ and 1-PS $\lambda: \bb{G}_m \rightarrow \SL_N$ inducing a weight space decomposition and filtration as above, we have \[\mu^{\L_M}(q, \lambda) = \sum_{r\in \Z} P_{\E_{\leq r}}(M) - \frac{\dim V_{\leq r}}{N}P(M), \] where $P_{\E_{\leq r}}$ is the Hilbert polynomial of $\E_{\leq r}$ and $P$ is the Hilbert polynomial $d + nz\deg \Ox(1) + n(1-g)$ of $\E$.
@@ -340,7 +404,7 @@ The next question to ask is what this does to $k$-points. Let $(g,p)$ be a $k$-p
 \begin{proof}
 	\autocite[p. 76]{ModuliNotes}.
 \end{proof}
-Thus the way forward is clear: we fix one such $M$ and use this expression for the weight and the Hilbert-Mumford criterion to calculate the stability of this linearised action, and eventually relate it to the usual vector bundle stability. To begin, let us investigate the sum $\sum_{r\in \Z} P_{\E_{\leq r}}(M) - \frac{\dim V_{\leq r}}{N}P(M)$. Suppose the weights of $\lambda$ are labelled $r_1<...<r_m$. Then for any $r < r_1$, it follows $V_{\leq r}  = 0$ whence $\E_{\leq r} = 0$ too, hence \[ P_{\E_{\leq r}}(M) - \frac{\dim V_{\leq r}}{N}P(M) = P_0(M) - \frac{0}{N}P(M) = 0.\] On the other end, if $r > r_m$, then it follows $\E_{\leq r} = \E$ and $\dim V_{\leq r} = N$, and so \[ P_{\E_{\leq r}}(M) - \frac{\dim V_{\leq r}}{N}P(M) = P(M) - \frac{N}{N}P(M) = 0\] too. In particular, we do get a finite sum. Now for any $r$ such that $r_i \leq r < r_{i+1}$, it follows $V_{\leq r_i} = V_{\leq r}$, hence $\E_{\leq r} = \E_{\leq r_i}$, and thus \[\sum_{r_i \leq r \leq r_{i+1}} P_{\E_{\leq r}}(M) - \frac{\dim V_{\leq r}}{N}P(M) = (r_{i+1} - r_i)\left(P_{\E_{\leq r_i}}(M) - \frac{\dim V_{\leq r_i}}{N}P(M)\right) \] whence \[\mu^{\L_M} = \sum_{r\in \Z} P_{\E_{\leq r}}(M) - \frac{\dim V_{\leq r}}{N}P(M) = \sum_{1 \leq i \leq m-1} (r_{i+1} - r_i)\left(P_{\E_{\leq r_i}}(M) - \frac{\dim V_{\leq r_i}}{N}P(M)\right).\] From this and the above proposition, we deduce:
+Thus the way forward is clear: we assume $M$ is sufficiently large and use this expression for the weight and the Hilbert-Mumford criterion to calculate the stability of this linearised action, and eventually relate it to the usual vector bundle stability. To begin, let us investigate the sum $\sum_{r\in \Z} P_{\E_{\leq r}}(M) - \frac{\dim V_{\leq r}}{N}P(M)$. Suppose the weights of $\lambda$ are labelled $r_1<...<r_m$. Then for any $r < r_1$, it follows $V_{\leq r}  = 0$ whence $\E_{\leq r} = 0$ too, hence \[ P_{\E_{\leq r}}(M) - \frac{\dim V_{\leq r}}{N}P(M) = P_0(M) - \frac{0}{N}P(M) = 0.\] On the other end, if $r > r_m$, then it follows $\E_{\leq r} = \E$ and $\dim V_{\leq r} = N$, and so \[ P_{\E_{\leq r}}(M) - \frac{\dim V_{\leq r}}{N}P(M) = P(M) - \frac{N}{N}P(M) = 0\] too. In particular, we do get a finite sum. Now for any $r$ such that $r_i \leq r < r_{i+1}$, it follows $V_{\leq r_i} = V_{\leq r}$, hence $\E_{\leq r} = \E_{\leq r_i}$, and thus \[\sum_{r_i \leq r \leq r_{i+1}} P_{\E_{\leq r}}(M) - \frac{\dim V_{\leq r}}{N}P(M) = (r_{i+1} - r_i)\left(P_{\E_{\leq r_i}}(M) - \frac{\dim V_{\leq r_i}}{N}P(M)\right) \] whence \[\mu^{\L_M} = \sum_{r\in \Z} P_{\E_{\leq r}}(M) - \frac{\dim V_{\leq r}}{N}P(M) = \sum_{1 \leq i \leq m-1} (r_{i+1} - r_i)\left(P_{\E_{\leq r_i}}(M) - \frac{\dim V_{\leq r_i}}{N}P(M)\right).\] From this and the above proposition, we deduce:
 \begin{proposition}\label{GIT criterion stability}
 	Let $q: \Ox^N \rightarrow \E$ be a $k$-point in $Q$. Then $q$ is semistable with respect to $\L_M$ if and only if for any subspace $V' \subseteq V$ we have 
 	\begin{equation}\label{git-semi-stability-quot-scheme}
@@ -355,27 +419,36 @@ Thus the way forward is clear: we fix one such $M$ and use this expression for t
 \end{proof}
 
 Note that this is starting to look like our notion of stability already, since we are relating quantities of $\E$ to quantities of subsheaves of $\E$. For example, if $q: \Ox^N \rightarrow \E$ is a point, $\E$ is locally free and $\E'$ is one such subsheaf and $H^1(X, \E') = 0$, then the Riemann-Roch theorem tells us that the degree of $\E'$ cannot be too small. And in fact, we can already concretely deduce:
-\begin{corollary}
-	Let $q: \Ox^N \rightarrow \E$ be a semistable $k$-point in $Q$ with respect to a sufficiently large $M$. Then:
-	\begin{enumerate}
-		\item $\E$ is a locally free sheaf.
-		\item $H^0(q)$ is an isomorphism.
-		%\item $\E$ is a semistable vector bundle.
-	\end{enumerate}
+\begin{corollary}\label{first-stability-corollary}
+	Let $q: \Ox^N \rightarrow \E$ be a semistable $k$-point in $Q$ with respect to a sufficiently large $M$. Then $\E$ is a locally free sheaf.
 \end{corollary} 
 \begin{proof}
-	Choose $M\geq M_0$, and such that $P(M) > N^2$. 
-	
-	Firstly suppose $\E$ is not locally free. Then $\E$ is not torsion free, so let $\F$ be a nonzero torsion subsheaf of $\E$. Then $\F$ is supported on a discrete set, since we are on a curve, and so $H^0(\F)\neq 0$. Now let $V' := H^0(q)^{-1}(H^0(\F))$ and let $\E' = \im q|_{V' \otimes \Ox}$. Since $q$ is surjective, it follows that $\E'$ is a subsheaf of $\F$ and hence is also torsion. But then $\E'$ has constant Hilbert polynomial (since it is supported on a discrete set, twisting does nothing), and moreover $h^1(\E) = 0$ (\autocite[III, Theorem 2.7]{Hart}), and so \[0 < P_{\E'}(M) = h^0(\E') \leq N \leq \frac{P(M)}{N} < \frac{\dim V'}{N}P(M). \] Hence $\E$ is unstable, which proves (i). 
-	
-	To prove (ii), let $V' = \ker H^0(q)$. Then $\E' = \im q|_{V'\otimes \Ox} =0$, and so \[0 = P_{\E'}(M) \geq \frac{\dim V'}{N}P(M), \] whence $\dim V' = 0$, as desired. To prove surjectivity, observe that by the Riemann-Roch theorem, it suffices to show that $H^1(X, \E) = 0$, whence $h^0( E) = N = \dim \im H^0(q)$. So suppose for contradiction $H^1(X, \E)\neq 0$; then by the Serre duality theorem there is a nonzero map $\varphi: \E \rightarrow \omega_X$. Let $\F$ denote the image of this map. Then $\F$ is a line bundle, and in particular we know that its Hilbert polynomial $P'$ is \[P'(z) = \deg \F + z\deg \Ox(1) +  1-g\leq g-1+z\deg \Ox(1), \] since $\deg \F \leq 2g-2$ by Lemma \ref{stability-properties} (iv). It thus follows that $\ker \varphi$ has Hilbert polynomial $P - P'$. We claim $h^0(\ker \varphi) \neq 0$. Indeed, since $\F$ injects into $\omega_X$, it follows that $h^0(\F)\leq g$, and hence \[ h^0(\ker \varphi) \geq h^0(\E) - h^0(\F) \geq d+n(1-g) - g > n(2g-1) + n(1-g) -g = ng -g \geq  0, \] as claimed, since we are assuming $g \geq 2$ and $n \geq 2$. Now let $V' := H^0(q)^{-1}(H^0(X, \ker \varphi))$, and let $\E':= \im q_{V' \otimes \Ox}\neq 0$, so that $\E' \subseteq \ker \varphi$, and thus $\E/\E'$ surjects onto $\F$. 
-%	
-%	
-%	
-%	Finally, to prove (iii), suppose $\E$ is unstable, and let $\F$ be a {\color{red} destabilising subbundle} with $\mu(\F)> \mu(\E)$. 
+	Choose $M\geq M_0$, and such that $P(M) > N^2$. Firstly suppose $\E$ is not locally free. Then $\E$ is not torsion free, so let $\F$ be a nonzero torsion subsheaf of $\E$. Then $\F$ is supported on a discrete set, since we are on a curve, and so $H^0(\F)\neq 0$. Now let $V' := H^0(q)^{-1}(H^0(\F))$ and let $\E' = \im q|_{V' \otimes \Ox}$. Since $q$ is surjective, it follows that $\E'$ is a subsheaf of $\F$ and hence is also torsion. But then $\E'$ has constant Hilbert polynomial (since it is supported on a discrete set, twisting does nothing), and moreover $h^1(\E) = 0$ for dimension reasons (\autocite[III, Theorem 2.7]{Hart}), and so \[0 < P_{\E'}(M) = h^0(\E') \leq N \leq \frac{P(M)}{N} < \frac{\dim V'}{N}P(M). \] Hence $\E$ is unstable. 
 \end{proof}
 
-Our next job is to relate stability of $Q$ as above back to vector bundle stability. To do this, observe that Proposition \ref{GIT criterion stability} defines stability in terms of the Hilbert polynomial of certain subsheaves and the dimension of the space of global sections, and thus we need some results to tie these quantities back into our usual degree and rank invariants. To begin, we have the following useful bound:
+We now take a closer look at the sheaves $\E':= \im q|_{V' \otimes \Ox}$. In particular, we want to know what proportion of subsheaves they make up, and whether they have special properties among the subsheaves. To this end, we have the following result:
+\begin{proposition}
+	The set of Hilbert polynomials $\{P_{\E'}\}$, where $\E' := \im q|_{V' \otimes \Ox}$, taken across all $q: \Ox^N \rightarrow \E$ and $V'\subseteq V$ is finite.
+\end{proposition} 
+\begin{proof}
+	Let $1\leq r \leq N$. It suffices to show that the set $\{P_{\E'}\}_{\dim V' = r}$ is finite. To this end, consider the Grassmannian $\Gr^{r, N}$. It is well-known that the Grassmannian is a fine moduli space parameterising injections $k^r \rightarrow k^N$, and so there is a universal family $\mathcal{U}\subseteq \O_{\Gr^{r, N}}^N$, where $\cal{U}$ is the universal bundle, which has rank $r$. Pulling this back via the projection $\pi_{\Gr^{r,N}}:\Gr^{r, N}\times Q \times X \rightarrow \Gr^{r,N}$, and composing this with the pullback of the universal family on $Q$ via $\pi_{Q\times X}: \Gr^{r, N}\times Q \times X\rightarrow Q \times X$ we have a restricted family of sheaves \[\mathscr{E}':=\im \pi_{Q \times X}^*U|_{\mathcal{U}\otimes\O_{\Gr^{r,N}\times Q \times X} }\subseteq \mathscr{E}, \] and it is easy to see that given $V'\in \Gr^{r,N}(k)$, which we treat as a subspace of $k^N$, and $q: \Ox^N \rightarrow \E$, the fibre $\mathscr{E}'_{(V', q)}$ of $\mathscr{E}'$ via the projection $\pi_{\Gr^{r,N}\times Q}:\Gr^{r,N}\times Q \times X \rightarrow \Gr^{r,N}\times Q$ is just $\E' =\im q|_{V'\otimes \Ox}$. In particular, every such $\im q|_{V' \otimes \Ox}$ where $\dim V' = r$ turns up in this family, and by Theorem \ref{Hilbert-polynomial-is-constant}, it follows that they all have the same Hilbert polynomial on each connected component of $\Gr^{r,N}\times Q$. Since both of these schemes are quasi-compact, they have a finite number of connected components and the result follows.
+\end{proof}
+
+Let $q: \Ox^N \rightarrow \E$ is a $k$-point in $Q$; let us now examine explicitly the Hilbert polynomials $P_{\E'}$. If $\E'$ is torsion-free (hence locally free) of signature $(n', d')$ then we know \[P_{\E'} = d' + n'\deg \Ox(1) z + n'(1-g).\] If $\E'$ is not torsion-free, let $\F'\subseteq \E'$ be its torsion subsheaf, so that $\E'/\F'$ is locally free of signature $(n', d')$. Now the Hilbert polynomial of $\F'$ is constant, equal to $h^0(\F')$, and so the Hilbert polynomial of $\E'$ is\[ P_{\E'} = d'+h^0(\F') + n'\deg \Ox(1) z + n'(1-g). \] In particular, the Hilbert polynomial of $\E'$ has degree at most one, and its leading coefficient is the rank of its torsion-free part, which is at most $n$. Thus given $\E'$, we can choose a sufficiently large $M_0'$ such that the inequality (\ref{git-semi-stability-quot-scheme}) holds for any $M > M_0'$ if and only if 
+\begin{equation}\label{git-semi-stability-quot-scheme-rank}
+	\rk \E' \geq \frac{n\dim V'}{N},
+\end{equation} 
+where by abuse of notation $\rk \E'$ is the rank of the torsion-free part of $\E'$. Moreover, note that this $M_0'$ depends only on $P_{\E'}$ and $\dim V'$, and since there are finitely many such pairs, we can choose this sufficiently large to work for all $\E'$. With this in mind, we can deduce the following:
+\begin{corollary}\label{second-stability-corollary}
+	Let $M > M_0'$ and $q: \Ox^N \rightarrow \E$ be a $k$-valued point in $Q$, semistable with respect to $\L_M$. Then $H^0(q)$ is an isomorphism.
+\end{corollary}
+\begin{proof}
+	We begin with injectivity. Let $V' = \ker H^0(q)$. Then $\E' = \im q|_{V'\otimes \Ox} =0$, and so \[0 = P_{\E'}(M) \geq \frac{\dim V'}{N}P(M), \] whence $\dim V' = 0$, as desired. 
+	
+	To prove surjectivity, observe that by the Riemann-Roch theorem, it suffices to show that $H^1(X, \E) = 0$, whence $h^0( \E) = N = \dim \im H^0(q)$. So suppose for contradiction $H^1(X, \E)\neq 0$; then by the Serre duality theorem there is a nonzero map $\varphi: \E \rightarrow \omega_X$. Let $\F$ denote the image of this map. We claim $h^0(\ker \varphi) \neq 0$. Indeed, since $\F$ injects into $\omega_X$, it follows that $h^0(\F)\leq g$, and hence \[ h^0(\ker \varphi) \geq h^0(\E) - h^0(\F) \geq d+n(1-g) - g > n(2g-1) + n(1-g) -g = ng -g \geq  0, \] as claimed. Now let $V' := H^0(q)^{-1}(H^0(X, \ker \varphi))$, and let $\E':= \im q|_{V' \otimes \Ox}\neq 0$, so that $\E' \subseteq \ker \varphi$. By the previous discussion, we have \[\rk \E' \geq \frac{n \dim V'}{N},  \] and since $\rk \ker \varphi \geq \rk \E'$, we have \[\rk \ker \varphi = n-1 \geq \frac{n \dim V'}{N}\geq \frac{n(N-g)}{N}= n(1-\frac{g}{N}). \] But that would imply $d \leq n(2g-1)$ after a rearrangement, which contradicts our choice of $d$. 
+\end{proof}
+
+Our next job is to relate stability of $Q$ as above back to vector bundle stability. In particular, we need to rephrase usual vector bundle stability (involving degree and rank invariants) in terms of cohomology. To begin, we have the following useful bound:
 \begin{lemma}
 	Let $\E$ be a semistable vector bundle of signature $(n,d)$ and slope $\mu$. Then
 	\begin{equation}\label{le-potier-bounds}
@@ -387,17 +460,75 @@ Our next job is to relate stability of $Q$ as above back to vector bundle stabil
 \end{proof}
 
 We now give another criterion for vector bundle (semi)-stability.
-\begin{proposition}
-	Let $n\geq 2$ be fixed, let $d > gn^2+n(2g-2)$ and let $\E$ be a vector bundle of signature $(n,d)$ and slope $\mu$. Then $\E$ is semistable if and only if for every subsheaf $\F$ of rank $n'$ we have \[h^0(\F)\leq \frac{n'}{n}h^0(\E). \] If strict inequality holds, then $\E$ is stable. 
+\begin{proposition}[Le Potier's Theorem]\label{alternative-vector-bundle-stability}
+	Let $n\in \N$ be fixed, let $d > gn^2+n(2g-2)$ and let $\E$ be a vector bundle of signature $(n,d)$ and slope $\mu$. Then $\E$ is semistable if and only if for every subsheaf $\F$ of rank $n'$ we have 
+	\begin{equation}\label{le-potier-stability}
+		h^0(\F)\leq \frac{n'}{n}h^0(\E).
+	\end{equation}
+	Strict inequality holds if and only if $\E$ is stable. 
 \end{proposition}
 \begin{proof}
-	Firstly suppose $\E$ is unstable, and let $\F$ be a semistable subbundle of signature $(n', d')$ such that $\mu(\F)> \mu(\E)$ (for example, we can take $\F$ to be the first term in the Harder-Narasimhan filtration of $\E$). Now observe that \[d' > \mu n' \geq n' (gn + 2g-2)> n'(2g-2), \] so in particular $H^1(X, \F) = 0$ by Lemma \ref{bounding-family}. Thus by the Riemann-Roch theorem we have \[h^0(\F) = d'+n'(1-g) = n'(\mu(\F)+ 1-g) > n'(\mu(\E)+1-g) = \frac{n'}{n}(d+n(1-g)) = \frac{n'}{n}h^0(\E). \] If $\E$ is strictly semistable, then we repeat the argument with $\F$ of equal slope and deduce equality. 
+	Firstly suppose $\E$ is unstable, and let $\F$ be a semistable subbundle of signature $(n', d')$ such that $\mu(\F)> \mu(\E)$ (for example, we can take $\F$ to be the first term in the Harder-Narasimhan filtration of $\E$). Now observe that \[d' > \mu n' \geq n' (gn + 2g-2)> n'(2g-2), \] so in particular $H^1(X, \F) = 0$ by Lemma \ref{bounding-family}. Thus by the Riemann-Roch theorem we have \[h^0(\F) = d'+n'(1-g) = n'(\mu(\F)+ 1-g) > n'(\mu(\E)+1-g) = \frac{n'}{n}(d+n(1-g)) = \frac{n'}{n}h^0(\E). \] If $\E$ is strictly semistable, then we repeat the argument with $\F$ of equal slope and deduce equality in (\ref{le-potier-stability}).
 	
-	Conversely, suppose $\E$ is semistable. Let $\F$ be a subsheaf of signature $(n', d')$ and let $(\F_i)_{i = 0}^m$ be the Harder-Narasimhan filtration of $\F$. Observe that \[h^0(\F) =\sum_{i = 1}^m h^0(\F_i) - h^0(\F_{i-1})\leq \sum_{i = 1}^m h^0(\F_i/\F_{i-1}) \leq \sum_{i = 1}^m \rk(\F_i/\F_{i-1})[\mu(\F_i/\F_{i-1})+1 ]_+,   \] and furthermore note that $\mu(\F_{1}) \geq \mu(\F_i/\F_{i-1})$ by the construction of the Harder-Narasimhan filtration. In particular, since $\E$ is semistable we have $\mu(\F_i/\F_{i-1})\leq \mu$ and applying this to the above we have \[h^0(\F)\leq  \sum_{i = 1}^m \rk(\F_i/\F_{i-1})[\mu(\F_i/\F_{i-1})+1 ]_+ \leq (n'-1)(\mu+1) + [\mu(\F/\F_{m-1})+1]_+. \] Now if $\mu(\F/\F_{m-1}) \leq \mu - gn$, then \[h^0(\F)\leq (n'-1)(\mu+1) + (\mu-gn+1) \leq n'(\mu+1)-gn'= \frac{n'}{n}(d+n(1-g)) = \frac{n'}{n} h^0(\E), \] since $H^1(X, \E) = 0$ by Lemma \ref{bounding-family}. Otherwise, if $\mu(\F/\F_{m-1})>\mu-gn >2g-2$, we claim that $H^1(X, \F) = 0$, whence \[h^0(\F) = d'+n'(1-g)\leq \frac{n'd}{n} + n'(1-g) = \frac{n'}{n}(d+n(1-g)) =  \frac{n'}{n}h^0(\E).\] In fact, we will show inductively that each $H^1(X, \F_i) = 0$. Firstly note that $\mu(\F_1) \geq \mu(\F/\F_{m-1}) > 2g-2$ (with equality holding on the left if and only if $\F$ is semistable) whence $H^1(X, \F_1) = 0$ by Lemma \ref{bounding-family}. Now supposing we have shown $H^1(X, \F_{i-1}) = 0$, we observe that $H^1(X, \F_{i}/\F_{i-1}) = 0$ too, by the same reasoning as before, and thus by the long exact sequence of cohomology applied to \[0 \rightarrow \F_{i-1} \rightarrow \F_i \rightarrow \F_{i}/\F_{i-1} \rightarrow 0 \] we deduce that $H^1(X, \F_i) = 0$ too. This completes the proof.
+	Conversely, suppose $\E$ is semistable. Let $\F$ be a subsheaf of signature $(n', d')$ and let $(\F_i)_{i = 0}^m$ be the Harder-Narasimhan filtration of $\F$. Observe that \[h^0(\F) =\sum_{i = 1}^m h^0(\F_i) - h^0(\F_{i-1})\leq \sum_{i = 1}^m h^0(\F_i/\F_{i-1}) \leq \sum_{i = 1}^m \rk(\F_i/\F_{i-1})[\mu(\F_i/\F_{i-1})+1 ]_+,   \] and furthermore note that $\mu(\F_{1}) \geq \mu(\F_i/\F_{i-1})$ by the construction of the Harder-Narasimhan filtration. In particular, since $\E$ is semistable we have $\mu(\F_i/\F_{i-1})\leq \mu$ and applying this to the above we have \[h^0(\F)\leq  \sum_{i = 1}^m \rk(\F_i/\F_{i-1})[\mu(\F_i/\F_{i-1})+1 ]_+ \leq (n'-1)(\mu+1) + [\mu(\F/\F_{m-1})+1]_+. \] Now if $\mu(\F/\F_{m-1}) < \mu - gn$, then \[h^0(\F)< (n'-1)(\mu+1) + (\mu-gn+1) \leq n'(\mu+1)-gn'= \frac{n'}{n}(d+n(1-g)) = \frac{n'}{n} h^0(\E), \] since $H^1(X, \E) = 0$ by Lemma \ref{bounding-family}. Otherwise, if $\mu(\F/\F_{m-1})\geq\mu-gn >2g-2$, we claim that $H^1(X, \F) = 0$, whence 
+	\begin{equation}\label{le-potier-stability-h1-is-0}
+		h^0(\F) = d'+n'(1-g)\leq \frac{n'd}{n} + n'(1-g) = \frac{n'}{n}(d+n(1-g)) =  \frac{n'}{n}h^0(\E).
+	\end{equation} In fact, we will show inductively that each $H^1(X, \F_i) = 0$. Firstly note that $\mu(\F_1) \geq \mu(\F/\F_{m-1}) > 2g-2$ (with equality holding on the left if and only if $\F$ is semistable) whence $H^1(X, \F_1) = 0$ by Lemma \ref{bounding-family}. Now supposing we have shown $H^1(X, \F_{i-1}) = 0$, we observe that $H^1(X, \F_{i}/\F_{i-1}) = 0$ too, by the same reasoning as before, and thus by the long exact sequence of cohomology applied to \[0 \rightarrow \F_{i-1} \rightarrow \F_i \rightarrow \F_{i}/\F_{i-1} \rightarrow 0 \] we deduce that $H^1(X, \F_i) = 0$ too. 
+	
+	Finally, suppose equality in (\ref{le-potier-stability}) holds for some $\F$. We will prove $\E$ is strictly semistable. Let $(\F_i)_{i = 0}^m$ be the Harder-Narasimhan filtration of $\F$, and note that by the above, equality cannot hold if $\mu(\F/\F_{m-1}) < \mu - gn$, so $\mu(\F/\F_{m-1})\geq \mu-gn$, and hence $H^1(X, \F) = 0$. Since equality holds in (\ref{le-potier-stability}), it must be that $\mu(\F) = \mu = \mu(\E)$, as can clearly be seen in (\ref{le-potier-stability-h1-is-0}). This completes the proof.
 \end{proof}
 
-And finally, we have:
+And finally, we conclude the subsection with the promised result:
 \begin{theorem}
-	Let $n\geq 2$ be fixed, let $d > gn^2+n^2(2g-2)$, write $N:= d+n(1-g)$, let $P\in \Q[z]$ be the polynomial \[P:=d+nz\deg \Ox(1) + n(1-g), \] and finally let $Q = \Quot_X^{P}(\Ox^N)$. Then there exists an $M_0$ such that for any $M \geq M_0$, a $k$-point $q: \Ox^N \rightarrow \E$ of $Q$ is semistable with respect to the linearised $\SL_N$-action on $\L_M$ if and only if $\E$ is a semistable locally free sheaf and $H^0(q)$ is an isomorphism. 
+	Let $n\in \N$ be fixed, let $d > gn^2+n^2(2g-1) \geq \sup\{n(2g-1), gn^2+n(2g-2)\}$, write $N:= d+n(1-g)$, let $P\in \Q[z]$ be the polynomial \[P:=d+nz\deg \Ox(1) + n(1-g), \] and finally let $Q = \Quot_X^{P}(\Ox^N)$. Then there exists an $M_0$ such that for any $M \geq M_0$, a $k$-point $q: \Ox^N \rightarrow \E$ of $Q$ is semistable with respect to the linearised $\SL_N$-action on $\L_M$ if and only if $\E$ is a semistable locally free sheaf and $H^0(q)$ is an isomorphism. Moreover, $q$ is stable if and only if $\E$ is stable.
 \end{theorem}
+\begin{proof}
+	We choose $M_0$ sufficiently large such that:
+	\begin{enumerate}
+		\item The conclusion of Proposition \ref{HM weight of large linearisation} holds.
+		\item The conclusion of Corollary \ref{first-stability-corollary} holds.
+		\item The inequality (\ref{git-semi-stability-quot-scheme}) for $M > M_0$ holds if and only if the inequality (\ref{git-semi-stability-quot-scheme-rank}) holds.
+	\end{enumerate}
+	Then we know from Corollaries \ref{first-stability-corollary} and \ref{second-stability-corollary} that if $q$ is semistable then $\E$ is locally free and $H^0(q)$ is an isomorphism. To show that $\E$ is in fact semistable, let $\F$ be a subsheaf of $\E$. If $h^0(\F) = 0$, we are done; otherwise, let $V' := H^0(q)(H^0(\F))$ and let $\E':= \im q|_{V'\otimes \Ox}$, and suppose $\E'$ has signature $(n', d')$. By Proposition \ref{GIT criterion stability} combined with (iii) above, we have \[n' \geq \frac{n \dim V'}{N}, \] and noting that $n' \leq \rk \F$, $h^0(\E) = N$ and $\dim V' = h^0(\F)$, we note \[h^0(\F) = \dim V' \leq \frac{n'}{n} h^0(\E)  \] and hence $\E$ is semistable by Proposition \ref{alternative-vector-bundle-stability}. If $q$ is stable, then $\E$ is stable too, by running the above argument, replacing the inequalities with strict ones.
+	
+	Conversely, suppose $\E$ is semistable and $H^0(q)$ is an isomorphism. Now let $V'\subseteq k^N$ be a nonzero subspace, let $\E':= \im q|_{V' \otimes \Ox}$ and suppose $\E'$ has signature $(n', d')$. Then we know  \[n' \geq \frac{n h^0(\E')}{N}= \frac{n \dim V'}{N} \] and so $q$ is semistable. Now if $\E$ is stable, we run the argument through with strict inequality and deduce strict inequality. 
+\end{proof}
+\begin{corollary}
+	The map \[H^0(\O_{Q^{ss} \times X}^N)\rightarrow H^0(\mathscr{E}|_{Q^{ss}})\] is an isomorphism.
+\end{corollary}
+\begin{proof}
+{\color{red}	Let $V$ denote the kernel of this map. Then $V$ is an}
+\end{proof}
+\subsection{Putting it all together}
+
+So now we have an open subscheme $Q^{(s)s}$ whose $k$-points are exactly $q: \Ox^N \rightarrow \E$ (semi)-stable vector bundles of our given signature $(n,d)$, where $d > gn^2 + n^2(2g-2)$ (indeed, it is easy to see that tensoring with a line bundle of degree one is a natural isomorphism of functors between $\mathcal{V}^s_{n,d}$ and $\mathcal{V}^s_{n, d+n}$, so we may assume without loss of generality $d$ is sufficiently large). In particular, we may take the projective GIT quotient $Q^{ss}\rightarrow Q^{ss} \git_{\L_M} \SL_N=:V^{ss}_{n,d}$ to obtain a categorical quotient, and moreover we have the geometric quotient $ Q^s \git_{\L_M} \SL_N=:V^{s}_{n,d}$. What remains is to complete the argument and show that $V^s_{n,d}$ is in fact the moduli space for stable bundles of signature $(n,d)$. To begin, we have the following:
+
+\begin{lemma}
+	Let $\eta: \mathcal{V}^s_{n,d} \rightarrow \Hom(-, N)$ be a natural transformation. Then \[\eta_{Q^s}(\mathscr{E}|_{Q^s}): Q^s \rightarrow N\] is $\SL_N$-invariant.
+\end{lemma}
+\begin{proof}
+	Let $\sigma: \SL_N \times Q^s \rightarrow Q^s$ denote the action. This is just saying that the families $\sigma^*(\E|_U)$ and $\pi_Q^*(\E|_U)$ are equivalent, which is obvious because they differ by the inverted universal $\O_{\SL_N}^N$ automorphism on $\SL_N$, which is an isomorphism.
+\end{proof}
+
+
+\begin{lemma}
+	The scheme $Q^s$ along with the family $ \mathscr{E}|_{Q^s}$ is locally versal.
+\end{lemma}
+\begin{proof}
+	Let $\E$ be a family of stable bundles over a variety $S$. By Grauert's theorem (\autocite[III Corollary 12.9]{Hart}), the pushforward $\pi_{S*}\E$ is locally free. Moreover, by Lemma \ref{bounding-family} and our assumption on $d$, for any $s\in S(k)$ we have $h^0(X, \E_s) = N$, and thus Grauert's theorem combined with Nakayama's lemma tells us that it is in fact locally free of rank $N$. Now let $U$ be an affine open subset where $\pi_{S*}\E$ is free, so that there is an isomorphism $\O_U^N \cong \pi_{S*}\E|_U$. Pulling this back via $\pi_S|_U$ and composing with the counit map of the pullback-pushforward m  adjunction, we have a map \[\begin{tikzcd}
+		\O_{U\times X}^N \arrow[r, "\cong"] & \pi_S^*\pi_{S*}\E|_U \arrow[r] & \E|_U.
+	\end{tikzcd}
+	\] Since every fibre $\E_s$ is generated by global sections, by Nakayama's lemma applied to every stalk of $S \times X$ we find that $\E$ is generated by global sections too, and since $\pi_{S*}\E = H^0(S \times X, \E)^\sim$, it follows the above map is surjective, and in particular determines a morphism into $Q$, with image in $Q^s$ by assumption, such that $\E|_U$ is equal to the pullback of $\mathscr{E}|_{Q^s}$.
+\end{proof}
+
+In particular, if we can use the fact that  $ \mathscr{E}|_{Q^s}$ is locally versal to build a natural transformation $\eta: \mathcal{V}^s_{n,d} \rightarrow \Hom(-, V^s_{n,d})$, then we automatically get a coarse moduli space by virtue of the fact that $Q^s \rightarrow V^s_{n,d}$ is a geometric quotient. So naturally we have:
+\begin{theorem}
+	Let $\E$ be a family over $S$ and let $\{U_\alpha = \Spec A_\alpha\}$ be an affine open cover, where each $U_\alpha$ is small enough to determine a morphism to $Q^s$. Let $\varphi_\alpha:U_\alpha \rightarrow Q^s$ denote the morphism determined on $U_\alpha$. Let $\psi:Q^s \rightarrow V^s_{n,d}$ denote the GIT quotient. Then the $\psi\circ \varphi_\alpha$ glue to form a functorial morphism $\eta: S \rightarrow V^s_{n,d}$. In particular, $V^s_{n,d}$ is the coarse moduli space for $\V^s_{n,d}$.
+\end{theorem}
+\begin{proof}
+	Let $U_\alpha, U_\beta$ as above be given, and let $\E_\alpha$ and $\E_\beta$ denote the pullback of $\mathscr{E}|_U$ via $\varphi_\alpha$ and $\varphi_\beta$ respectively. By assumption, their restriction to the overlap are equivalent, so given an affine open subset $U_{\alpha\beta\gamma} = \Spec A_{\alpha\beta\gamma}$ of $U_\alpha \cap U_\beta$, there is some $\L$ on $U_{\alpha\beta\gamma}$ such that $ \E_\alpha|_{U_{\alpha\beta\gamma}}\cong \E_\beta|_{U_{\alpha\beta\gamma}}\otimes \pi_S^*\L$. Since the map $H^0(\O_{Q^{s} \times X}^N)\rightarrow H^0(\mathscr{E}|_{Q^{s}})$ is an isomorphism, this means that identifying $H^0(\E_\alpha|_{U_{\alpha\beta\gamma}})$ with $H^0(\O_{U_{\alpha\beta\gamma}\times X}^N)$, there is some $g^{-1}\in \GL_N(A_{\alpha\beta\gamma})$ that takes $H^0(\O^N_{U_{\alpha\beta\gamma}})\cong H^0(\E_\alpha|_{U_{\alpha\beta\gamma}})$ to $H^0(\E_\beta|_{U_{\alpha\beta\gamma}})$. Dividing $g$ by its determinant (and replacing $\L$), we may assume $g\in \SL_N(A_{\alpha\beta\gamma})$. But since $\E_{\alpha}|_{U_{\alpha\beta\gamma}}$ and $\E_{\beta}|_{U_{\alpha\beta\gamma}}\otimes \pi_S^*\L$ are actually isomorphic, this means that \[g\cdot\E_{\alpha}|_{U_{\alpha\beta\gamma}} = \E_{\beta}|_{U_{\alpha\beta\gamma}}\otimes \pi_S^*\L. \]  But that means $\psi \circ \varphi_\alpha$ and $\psi \circ\varphi_\beta$ agree on $U_{\alpha\beta\gamma}$ (since $\varphi_\alpha$ and $\varphi_\beta$ differ by $g$), and since the $U_{\alpha\beta\gamma}$ cover the overlap, this means $\psi \circ \varphi_\alpha$ and $\psi \circ \varphi_\beta$ agree, and so we have a well-defined morphism to $V^s_{n,d}$. The fact that it is functorial is easily checked, and the fact that it is a coarse moduli space follows from the fact that the $\psi$ is a geometric quotient.
+\end{proof}
+
+And this concludes the first part of the thesis. 
+
 
